@@ -1,0 +1,24 @@
+{
+  "name": "fileSharp",
+  "description": "A hackable file manager",
+  "version": "0.1.0",
+  "author": "Stephan Ahlf <stephan.ahlf@gmail.com>",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "",
+  "keywords": [],
+  "license": "",
+  "main": "index.js",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "scripts": {
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}

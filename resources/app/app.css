@@ -1,0 +1,45 @@
+table{
+  width: 100%;
+  height: 100%;
+}
+
+.clusterize-scroll{
+  max-height: 400px;
+  overflow: auto;
+}
+html, body{
+  background-color: #121212;
+  color: #777;
+}
+
+.breadcrumb{
+  background-color: #101010;
+}
+
+#scrollArea1 .filesystemitem, #scrollArea2 .filesystemitem{
+  cursor: pointer;
+}
+
+#scrollArea1 .filesystemitem:hover .filesystemitem-filename, #scrollArea2 .filesystemitem:hover .filesystemitem-filename{
+  color:#E0E0E0;
+  text-decoration: underline;
+}
+
+
+.file-view-active .breadcrumb{
+  background-color: #292929;
+}
+
+.file-view-active .breadcrumb a{
+  color: #F53D00;
+}
+
+.file-view-active .filesystemitem-selected{
+  color: #F53D00;
+  
+}
+
+.filesystemitem-selected{
+  background-color:#292929;
+  color: #337ab7;
+}

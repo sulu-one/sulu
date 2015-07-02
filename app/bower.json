@@ -1,0 +1,21 @@
+{
+  "name": "sulu",
+  "version": "0.1.0",
+  "homepage": "https://github.com/s-a/sulu",
+  "authors": [
+    "s-a <stephan.ahlf@googlemail.com>"
+  ],
+  "license": "MIT AND GPLv3",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.4",
+    "clusterize": "~0.8.0",
+    "keymaster": "~1.6.3"
+  }
+}

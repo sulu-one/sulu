@@ -23,7 +23,6 @@
     "clean:win32": "rm -rf ./dist/win32",
     "clean:win64": "rm -rf ./dist/win64",
     "clean:macos": "rm -rf ./dist/macos",
-    "build": "npm run clean && npm run build:macos && npm run build:win32 && npm run build:win64",
     "build:linux32": "npm run clean:linux32 && electron-packager ./app \"sulu\" --out=dist --platform=linux --arch=ia32 --version=0.25.3 --icon=src/icon.ico && mv dist/sulu-linux dist/linux32",
     "build:linux64": "npm run clean:linux64 && electron-packager ./app \"sulu\" --out=dist --platform=linux --arch=x64 --version=0.25.3 --icon=src/icon.ico && mv dist/sulu-linux dist/linux64",
     "build:win32": "npm run clean:win32 && electron-packager ./app \"sulu\" --out=dist --platform=win32 --arch=ia32 --version=0.25.3 --icon=src/icon.ico && mv dist/sulu-win32 dist/win32",
@@ -31,7 +30,9 @@
     "build:macos": "npm run clean:macos && electron-packager ./app \"sulu\" --out=dist --platform=osx --arch=ia32 --version=0.25.3 --icon=src/icon.icns",
     "pack": "npm run pack:macos && npm run pack:win32 && npm run pack:win64",
     "pack:macos": "npm run build:macos && electron-builder \"dist/macos/sulu.app\" --platform=macos --out=\"dist/macos\" --config=packager.json",
-    "pack:win32": "npm run build:win32 && electron-builder \"dist/win32/sulu-win32\" --platform=win32 --out=\"dist/win32\" --config=packager.json"
+    "pack:win32": "npm run build:win32 && electron-builder \"dist/win32/sulu-win32\" --platform=win32 --out=\"dist/win32\" --config=packager.json",
+    "build": "npm run clean && npm run build:win32 && npm run build:win64",
+    "deploy" : "npm version patch && npm run build"
   },
   "dependencies": {},
   "devDependencies": {

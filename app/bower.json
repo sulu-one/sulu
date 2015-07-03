@@ -1,6 +1,6 @@
 {
   "name": "sulu",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "homepage": "https://github.com/s-a/sulu",
   "authors": [
     "s-a <stephan.ahlf@googlemail.com>"
@@ -15,7 +15,8 @@
   ],
   "dependencies": {
     "bootstrap": "~3.3.4",
-    "clusterize": "~0.8.0",
-    "keymaster": "~1.6.3"
+    "clusterize": "~0.8.2",
+    "keymaster": "~1.6.3",
+    "jquery": "~2.1.4"
   }
 }

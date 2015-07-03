@@ -23,14 +23,14 @@
   ],
   "license": "MIT",
   "homepage": "https://github.com/NeXTs/Clusterize.js",
-  "version": "0.8.0",
-  "_release": "0.8.0",
+  "version": "0.8.2",
+  "_release": "0.8.2",
   "_resolution": {
     "type": "version",
-    "tag": "v0.8.0",
-    "commit": "1c2e6543bf8b838f81c5bca95a291aa5338a012d"
+    "tag": "v0.8.2",
+    "commit": "04be8cdbf30b58915047c547565f8b0e411aa39a"
   },
   "_source": "git://github.com/NeXTs/Clusterize.js.git",
-  "_target": "~0.8.0",
+  "_target": "~0.8.2",
   "_originalSource": "clusterize"
 }

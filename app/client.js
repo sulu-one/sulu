@@ -1,6 +1,15 @@
+var path = require("path");
 window.jQuery = require("./bower_components/jquery/dist/jquery.min.js");
 //window.bootstrap = require("./bower_components/bootstrap/dist/js/bootstrap.min.js");
 
+
+var npmc = require("./npmc.js"); // find NPM on the system
+npmc.init();
+
+
+npmc.install({prefix : path.join(__dirname, "node_modules")}, function() {
+	console.log("done", arguments);
+});
 
 (function($, key) {
 

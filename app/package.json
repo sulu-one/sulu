@@ -15,10 +15,8 @@
     "type": "git",
     "url": ""
   },
-  "scripts": {
-  },
+  "scripts": {},
   "dependencies": {
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }

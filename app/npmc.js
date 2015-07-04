@@ -34,7 +34,7 @@ NPMC.prototype.nodeHomeFromPathEnvironment = function() {
 };
 
 NPMC.prototype.nodeHome = function(){
-	var execPath = path.basename(process.execPath).toLowerCase();
+	var execPath = path.basename(process.execPath);
 	var result = null;
 	if (execPath === "node" || execPath === "node.exe"){
 		result = path.dirname(process.execPath);

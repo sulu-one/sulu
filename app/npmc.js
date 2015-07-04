@@ -50,7 +50,7 @@ NPMC.prototype.init = function() {
 
 NPMC.prototype.install = function(config, done) {
 	this.npm.load(config, function (er, npm) {
-		npm.commands.install(["package.js"], done);
+		npm.commands.install([], done);
 	});
 };
 

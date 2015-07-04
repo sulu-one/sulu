@@ -17,6 +17,12 @@
   },
   "scripts": {},
   "dependencies": {
+    "bootstrap": "^3.3.5",
+    "clusterize.js": "^0.8.2",
+    "jquery": "^2.1.4",
+    "keymaster": "^1.6.2",
+    "node-notifier": "^4.2.3",
+    "package.js": "^1.1.2"
   },
   "devDependencies": {}
 }

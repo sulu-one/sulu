@@ -5,112 +5,108 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-  <link rel="stylesheet" href="bower_components/clusterize/clusterize.css">
+  <link rel="stylesheet" href="node_modules/clusterize.js/clusterize.css">
   <link rel="stylesheet" href="packages/file-icons/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="app.css">
+  <style type="text/css">
+    .hidden{
+      display: none;
+    }
+  </style>
 </head>
 <body>
-  <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="https://github.com/s-a/flying-panda" target="_blank">Github</a>
-      </div>
+  <div id="boot-info">
+    <h1>installing packages ... </h1>
+  </div>
+  <div id="workspace" class="hidden">
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
 
-      
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav" id="main-menu">
-         
-<!--           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Edit <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu" id="main-menu-edit">
-              <li class="divider"></li>
-              <li><a href="#">Copy filename(s) with path <sup>strg+x</sup></a></li>
-              <li><a href="#">Copy filename(s) without path  <sup>strg+y</sup></a></li>
-            </ul>
-          </li> -->
-        </ul>
-        <form class="navbar-form navbar-left" role="search">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Console">
-          </div>
-          <button type="submit" class="btn btn-default">Submit</button>
-        </form>
-       
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
-
-  <div class="row">
-    <div class="col-xs-6">
-      <div class="file-view file-view-1">
-        <ol class="breadcrumb">
-          <li><a href="#">c:</a></li>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Library</a></li>
-          <li class="active">Data</li>
-        </ol>
-
-        <div class="row">
-          <div class="col-xs-1"></div>
-          <div class="col-xs-2">Filename</div>
-          <div class="col-xs-2">Ext</div>
-          <div class="col-xs-2">Size</div>
-          <div class="col-xs-4">Date</div>
-          <div class="col-xs-1">Att</div>
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="https://github.com/s-a/flying-panda" target="_blank">Github</a>
         </div>
-        <div class="row">
-          <div class="col-xs-12">
-            <div id="scrollArea1" class="clusterize-scroll">
-              <div id="contentArea1" class="clusterize-content">
-                <div class="clusterize-no-data">Loading data…</div>
-              </div>
+
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav" id="main-menu">
+          </ul>
+          <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Console">
             </div>
-          </div>
-        </div>
-      </div>
-     
-    </div>
-    <div class="col-xs-6">
-      <div class="file-view file-view-2">
-        <ol class="breadcrumb">
-          <li><a href="#">c:</a></li>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Library</a></li>
-          <li class="active">Data</li>
-        </ol>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
 
-        <div class="row">
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="row">
+      <div class="col-xs-6">
+        <div class="file-view file-view-1">
+          <ol class="breadcrumb">
+            <li><a href="#">c:</a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Library</a></li>
+            <li class="active">Data</li>
+          </ol>
+
+          <div class="row">
             <div class="col-xs-1"></div>
             <div class="col-xs-2">Filename</div>
             <div class="col-xs-2">Ext</div>
             <div class="col-xs-2">Size</div>
             <div class="col-xs-4">Date</div>
             <div class="col-xs-1">Att</div>
-        </div>
-        <div class="row">
+          </div>
+          <div class="row">
             <div class="col-xs-12">
-              <div id="scrollArea2" class="clusterize-scroll">
-                <div id="contentArea2" class="clusterize-content">
+              <div id="scrollArea1" class="clusterize-scroll">
+                <div id="contentArea1" class="clusterize-content">
                   <div class="clusterize-no-data">Loading data…</div>
                 </div>
               </div>
             </div>
-        </div> 
+          </div>
+        </div>
+
+      </div>
+      <div class="col-xs-6">
+        <div class="file-view file-view-2">
+          <ol class="breadcrumb">
+            <li><a href="#">c:</a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Library</a></li>
+            <li class="active">Data</li>
+          </ol>
+
+          <div class="row">
+              <div class="col-xs-1"></div>
+              <div class="col-xs-2">Filename</div>
+              <div class="col-xs-2">Ext</div>
+              <div class="col-xs-2">Size</div>
+              <div class="col-xs-4">Date</div>
+              <div class="col-xs-1">Att</div>
+          </div>
+          <div class="row">
+              <div class="col-xs-12">
+                <div id="scrollArea2" class="clusterize-scroll">
+                  <div id="contentArea2" class="clusterize-content">
+                    <div class="clusterize-no-data">Loading data…</div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
       </div>
   </div>
-
-
-
-  <script src="bower_components/keymaster/keymaster.js"></script>
-  <script src="client.js"></script>
-  <!-- package-scripts -->
+  <script src="app.js"></script>
 </body>
 </html>

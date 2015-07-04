@@ -2,8 +2,7 @@ var fs = require("fs");
 var path = require("path");
 var npmc = require("./npmc.js"); // find NPM on the system
 
-var 
-	$, notifier, key, Clusterize;
+
 
 
 	//cmd /K "cd C:\Windows\"
@@ -340,64 +339,12 @@ var initFileSystemItemIcon = function(fileSystemItem) {
 	};
 
 
-var initializeRequireModules = function() {
-	// body...
-};
 
-if (fs.existsSync(path.join(__dirname, "node_modules"))){
-	$ = require("jquery");
+var applicationController = require("./app.controller.js");
+if (applicationController.initialize()){
 	$("#boot-info").html("<h1>loading...</h1>");
-	key = require("keymaster");
-	Clusterize = require("clusterize.js");
-	if(!window.panda){
-		window.panda = new Panda();
-		$("#boot-info").hide();
-		$("#workspace").removeClass("hidden").hide().fadeIn("fast");
-	}
-} else {
-	try {
-		npmc.init();
-		npmc.install({prefix : path.join(__dirname)}, function(a,b,c) {
-
-			var installedPackages = [];
-			for (var k in c) {
-				var pac = c[k].what;
-				installedPackages.push(pac);
-			}
-
-			console.log("done", arguments);
-			var icon = path.join(__dirname, "logo.jpg");
-			console.log(icon);
-			notifier = require('node-notifier');
-			notifier.notify({
-			  title: 'SULU Packages installed',
-			  message: installedPackages.join(", "),
-			  icon: icon, // absolute path (not balloons) 
-			  sound: false, // Only Notification Center or Windows Toasters 
-			  wait: true // wait with callback until user action is taken on notification 
-			}, function (err, response) {
-			  // response is response from notification 
-			});
-
-			notifier.on('click', function (notifierObject, options) {
-			  // Happens if `wait: true` and user clicks notification 
-			});
-
-			notifier.on('timeout', function (notifierObject, options) {
-			  // Happens if `wait: true` and notification closes 
-			});
-
-			window.setTimeout(function  (argument) {
-				document.location.reload(true);
-			},4000);
-
-
-		});
-	} catch (e) {
-		alert(e);
-		throw e;
-	} finally {
-	}
+	window.panda = new Panda();
+	$("#boot-info").hide();
+	$("#workspace").removeClass("hidden").hide().fadeIn("fast");
+	console.log("sulu done.");
 }
-
-

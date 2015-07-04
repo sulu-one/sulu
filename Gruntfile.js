@@ -1,11 +1,13 @@
 var path = require("path");
 var projectVersion = "";
+projectVersion = require(path.join(__dirname, "package.json")).version + ".alpha";
 
 module.exports = function(grunt) {
 	grunt.registerTask('fetchProjectVersion', 'Determining package.json.version', function(/*arg1, arg2*/) {
-	  	projectVersion = require("./package.json").version;
-    	grunt.log.writeln(projectVersion);
+		grunt.log.writeln("package.json.version : " + projectVersion);
 	});
+
+
 
 
 	grunt.initConfig({
@@ -61,44 +63,53 @@ module.exports = function(grunt) {
 				gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d' // options to use with '$ git describe'
 			}
 		},
-		gitadd: {
-	   		"dist-win32": {
-	     		options: {
-		        	cwd: "./../sulu-dist-win32",
-	     		},
-	     		files: {
-       				src: ['.']
-     			}
-   			}
-	 	},
-		gitcommit: {
-		    "dist-win32": {
-		      	options: {
-		        	cwd: path.join(__dirname, "..", "sulu-dist-win32"),
-		        	message : projectVersion,
-		        	force:true
-		      	},
-		      	files: [
-		        	{
-		          		src: ["."],
-		          		expand: true,
-		          		cwd: "./../sulu-dist-win32"
-	        		}
-		      	]
-		    }
-	  	},
+		shell: {
+			"checkout-branch-dist-win32": {
+				options: {
+					failOnError:false
+				},
+				command: [
+					"cd " + path.join(__dirname, ".."),
+					"git clone https://github.com/s-a/sulu-dist-win32.git",
+					"cd " + path.join(__dirname, "..", "sulu-dist-win32"),
+					"git checkout --orphan gh-pages"
+				].join(" && ")
+			},
+			"commitFiles-dist-win32": {
+				options: {
+					failOnError:false
+				},
+				command: [
+					"cd " + path.join(__dirname, "..", "sulu-dist-win32"),
+					"git add .",
+					"git commit -m " + (projectVersion||"test") + "",
+					"git tag v" + projectVersion + " -m \"version " + projectVersion + "\"",
+				].join(" && ")
+			},
+			"pushFiles-dist-win32": {
+				options: {
+					failOnError:false
+				},
+				command: [
+					"cd " + path.join(__dirname, "..", "sulu-dist-win32"),
+					"git push origin gh-pages",
+					"git push tags"
+				].join(" && ")
+			}
+		},
 	});
 
 
 	// Production Build Tools
 	require('load-grunt-tasks')(grunt);
 	grunt.registerTask('deploy:win32', [
+		'shell:checkout-branch-dist-win32',
 		'clean:dist-win32',
 		'copy:dist-win32',
 		'rename:dist-win32',
-		'gitadd:dist-win32',
 		'fetchProjectVersion',
-		'gitcommit:dist-win32',
+		'shell:commitFiles-dist-win32',
+		'shell:pushFiles-dist-win32'
 	]);
 
 	//grunt.registerTask('environment', [/*'npm-install', 'bower',  */'bower_postinst', /*'shell:mongo-service-install',*/'default']);

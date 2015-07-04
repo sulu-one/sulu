@@ -1,15 +1,7 @@
 var path = require("path");
-var projectVersion = "";
-projectVersion = require(path.join(__dirname, "package.json")).version + ".alpha";
+var projectVersion = require(path.join(__dirname, "package.json")).version + ".alpha";
 
 module.exports = function(grunt) {
-	grunt.registerTask('fetchProjectVersion', 'Determining package.json.version', function(/*arg1, arg2*/) {
-		grunt.log.writeln("package.json.version : " + projectVersion);
-	});
-
-
-
-
 	grunt.initConfig({
 		pkg : grunt.file.readJSON('package.json'),
 		"clean" : {
@@ -93,24 +85,21 @@ module.exports = function(grunt) {
 				command: [
 					"cd " + path.join(__dirname, "..", "sulu-dist-win32"),
 					"git push origin gh-pages",
-					"git push tags"
+					"git push tags origin gh-pages"
 				].join(" && ")
 			}
 		},
 	});
 
-
-	// Production Build Tools
+	// Build Deployment
 	require('load-grunt-tasks')(grunt);
+
 	grunt.registerTask('deploy:win32', [
 		'shell:checkout-branch-dist-win32',
 		'clean:dist-win32',
 		'copy:dist-win32',
 		'rename:dist-win32',
-		'fetchProjectVersion',
 		'shell:commitFiles-dist-win32',
 		'shell:pushFiles-dist-win32'
 	]);
-
-	//grunt.registerTask('environment', [/*'npm-install', 'bower',  */'bower_postinst', /*'shell:mongo-service-install',*/'default']);
 };

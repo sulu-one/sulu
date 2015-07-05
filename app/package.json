@@ -1,7 +1,7 @@
 {
   "name": "fileSharp",
   "description": "A hackable file manager",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "author": "Stephan Ahlf <stephan.ahlf@gmail.com>",
   "bugs": {
     "url": ""

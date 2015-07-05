@@ -1,7 +1,7 @@
 {
   "name": "sulu",
   "description": "A hackable file manager",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "author": "Stephan Ahlf <stephan.ahlf@gmail.com>",
   "bugs": {
     "url": "https://github.com/s-a/sulu/issues"
@@ -31,7 +31,7 @@
     "pack": "npm run pack:macos && npm run pack:win32 && npm run pack:win64",
     "pack:macos": "npm run build:macos && electron-builder \"dist/macos/sulu.app\" --platform=macos --out=\"dist/macos\" --config=packager.json",
     "pack:win32": "npm run build:win32 && electron-builder \"dist/win32/sulu-win32\" --platform=win32 --out=\"dist/win32\" --config=packager.json",
-    "build": "npm run clean && npm run build:win32 && npm run build:win64",
+    "build": "npm run clean && npm run build:win32 && npm run build:win64 && npm run build:linux32 && npm run build:linux64",
     "deploy": "npm version patch && npm run build"
   },
   "dependencies": {},

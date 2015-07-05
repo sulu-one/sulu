@@ -1,6 +1,6 @@
 var fs = require("fs");
 var path = require("path");
-var npmc = require("./npmc.js"); // find NPM on the system
+//var npmc = require("./npmc.js"); // find NPM on the system
 
 
 
@@ -258,8 +258,6 @@ var npmc = require("./npmc.js"); // find NPM on the system
 
 
 var view = [];
-var fs = require("fs");
-var path = require("path");
 
 view[1] = {};
 view[2] = {};

@@ -1,48 +1,155 @@
 var path = require("path");
-var projectVersion = require(path.join(__dirname, "package.json")).version + ".alpha";
+var projectVersion = require(path.join(__dirname, "package.json")).version;
+var platforms = ["win32", "win64", "linux32", "linux64", "osx64"];
+
+var TaskObject = function(taskNamePrefix) {
+	this.jobs = {};
+
+	for (var i = 0; i < platforms.length; i++) {
+		var os = platforms[i];
+		this.jobs[taskNamePrefix + os] = "";
+	}
+
+	return this;
+};
+
+TaskObject.prototype.eachOS = function(eachItemHandler) {
+	for (var os in this.jobs) {
+		if (this.jobs.hasOwnProperty(os)){
+			eachItemHandler(os);
+		}
+	}
+};
+
+var Task = function() {
+	return this;
+};
+
+Task.prototype.clean = function() {
+	var task =  new TaskObject("dist-");
+
+	task.eachOS(function(taskName) {
+		task.jobs[taskName] = {
+			src: ["./../sulu-" + taskName + "/*", "!./../sulu-" + taskName + "/.git"],
+			options: { force: true }
+		}
+	});
+
+	return task.jobs;
+};
+
+Task.prototype.copy = function() {
+	var task =  new TaskObject("dist-");
+
+	task.eachOS(function(taskName) {
+		var os = taskName.split("-")[1];
+		task.jobs[taskName] = {
+			files: [
+				{
+					expand: true,
+					cwd: "dist/" + os,
+					src: [
+						"**/*",
+						"!**/resources/app/node_modules/**",
+						"!**/resources/default_app/**",
+						"!LICENSE"
+					],
+					dest: "./../sulu-" + taskName + "/",
+					flatten: false
+				},
+				{
+					expand: true,
+					cwd: "./",
+					src: [ "dist-readme.txt", "LICENSE.md", ".gitignore" ],
+					dest: "./../sulu-" + taskName,
+					flatten: false
+				}
+			]
+		}
+	});
+
+	return task.jobs;
+};
+
+Task.prototype.rename = function() {
+	var task =  new TaskObject("dist-");
+
+	task.eachOS(function(taskName) {
+		task.jobs[taskName] = {
+			files: [
+				{
+					src : ["./../sulu-" + taskName + "/dist-readme.txt"],
+					dest: "./../sulu-" + taskName + "/README.md"
+				},
+			]
+		}
+	});
+
+	return task.jobs;
+};
+
+Task.prototype.shell = function() {
+	var task =  new TaskObject("dist-");
+
+	task.eachOS(function(taskName) {
+
+		task.jobs[taskName + "_git-checkout"] = {
+			options: {
+				failOnError:false
+			},
+			command: [
+				"cd " + path.join(__dirname, ".."),
+				"git clone https://github.com/s-a/sulu-" + taskName + ".git",
+				"cd " + path.join(__dirname, "..", "sulu-" + taskName),
+				"git checkout --orphan gh-pages"
+			].join(" && ")
+		};
+
+		task.jobs[taskName + "_git-commit"] = {
+			options: {
+				failOnError:false
+			},
+			command: [
+				"cd " + path.join(__dirname, "..", "sulu-" + taskName),
+				"git add . --all",
+				"git commit -m " + (projectVersion||"test"),
+				"git tag v" + projectVersion + " -m \"version " + projectVersion + "\"",
+			].join(" && ")
+		};
+
+		task.jobs[taskName + "_git-push" ] = {
+			options: {
+				failOnError:false
+			},
+			command: [
+				"cd " + path.join(__dirname, "..", "sulu-" + taskName + ""),
+				"git push origin gh-pages",
+				"git push --tags origin gh-pages"
+			].join(" && ")
+		};
+
+	});
+
+	return task.jobs;
+};
+
+
+var task = new Task();
+
+
 
 module.exports = function(grunt) {
+
+
 	grunt.initConfig({
-		pkg : grunt.file.readJSON('package.json'),
-		"clean" : {
-		 	"dist-win32": {
-				src: ['./../sulu-dist-win32/*', '!./../sulu-dist-win32/.git'],
-				options: { force: true }
-		 	}
-		},
-		copy: {
-			"dist-win32": {
-				files: [
-					{
-						expand: true,
-						cwd: "dist/win32",
-						src: [ "**/*", "!**/resources/app/node_modules/**", "!**/resources/default_app/**" ],
-						dest: "./../sulu-dist-win32/",
-						flatten: false
-					},
-					{
-						expand: true,
-						cwd: "./",
-						src: [ "dist-readme.txt", "LICENSE.md", ".gitignore" ],
-						dest: "./../sulu-dist-win32",
-						flatten: false
-					}
-				]
-			}
-		},
-		rename: {
-		  "dist-win32": {
-		    files: [
-		        {
-	        		src : ['./../sulu-dist-win32/dist-readme.txt'], 
-	        		dest: './../sulu-dist-win32/README.md'
-	        	},
-			]
-		  }
-		},
-		bump: {
+		"pkg"		: grunt.file.readJSON('package.json'),
+		"clean"  	: task.clean(),
+		"copy"	 	: task.copy(),
+		"rename"	: task.rename(),
+		"shell"		: task.shell(),
+		bump		: {
 			options: {
-				files: ['package.json', './app/package.json'], 
+				files: ['package.json', './app/package.json'],
 				updateConfigs: [],
 				commit: true,
 				commitMessage: 'Release v%VERSION%',
@@ -55,51 +162,21 @@ module.exports = function(grunt) {
 				gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d' // options to use with '$ git describe'
 			}
 		},
-		shell: {
-			"checkout-branch-dist-win32": {
-				options: {
-					failOnError:false
-				},
-				command: [
-					"cd " + path.join(__dirname, ".."),
-					"git clone https://github.com/s-a/sulu-dist-win32.git",
-					"cd " + path.join(__dirname, "..", "sulu-dist-win32"),
-					"git checkout --orphan gh-pages"
-				].join(" && ")
-			},
-			"commitFiles-dist-win32": {
-				options: {
-					failOnError:false
-				},
-				command: [
-					"cd " + path.join(__dirname, "..", "sulu-dist-win32"),
-					"git add .",
-					"git commit -m " + (projectVersion||"test") + "",
-					"git tag v" + projectVersion + " -m \"version " + projectVersion + "\"",
-				].join(" && ")
-			},
-			"pushFiles-dist-win32": {
-				options: {
-					failOnError:false
-				},
-				command: [
-					"cd " + path.join(__dirname, "..", "sulu-dist-win32"),
-					"git push origin gh-pages",
-					"git push tags origin gh-pages"
-				].join(" && ")
-			}
-		},
 	});
 
 	// Build Deployment
-	require('load-grunt-tasks')(grunt);
+	require("load-grunt-tasks")(grunt);
 
-	grunt.registerTask('deploy:win32', [
-		'shell:checkout-branch-dist-win32',
-		'clean:dist-win32',
-		'copy:dist-win32',
-		'rename:dist-win32',
-		'shell:commitFiles-dist-win32',
-		'shell:pushFiles-dist-win32'
-	]);
+
+	for (var i = 0; i < platforms.length; i++) {
+		var os = platforms[i];
+		grunt.registerTask("deploy:" + os, [
+			"shell:dist-" + os + "_git-checkout",
+			"clean:dist-" + os,
+			"copy:dist-" + os,
+			"rename:dist-" + os,
+			"shell:dist-" + os + "_git-commit",
+			"shell:dist-" + os + "_git-push"
+		]);
+	}
 };

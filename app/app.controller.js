@@ -37,8 +37,10 @@ ApplicationCorePackageController.prototype.install = function() {
 		npmc.install({prefix : path.join(__dirname)}, function(a,b,c) {
 			var installedPackages = [];
 			for (var k in c) {
-				var pac = c[k].what;
-				installedPackages.push(pac);
+				if (c.hasOwnProperty(k)){
+					var pac = c[k].what;
+					installedPackages.push(pac);
+				}
 			}
 			var icon = path.join(__dirname, "logo.jpg");
 			console.log(icon);

@@ -133,13 +133,6 @@ background-color:#FFFFFF;
 
 }
 
-@-ms-keyframes bubblingG {
-0% {
-width: 10px;
-height: 10px;
-background-color:#3379B7;
--ms-transform: translateY(0);
-}
 
 100% {
 width: 24px;

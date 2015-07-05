@@ -37,8 +37,8 @@
   "dependencies": {},
   "devDependencies": {
     "electron-builder": "^2.0.0",
-    "electron-packager": "^4.2.0",
-    "electron-prebuilt": "^0.27.1",
+    "electron-packager": "^5.0.0",
+    "electron-prebuilt": "^0.29.1",
     "grunt": "^0.4.5",
     "grunt-bump": "^0.3.1",
     "grunt-contrib-clean": "^0.6.0",

@@ -3,6 +3,64 @@ var path = require("path");
 //var npmc = require("./npmc.js"); // find NPM on the system
 
 
+	var readDirectoyContents = function(req, callback) {
+
+		var summary = {
+			folders:0,
+			files:0,
+			size:0
+		};
+		var viewIndex = parseInt(req.view);
+
+		var newDir = view[viewIndex].dir;
+		if (req && req.cd){
+			newDir = path.join(view[viewIndex].dir, req.cd);
+		}
+		console.log( req.view, "cdw", newDir );
+		fs.readdir(newDir, function  (err, directoryContent) {
+			if (err){
+				console.error(err);
+			} else {
+				var files = [];
+				var dirs = [];
+				dirs.push({
+					icon: "fa fa-level-up",
+					path: path.join(newDir, ".."),
+					stats:{size:0, date:""},
+					name: "..",
+					ext: "",
+					isDirectory: true
+				});
+
+				for (var i = 0; i < directoryContent.length; i++) {
+					var filename = directoryContent[i];
+					var stats = fs.statSync(path.join(newDir, filename));
+
+					var extension = path.extname(filename);
+					var fileSystemItem = {
+						//icon: "fa fa-file-o",
+						path: newDir,
+						stats: {size:stats.size, date:stats.mtime},
+						name: path.basename(filename, extension),
+						ext: extension,
+						isDirectory: !stats.isFile()
+					};
+					
+					fileSystemItem = initFileSystemItemIcon(fileSystemItem);
+					//console.log(fileSystemItem);
+					if (fileSystemItem.isDirectory){
+						dirs.push(fileSystemItem);
+					} else {
+						files.push(fileSystemItem);
+					}
+				}
+				dirs.push.apply(dirs, files);
+			
+				view[viewIndex].dir = newDir;
+		  		callback({summary:summary, items:dirs, viewIndex: viewIndex});
+			}
+		});
+	};
 
 
 	//cmd /K "cd C:\Windows\"
@@ -277,64 +335,6 @@ var initFileSystemItemIcon = function(fileSystemItem) {
 	return fileSystemItem;
 };
 
-	var readDirectoyContents = function(req, callback) {
-
-		var summary = {
-			folders:0,
-			files:0,
-			size:0
-		};
-		var viewIndex = parseInt(req.view);
-
-		var newDir = view[viewIndex].dir;
-		if (req && req.cd){
-			newDir = path.join(view[viewIndex].dir, req.cd);
-		}
-		console.log( req.view, "cdw", newDir );
-		fs.readdir(newDir, function  (err, directoryContent) {
-			if (err){
-				console.error(err);
-			} else {
-				var files = [];
-				var dirs = [];
-				dirs.push({
-					icon: "fa fa-level-up",
-					path: path.join(newDir, ".."),
-					stats:{size:0, date:""},
-					name: "..",
-					ext: "",
-					isDirectory: true
-				});
-
-				for (var i = 0; i < directoryContent.length; i++) {
-					var filename = directoryContent[i];
-					var stats = fs.statSync(path.join(newDir, filename));
-
-					var extension = path.extname(filename);
-					var fileSystemItem = {
-						//icon: "fa fa-file-o",
-						path: newDir,
-						stats: {size:stats.size, date:stats.mtime},
-						name: path.basename(filename, extension),
-						ext: extension,
-						isDirectory: !stats.isFile()
-					};
-					
-					fileSystemItem = initFileSystemItemIcon(fileSystemItem);
-					//console.log(fileSystemItem);
-					if (fileSystemItem.isDirectory){
-						dirs.push(fileSystemItem);
-					} else {
-						files.push(fileSystemItem);
-					}
-				}
-				dirs.push.apply(dirs, files);
-			
-				view[viewIndex].dir = newDir;
-		  		callback({summary:summary, items:dirs, viewIndex: viewIndex});
-			}
-		});
-	};
 
 
 

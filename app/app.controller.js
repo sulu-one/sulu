@@ -1,8 +1,6 @@
-var fs = require("fs");
 var path = require("path");
 var npmc = require("./npmc.js"); // find NPM on the system
-
-
+var events = require('events');
 
 var ApplicationNotifier = function  () {
 	return this;
@@ -34,7 +32,7 @@ var ApplicationCorePackageController = function(applicationController) {
 ApplicationCorePackageController.prototype.install = function() {
 	try {
 		npmc.init();
-		npmc.install({prefix : path.join(__dirname)}, function(a,b,c) {
+		npmc.install({prefix : this.applicationController.config.nodeModulesFolder}, function(a,b,c) {
 			var installedPackages = [];
 			for (var k in c) {
 				if (c.hasOwnProperty(k)){
@@ -53,23 +51,24 @@ ApplicationCorePackageController.prototype.install = function() {
 				wait: true // wait with callback until user action is taken on notification 
 			})
 
-			window.setTimeout(function  (argument) {
+			window.setTimeout(function() {
 				document.location.reload(true);
 			},2000);
 		});
 	} catch (e) {
 		alert(e);
 		throw e;
-	} finally {
 	}
 };
 
 
 
-var ApplicationController = function() {
+var ApplicationController = function(config) {
+	this.config = config;
 	var applicationNotifier = new ApplicationNotifier();
 	this.corePackageController = new ApplicationCorePackageController(this);
 	this.msg = applicationNotifier.msg;
+	this.events = new events.EventEmitter();
 	return this;
 };
 
@@ -79,9 +78,21 @@ ApplicationController.prototype.requireAll = function() {
 		window.jQuery = window.$ = require("jquery");
 		window.key = require("keymaster");
 		window.Clusterize = require("clusterize.js");
+		this.packageController = require("package.js");
+
+		this.packageController.autoload({
+			debug: true,
+			directories: [path.join(__dirname, "node_modules")],
+			identify: function() {
+				return (this.meta.suluPackage === true);
+			},
+			packageContstructorSettings: {app : this}
+		});
 
 		result = true;
 	} catch (e) {
+		debugger;
+		console.log(e);
 	}
 	return result;
 };
@@ -94,5 +105,4 @@ ApplicationController.prototype.initialize = function() {
 	return result;
 };
 
-
-module.exports = new ApplicationController();
+module.exports = ApplicationController;

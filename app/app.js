@@ -338,11 +338,31 @@ var initFileSystemItemIcon = function(fileSystemItem) {
 
 
 
-var applicationController = require("./app.controller.js");
+var ApplicationController = require("./app.controller.js");
+var applicationController = new ApplicationController({nodeModulesFolder: __dirname });
+var remote = require('remote');
+var Menu = remote.require('menu');
+applicationController.mainMenu = [
+];
+
+
+//applicationController.app = app; // Module to control application life.
+//applicationController.window = window.mainWindow;
+
 if (applicationController.initialize()){
-	$("#boot-info").html("<h1>loading...</h1>");
+	$("#boot-info").html("<h1>Loading packages...</h1>");
+
+
+
+	applicationController.events.emit("init-main-menu", applicationController);
+	
+	var menu = Menu.buildFromTemplate(applicationController.mainMenu);
+	Menu.setApplicationMenu(menu);
+
 	window.panda = new Panda();
 	$("#boot-info").hide();
 	$("#workspace").removeClass("hidden").hide().fadeIn("fast");
 	console.log("sulu done.");
 }
+
+

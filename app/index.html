@@ -1,111 +1,82 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title></title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-  <link rel="stylesheet" href="node_modules/clusterize.js/clusterize.css">
-  <link rel="stylesheet" href="packages/file-icons/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="app.css">
+	<link rel="stylesheet" href="node_modules/clusterize.js/clusterize.css">
+	<link rel="stylesheet" href="packages/file-icons/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="app.css">
 </head>
 <body>
-  <div id="boot-info">
-    <h1>installing packages ... </h1> 
-      <div class="bubblingG">
-        <span id="bubblingG_1"></span><span id="bubblingG_2"></span><span id="bubblingG_3"></span>
-      </div>
-      <!-- - See more at: http://cssload.net/#sthash.qxUm0y13.dpuf -->
-  </div>
-  <div id="workspace" class="hidden">
-    <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
+	<div id="boot-info">
+		<h1>Donwloading and installing packages! Please wait. This could take a moment...</h1> 
+		<div class="bubblingG">
+			<span id="bubblingG_1"></span><span id="bubblingG_2"></span><span id="bubblingG_3"></span>
+		</div>
+	</div>
+	<div id="workspace" class="hidden">
+		<div class="row">
+			<div class="col-xs-6">
+				<div class="file-view file-view-1">
+					<ol class="breadcrumb">
+						<li><a href="#">c:</a></li>
+						<li><a href="#">Home</a></li>
+						<li><a href="#">Library</a></li>
+						<li class="active">Data</li>
+					</ol>
 
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="https://github.com/s-a/flying-panda" target="_blank">Github</a>
-        </div>
+					<div class="row">
+						<div class="col-xs-1"></div>
+						<div class="col-xs-2">Filename</div>
+						<div class="col-xs-2">Ext</div>
+						<div class="col-xs-2">Size</div>
+						<div class="col-xs-4">Date</div>
+						<div class="col-xs-1">Att</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12">
+							<div id="scrollArea1" class="clusterize-scroll">
+								<div id="contentArea1" class="clusterize-content">
+									<div class="clusterize-no-data">Loading data…</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
+			</div>
+			<div class="col-xs-6">
+				<div class="file-view file-view-2">
+					<ol class="breadcrumb">
+						<li><a href="#">c:</a></li>
+						<li><a href="#">Home</a></li>
+						<li><a href="#">Library</a></li>
+						<li class="active">Data</li>
+					</ol>
 
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav" id="main-menu">
-          </ul>
-          <form class="navbar-form navbar-left" role="search">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Console">
-            </div>
-            <button type="submit" class="btn btn-default">Submit</button>
-          </form>
-
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
-
-    <div class="row">
-      <div class="col-xs-6">
-        <div class="file-view file-view-1">
-          <ol class="breadcrumb">
-            <li><a href="#">c:</a></li>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Library</a></li>
-            <li class="active">Data</li>
-          </ol>
-
-          <div class="row">
-            <div class="col-xs-1"></div>
-            <div class="col-xs-2">Filename</div>
-            <div class="col-xs-2">Ext</div>
-            <div class="col-xs-2">Size</div>
-            <div class="col-xs-4">Date</div>
-            <div class="col-xs-1">Att</div>
-          </div>
-          <div class="row">
-            <div class="col-xs-12">
-              <div id="scrollArea1" class="clusterize-scroll">
-                <div id="contentArea1" class="clusterize-content">
-                  <div class="clusterize-no-data">Loading data…</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-      <div class="col-xs-6">
-        <div class="file-view file-view-2">
-          <ol class="breadcrumb">
-            <li><a href="#">c:</a></li>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Library</a></li>
-            <li class="active">Data</li>
-          </ol>
-
-          <div class="row">
-              <div class="col-xs-1"></div>
-              <div class="col-xs-2">Filename</div>
-              <div class="col-xs-2">Ext</div>
-              <div class="col-xs-2">Size</div>
-              <div class="col-xs-4">Date</div>
-              <div class="col-xs-1">Att</div>
-          </div>
-          <div class="row">
-              <div class="col-xs-12">
-                <div id="scrollArea2" class="clusterize-scroll">
-                  <div id="contentArea2" class="clusterize-content">
-                    <div class="clusterize-no-data">Loading data…</div>
-                  </div>
-                </div>
-              </div>
-          </div>
-        </div>
-      </div>
-  </div>
-  <script src="app.js"></script>
+					<div class="row">
+							<div class="col-xs-1"></div>
+							<div class="col-xs-2">Filename</div>
+							<div class="col-xs-2">Ext</div>
+							<div class="col-xs-2">Size</div>
+							<div class="col-xs-4">Date</div>
+							<div class="col-xs-1">Att</div>
+					</div>
+					<div class="row">
+							<div class="col-xs-12">
+								<div id="scrollArea2" class="clusterize-scroll">
+									<div id="contentArea2" class="clusterize-content">
+										<div class="clusterize-no-data">Loading data…</div>
+									</div>
+								</div>
+							</div>
+					</div>
+				</div>
+			</div>
+	</div>
+	<script src="app.js"></script>
 </body>
 </html>

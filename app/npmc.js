@@ -9,6 +9,9 @@ var NPMC = function() {
 
 NPMC.prototype.nodeHomeFromPathEnvironment = function() {
 	var p = process.env.PATH.split(";");
+	if (p.length === 1){
+		p = process.env.PATH.split(":");
+	}
 	var execFilename = "node";
 	var result = null;
 
@@ -45,7 +48,16 @@ NPMC.prototype.nodeHome = function(){
 };
 
 NPMC.prototype.init = function() {
-	this.npm = require(path.join(this.nodeHome(), "node_modules/npm/lib/npm.js"));
+
+	var npmModule = "npm.js";
+
+	if (os.platform().slice(0,3) === "win"){
+		npmModule = path.join(this.nodeHome(), "node_modules/npm/lib/npm.js");
+	} else {
+		npmModule = "/usr/lib/node_modules/npm/lib/npm.js";
+	}
+
+	this.npm = require(npmModule);
 };
 
 NPMC.prototype.install = function(config, done) {

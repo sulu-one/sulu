@@ -4,6 +4,7 @@ var path = require("path");
 
 
 var NPMC = function() {
+	this.packageMeta = require("./package.json");
 	return this;
 };
 
@@ -61,20 +62,82 @@ NPMC.prototype.init = function() {
 };
 
 
+var DocumentEvent = function(eventName) {
+	var event; // The custom event that will be created
 
+	if (document.createEvent) {
+		event = document.createEvent("HTMLEvents");
+		event.initEvent(eventName, true, true);
+	} else {
+		event = document.createEventObject();
+		event.eventType = eventName;
+	}
+
+	event.eventName = eventName;
+	return event;
+}
 
 NPMC.prototype.install = function(config, done){
 
 	var exec = require('child_process').exec;
-	process.cwd(__dirname);
-	exec('npm install --prefix=' + config.prefix, function(err, stdout, stderr) {
-		if (stderr){
-			alert(stderr);
+	
+	var modules = [];
+
+	for(var moduleName in this.packageMeta.dependencies){
+		if (this.packageMeta.dependencies.hasOwnProperty(moduleName)){
+			modules.push(moduleName  + "@" + this.packageMeta.dependencies[moduleName]);
 		}
-  		done(stdout);
-	  	//console.log(stdout);
-	});
-	/* 
+	}
+
+	var event = new DocumentEvent("mdl-componentupgraded");
+	var moduleCount = modules.length;
+	var self = this;
+	var currentModule = 1;
+	event.statusData = {
+		progress 	: 0,
+		buffer 		: 0,
+		bufferStep 	: 100 / moduleCount
+	};
+	var $bootProgressBar = document.querySelector('#boot-progress-bar');
+	$bootProgressBar.dispatchEvent(event);
+
+	var installNextModule = function() {
+		var module = modules.shift();
+
+		document.getElementById("boot-info-install-status-text").innerHTML = "Installing package " + (currentModule++ + " / " + moduleCount) + " <strong>" + module + "</strong>";
+		event.statusData.buffer += event.statusData.bufferStep;
+		$bootProgressBar.dispatchEvent(event);
+
+
+		var tick = function(){
+			event.statusData.progress += event.statusData.bufferStep;
+			$bootProgressBar.dispatchEvent(event);
+			if (modules.length === 0){
+				done("Packages installed");
+			} else {
+				installNextModule();
+			}
+		}
+/*
+		exec('npm install --prefix=' + config.prefix + " " + module, function(err, stdout, stderr) {
+			if (stderr){
+				alert(stderr);
+			}
+			tick();
+		});
+*/
+		self.npm.load(config, function (er, npm) {
+			npm.commands.install([module], tick);
+		});
+/*
+*/
+	}
+
+	installNextModule();
+	/*
+
+	*/
+	/*
 	FIXME: Spawn does not work?
 	var spawn = require('child_process').spawn,
     ls    = spawn('npm', ['-v']);
@@ -95,9 +158,8 @@ NPMC.prototype.install = function(config, done){
 	/*
 	child.pipe(dest);
 	FIXME: does not work?
-	this.npm.load(config, function (er, npm) {
-		npm.commands.install([], done);
-	});*/
+
+	*/
 };
 
 module.exports = new NPMC();

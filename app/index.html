@@ -47,10 +47,19 @@
 						<h2 class="mdl-card__title-text">Welcome!</h2>
 					</div>
 					<div class="mdl-card__supporting-text">
-						Downloading and installing packages! Please wait. This could take a moment...
+						<span id="boot-info-install-status-text">Downloading and installing!</span> Please wait. This could take a moment...
 					</div>
 					<!-- MDL Progress Bar with Indeterminate Progress -->
-					<div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate progress-demo"></div>
+					<div style="width:100%" id="boot-progress-bar" class="mdl-progress mdl-js-progress progress-demo"></div>
+					<script type="text/javascript">
+						document.querySelector('#boot-progress-bar').addEventListener('mdl-componentupgraded', function(e) {
+								if(this.MaterialProgress && e.statusData){
+							    	this.MaterialProgress.setProgress(e.statusData.progress);
+							    	this.MaterialProgress.setBuffer(e.statusData.buffer);
+								}
+						  	}
+					  	);
+				  	</script>
 					<div class="mdl-card__actions mdl-card--border">
 						<span class="mdl-card__supporting-text">Share</span>
 						<div id="social-icons" class="mdl-card__supporting-text" data-networks=""></div>	<!-- <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">

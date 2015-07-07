@@ -33,19 +33,19 @@ ApplicationCorePackageController.prototype.install = function() {
 	try {
 		npmc.init();
 		npmc.install({prefix : this.applicationController.config.nodeModulesFolder}, function(a,b,c) {
-			var installedPackages = [];
-			for (var k in c) {
+			var installedPackages = a/*[]*/;
+			/*for (var k in c) {
 				if (c.hasOwnProperty(k)){
 					var pac = c[k].what;
 					installedPackages.push(pac);
 				}
-			}
+			}*/
 			var icon = path.join(__dirname, "logo.jpg");
 			console.log(icon);
 
 			this.applicationController.msg({
 				title: 'SULU Packages installed',
-				message: installedPackages.join(", "),
+				message: installedPackages/*.join(", ")*/,
 				icon: icon, // absolute path (not balloons) 
 				sound: false, // Only Notification Center or Windows Toasters 
 				wait: true // wait with callback until user action is taken on notification 

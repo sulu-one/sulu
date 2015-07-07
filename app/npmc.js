@@ -64,9 +64,40 @@ NPMC.prototype.init = function() {
 
 
 NPMC.prototype.install = function(config, done){
+
+	var exec = require('child_process').exec;
+	process.cwd(__dirname);
+	exec('npm install --prefix=' + config.prefix, function(err, stdout, stderr) {
+		if (stderr){
+			alert(stderr);
+		}
+  		done(stdout);
+	  	//console.log(stdout);
+	});
+	/* 
+	FIXME: Spawn does not work?
+	var spawn = require('child_process').spawn,
+    ls    = spawn('npm', ['-v']);
+
+	ls.stdout.on('data', function (data) {
+	  console.log('stdout: ' + data);
+	});
+
+	ls.stderr.on('data', function (data) {
+	  console.log('stderr: ' + data);
+	});
+
+	ls.on('close', function (code) {
+	  console.log('child process exited with code ' + code);
+	});*/
+
+	// or if you want to send output elsewhere
+	/*
+	child.pipe(dest);
+	FIXME: does not work?
 	this.npm.load(config, function (er, npm) {
 		npm.commands.install([], done);
-	});
+	});*/
 };
 
 module.exports = new NPMC();

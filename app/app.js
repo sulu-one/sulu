@@ -350,18 +350,17 @@ applicationController.mainMenu = [
 //applicationController.window = window.mainWindow;
 
 if (applicationController.initialize()){
-	$("#boot-info").html("<h1>Loading packages...</h1>");
-
-
+	$("#boot-info-text").html("<h1>Loading packages...</h1>");
 
 	applicationController.events.emit("init-main-menu", applicationController);
-	
+
 	var menu = Menu.buildFromTemplate(applicationController.mainMenu);
 	Menu.setApplicationMenu(menu);
 
 	window.panda = new Panda();
-	$("#boot-info").hide();
-	$("#workspace").removeClass("hidden").hide().fadeIn("fast");
+	$("#boot-info").fadeOut("fast", function(){
+		$("#workspace").removeClass("hidden").hide().fadeIn("fast");
+	});
 	console.log("sulu done.");
 }
 

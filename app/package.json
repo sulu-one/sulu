@@ -21,6 +21,8 @@
     "clusterize.js": "^0.8.2",
     "jquery": "^2.1.4",
     "keymaster": "^1.6.2",
+    "look-at-this": "^0.1.14",
+    "material-design-lite": "^1.0.0-3",
     "node-notifier": "^4.2.3",
     "package.js": "^1.1.2",
     "shelljs": "^0.5.1",

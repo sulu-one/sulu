@@ -59,6 +59,15 @@ Task.prototype.copy = function() {
 				},
 				{
 					expand: true,
+					cwd: "app/" ,
+					src: [
+						"node_modules_fallback/**"
+					],
+					dest: "./../sulu-" + taskName + "/resources/app/",
+					flatten: false
+				},
+				{
+					expand: true,
 					cwd: "./",
 					src: [ "dist-readme.txt", "LICENSE.md", ".gitignore" ],
 					dest: "./../sulu-" + taskName,

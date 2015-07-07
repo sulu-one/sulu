@@ -33,11 +33,12 @@
 			height: 32px;
 
 		}
+ 
 	</style>
 </head>
 <body>
 	<div id="boot-info">
-		<div class="demo-grid-ruler mdl-grid">
+		<div class="mdl-grid">
 			<div class="mdl-cell mdl-cell--4-col">
 			</div>
 			<div class="mdl-cell mdl-cell--4-col">
@@ -69,74 +70,35 @@
 		</div>
 
 	</div>
-	<div id="workspace" class="hidden">
-		<div class="demo-grid-ruler mdl-grid">
+	<div id="workspace" class="hidden" style="height: 100%;">
+		<div class="mdl-grid">
 			<div class="mdl-cell mdl-cell--6-col">
-				<div id="scrollArea1" class="clusterize-scroll">
-					<div id="contentArea1" class="clusterize-content">
-						<div class="clusterize-no-data">Loading data…</div>
-					</div>
+				<!--table-->
+				<div class="clusterize">
+				  <div id="scrollArea1" class="clusterize-scroll">
+				    <table style="width:100%;height: 100%;" class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+				      <tbody id="contentArea1" class="clusterize-content">
+				        <tr class="clusterize-no-data">
+				          <td>Loading data…</td>
+				        </tr>
+				      </tbody>
+				    </table>
+				  </div>
 				</div>
-
-				<table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp" style="width:100%;">
-				  <thead>
-				    <tr>
-				      <th class="mdl-data-table__cell--non-numeric">Material</th>
-				      <th>Quantity</th>
-				      <th>Unit price</th>
-				    </tr>
-				  </thead>
-				  <tbody>
-				    <tr>
-				      <td class="mdl-data-table__cell--non-numeric">Acrylic (Transparent)</td>
-				      <td>25</td>
-				      <td>$2.90</td>
-				    </tr>
-				    <tr>
-				      <td class="mdl-data-table__cell--non-numeric">Plywood (Birch)</td>
-				      <td>50</td>
-				      <td>$1.25</td>
-				    </tr>
-				    <tr>
-				      <td class="mdl-data-table__cell--non-numeric">Laminate (Gold on Blue)</td>
-				      <td>10</td>
-				      <td>$2.35</td>
-				    </tr>
-				  </tbody>
-				</table>				
 			</div>
 			<div class="mdl-cell mdl-cell--6-col">
-				<div id="scrollArea2" class="clusterize-scroll">
-					<div id="contentArea2" class="clusterize-content">
-						<div class="clusterize-no-data">Loading data…</div>
-					</div>
+				<!--table-->
+				<div class="clusterize">
+				  <div id="scrollArea2" class="clusterize-scroll">
+				    <table style="width:100%;height: 100%;" class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+				      <tbody id="contentArea2" class="clusterize-content">
+				        <tr class="clusterize-no-data">
+				          <td>Loading data…</td>
+				        </tr>
+				      </tbody>
+				    </table>
+				  </div>
 				</div>
-				<table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp" style="width:100%;">
-				  <thead>
-				    <tr>
-				      <th class="mdl-data-table__cell--non-numeric">Material</th>
-				      <th>Quantity</th>
-				      <th>Unit price</th>
-				    </tr>
-				  </thead>
-				  <tbody>
-				    <tr>
-				      <td class="mdl-data-table__cell--non-numeric">Acrylic (Transparent)</td>
-				      <td>25</td>
-				      <td>$2.90</td>
-				    </tr>
-				    <tr>
-				      <td class="mdl-data-table__cell--non-numeric">Plywood (Birch)</td>
-				      <td>50</td>
-				      <td>$1.25</td>
-				    </tr>
-				    <tr>
-				      <td class="mdl-data-table__cell--non-numeric">Laminate (Gold on Blue)</td>
-				      <td>10</td>
-				      <td>$2.35</td>
-				    </tr>
-				  </tbody>
-				</table>				
 			</div>
 		</div>
 	</div>

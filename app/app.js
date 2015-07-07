@@ -127,14 +127,14 @@ var path = require("path");
 		for (var i = 0; i < fsItems.length; i++) {
 			var file = fsItems[i];
 		  	var row = [];
-		  	row.push('<div class="row filesystemitem" data-isdirectory="' + file.isDirectory + '" data-filename="' + file.name + '">');
-		    	row.push('<div class="col-xs-1"><span class="' + file.icon + '"></span></div>');
-		    	row.push('<div class="col-xs-2"><span class="filesystemitem-filename">' + file.name + '</span></div>');
-		    	row.push('<div class="col-xs-2">' + file.ext + '</div>');
-		    	row.push('<div class="col-xs-2">' + (!file.isDirectory ? file.stats.size : "") + '</div>');
-		    	row.push('<div class="col-xs-4">' + (file.stats.mtime || "").toString().replace("T", " ").replace(".000Z", "") + '</div>');
-		    	row.push('<div class="col-xs-1">-a--</div>');
-		  	row.push('</div>');
+		  	row.push('<tr class="row filesystemitem" data-isdirectory="' + file.isDirectory + '" data-filename="' + file.name + '">');
+		    	row.push('<td class="mdl-data-table__cell--non-numeric"><span class="' + file.icon + '"></span></td>');
+		    	row.push('<td class="mdl-data-table__cell--non-numeric"><span class="filesystemitem-filename">' + file.name + '</span></td>');
+		    	row.push('<td class="mdl-data-table__cell--non-numeric">' + file.ext + '</td>');
+		    	row.push('<td class="mdl-data-table__cell--non-numeric">' + (!file.isDirectory ? file.stats.size : "") + '</td>');
+		    	row.push('<td class="mdl-data-table__cell--non-numeric">' + (file.stats.mtime || "").toString().replace("T", " ").replace(".000Z", "") + '</td>');
+		    	row.push('<td class="mdl-data-table__cell--non-numeric">-a--</td>');
+		  	row.push('</tr>');
 
 		  	data.push(row.join(""));
 		}
@@ -348,6 +348,21 @@ applicationController.mainMenu = [
 
 //applicationController.app = app; // Module to control application life.
 //applicationController.window = window.mainWindow;
+
+var resizeScrollViews = function function_name () {
+	var w = window,
+    d = document,
+    e = d.documentElement,
+    g = d.getElementsByTagName('body')[0],
+    x = w.innerWidth || e.clientWidth || g.clientWidth,
+    y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+
+	document.getElementById("scrollArea1").setAttribute("style","max-height:" + (y - 40) + "px");
+	document.getElementById("scrollArea2").setAttribute("style","max-height:" + (y - 40) + "px");
+}
+
+window.addEventListener("resize", resizeScrollViews);
+resizeScrollViews();
 
 if (applicationController.initialize()){
 	$("#boot-info-text").html("<h1>Loading packages...</h1>");

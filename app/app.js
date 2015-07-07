@@ -349,12 +349,13 @@ applicationController.mainMenu = [
 //applicationController.app = app; // Module to control application life.
 //applicationController.window = window.mainWindow;
 
+
 var resizeScrollViews = function function_name () {
 	var w = window,
     d = document,
     e = d.documentElement,
     g = d.getElementsByTagName('body')[0],
-    x = w.innerWidth || e.clientWidth || g.clientWidth,
+	//    x = w.innerWidth || e.clientWidth || g.clientWidth,
     y = w.innerHeight|| e.clientHeight|| g.clientHeight;
 
 	document.getElementById("scrollArea1").setAttribute("style","max-height:" + (y - 40) + "px");
@@ -376,7 +377,8 @@ if (applicationController.initialize()){
 	$("#boot-info").fadeOut("fast", function(){
 		$("#workspace").removeClass("hidden").hide().fadeIn("fast");
 	});
+
+	applicationController.events.emit("init-gui", applicationController);
+
 	console.log("sulu done.");
 }
-
-

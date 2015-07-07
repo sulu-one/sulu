@@ -1,0 +1,42 @@
+{
+  "name": "material-design-lite",
+  "version": "1.0.0-3",
+  "description": "Material Design Components in CSS, JS and HTML",
+  "license": {
+    "type": "Apache-2",
+    "url": "https://github.com/google/material-design-lite/blob/master/LICENSE"
+  },
+  "author": {
+    "name": "Google"
+  },
+  "homepage": "https://github.com/google/material-design-lite",
+  "bugs": {
+    "url": "https://github.com/google/material-design-lite/issues"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "gitHead": "6a50dd394a65373d07c51314cda52dc85f0b4c1b",
+  "_id": "material-design-lite@1.0.0-3",
+  "scripts": {},
+  "_shasum": "829b37998be5291e260fc1df0306061045909ed8",
+  "_from": "material-design-lite@*",
+  "_npmVersion": "2.5.1",
+  "_nodeVersion": "0.12.0",
+  "_npmUser": {
+    "name": "addyosmani",
+    "email": "addyosmani@gmail.com"
+  },
+  "maintainers": [
+    {
+      "name": "addyosmani",
+      "email": "addyosmani@gmail.com"
+    }
+  ],
+  "dist": {
+    "shasum": "829b37998be5291e260fc1df0306061045909ed8",
+    "tarball": "http://registry.npmjs.org/material-design-lite/-/material-design-lite-1.0.0-3.tgz"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/material-design-lite/-/material-design-lite-1.0.0-3.tgz"
+}

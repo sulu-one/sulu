@@ -60,7 +60,10 @@ NPMC.prototype.init = function() {
 	this.npm = require(npmModule);
 };
 
-NPMC.prototype.install = function(config, done) {
+
+
+
+NPMC.prototype.install = function(config, done){
 	this.npm.load(config, function (er, npm) {
 		npm.commands.install([], done);
 	});

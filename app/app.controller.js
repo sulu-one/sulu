@@ -91,7 +91,6 @@ ApplicationController.prototype.requireAll = function() {
 
 		result = true;
 	} catch (e) {
-		debugger;
 		console.log(e);
 	}
 	return result;

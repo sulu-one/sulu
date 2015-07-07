@@ -1,19 +1,19 @@
 {
-  "name": "fileSharp",
+  "name": "sulu",
   "description": "A hackable file manager",
   "version": "0.0.8",
   "author": "Stephan Ahlf <stephan.ahlf@gmail.com>",
   "bugs": {
-    "url": ""
+    "url": "https://github.com/s-a/sulu/issues"
   },
   "homepage": "",
   "keywords": [],
   "license": "",
   "main": "index.js",
-  "private": true,
+  "private": false,
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/s-a/sulu"
   },
   "scripts": {},
   "dependencies": {

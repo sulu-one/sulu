@@ -11,6 +11,6 @@
 
 ## [License](/LICENSE.md)
 Copyright (c) 2015 Stephan Ahlf <stephan.ahlf@gmail.com>  
-This software is dual licensed under MIT and GNU GENERAL PUBLIC LICENSE Version 3.  
+This software is licensed under MIT.  
 
 [<img src="https://s-a.github.io/license/img/mit.svg" />](/LICENSE.md#mit "Massachusetts Institute of Technology (MIT)")

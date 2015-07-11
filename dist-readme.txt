@@ -1,3 +1,3 @@
 # Sulu binaries
 
-## http://s-a.github.io/sulu/
+## http://sulu-one.github.io/sulu/

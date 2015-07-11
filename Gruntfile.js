@@ -111,7 +111,7 @@ Task.prototype.shell = function() {
 			},
 			command: [
 				"cd " + path.join(__dirname, ".."),
-				"git clone https://github.com/s-a/sulu-" + taskName + ".git",
+				"git clone https://github.com/sulu-one/sulu-" + taskName + ".git",
 				"cd " + path.join(__dirname, "..", "sulu-" + taskName),
 				"git checkout --orphan gh-pages"
 			].join(" && ")

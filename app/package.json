@@ -18,7 +18,6 @@
   },
   "scripts": {},
   "dependencies": {
-    "Select2": "git+https://github.com/select2/select2.git",
     "clusterize.js": "^0.8.2",
     "jquery": "^2.1.4",
     "keymaster": "^1.6.2",
@@ -27,6 +26,7 @@
     "node-notifier": "^4.2.3",
     "package.js": "^1.1.2",
     "shelljs": "^0.5.1",
+    "Select2": "git+https://github.com/select2/select2.git",
     "sulu-core": "git+https://github.com/sulu-one/sulu-core.git"
   },
   "devDependencies": {}

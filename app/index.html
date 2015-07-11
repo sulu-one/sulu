@@ -4,16 +4,9 @@
 	<title></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
-	<link rel="stylesheet" href="node_modules_fallback/material-design-lite/material.min.css">
-	<link rel="stylesheet" type="text/css" href="node_modules_fallback/look-at-this/dist/look-at-this.min.css">
-
-	<link rel="stylesheet" href="node_modules/clusterize.js/clusterize.css">
-	<link rel="stylesheet" href="packages/file-icons/font-awesome/css/font-awesome.min.css">
-	<link rel="stylesheet" href="./node_modules/Select2/dist/css/select2.min.css">
-	<link rel="stylesheet" href="app.css"> 
 </head>
 <body>
+	<!-- <progress-info-box></progress-info-box> -->
 	<div id="boot-info">
 		<div class="mdl-grid">
 			<div class="mdl-cell mdl-cell--4-col">
@@ -63,18 +56,9 @@
 		</div> -->
 		<div class="mdl-grid">
 			<div class="mdl-cell mdl-cell--6-col">
-				<!--table-->
-				<div class="clusterize">
-				  <div id="scrollArea1" class="clusterize-scroll">
-				    <table style="width:100%;height: 100%;" class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
-				      <tbody id="contentArea1" class="clusterize-content">
-				        <tr class="clusterize-no-data">
-				          <td>Loading data…</td>
-				        </tr>
-				      </tbody>
-				    </table>
-				  </div>
-				</div>
+				<name-tag></name-tag>
+				<name-tag></name-tag>
+				<element-core-data-view></element-core-data-view>
 			</div>
 			<div class="mdl-cell mdl-cell--6-col">
 				<!--table-->
@@ -94,15 +78,9 @@
 	</div>
 
 	<script src="app.js"></script>
-	<script type="text/javascript" src="node_modules_fallback/look-at-this/dist/look-at-this.min.js"></script>
-	<script type="text/javascript">
-		window.socialIcons.setup.githubUrl = "https://github.com/s-a/sulu/";
-		/* TODO */
-		//window.socialIcons.setup.media = "http://s-a.github.io/look-at-this/responsive-showcase.gif";
-		window.socialIcons.setup.url = "http://s-a.github.io/sulu/";
-		window.socialIcons.setup.title = "SULU - A Hackable Filesystem Manager";
-	</script>
-	<script src="node_modules_fallback/material-design-lite/material.min.js"></script>
+
+
+	
 
 </body>
 </html>

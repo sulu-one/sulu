@@ -96,10 +96,39 @@ ApplicationController.prototype.requireAll = function() {
 	return result;
 };
 
+ApplicationController.prototype.loadCSS = function(path) {
+	var head  = document.getElementsByTagName('head')[0];
+	var link  = document.createElement('link');
+	// link.id   = "cssId";
+	link.rel  = 'stylesheet';
+	link.type = 'text/css';
+	link.href = path;
+	link.media = 'all';
+	head.appendChild(link);
+};
+
+ApplicationController.prototype.loadHTML = function(path) {
+	var head  = document.getElementsByTagName('head')[0];
+	var link  = document.createElement('link');
+	// link.id   = "cssId";
+	link.rel  = 'import';
+	link.href = path;
+	head.appendChild(link);
+};
+
+ApplicationController.prototype.loadJS = function(path) {
+	var head  = document.getElementsByTagName('head')[0];
+	var script  = document.createElement('script');
+	// link.id   = "cssId";
+	script.type = 'text/javascript';
+	script.src = path;
+	head.appendChild(script);
+};
+
 ApplicationController.prototype.initialize = function() {
 	var result = this.requireAll();
 	if (!result){
-		this.corePackageController.install();
+		//this.corePackageController.install();
 	}
 	return result;
 };

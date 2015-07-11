@@ -358,14 +358,35 @@ var resizeScrollViews = function function_name () {
 	//    x = w.innerWidth || e.clientWidth || g.clientWidth,
     y = w.innerHeight|| e.clientHeight|| g.clientHeight;
 
-	document.getElementById("scrollArea1").setAttribute("style","max-height:" + (y - 40) + "px");
-	document.getElementById("scrollArea2").setAttribute("style","max-height:" + (y - 40) + "px");
+	/*document.getElementById("scrollArea1").setAttribute("style","max-height:" + (y - 40) + "px");
+	document.getElementById("scrollArea2").setAttribute("style","max-height:" + (y - 40) + "px");*/
 }
 
 window.addEventListener("resize", resizeScrollViews);
 resizeScrollViews();
 
+	applicationController.loadCSS("node_modules_fallback/material-design-lite/material.min.css");
+	applicationController.loadJS("node_modules_fallback/material-design-lite/material.min.js");
+	applicationController.loadCSS("node_modules_fallback/look-at-this/dist/look-at-this.min.css");
+
+
+	applicationController.events.on("core-init-done", function(){
+		$(function  () {
+			$("#boot-info").fadeOut("fast", function(){
+				$("#workspace").removeClass("hidden").hide().fadeIn("fast");
+			});
+		})
+	});
+
 if (applicationController.initialize()){
+
+		var X = require("./node_modules_fallback/look-at-this/dist/look-at-this.min.js");
+		window.socialIcons.setup.githubUrl = "https://github.com/s-a/sulu/";
+		/* TODO */
+		//window.socialIcons.setup.media = "http://s-a.github.io/look-at-this/responsive-showcase.gif";
+		window.socialIcons.setup.url = "http://s-a.github.io/sulu/";
+		window.socialIcons.setup.title = "SULU - A Hackable Filesystem Manager";
+/*
 	var test = require("./node_modules/Select2/dist/js/select2.full.min.js");
 	var data = [
 		{ id: 0, text: 'enhancement' }, 
@@ -374,8 +395,6 @@ if (applicationController.initialize()){
 		{ id: 3, text: 'invalid' }, 
 		{ id: 4, text: 'wontfix' }
 	];
-
-
 
 	$(document).ready(function() {
 		$("#command-palette").select2({
@@ -388,18 +407,14 @@ if (applicationController.initialize()){
 			$(this).val(null).trigger("change");
 		}).val(null).trigger("change");
 	});
-
+*/
 	$("#boot-info-text").html("<h1>Loading packages...</h1>");
 
 	applicationController.events.emit("init-main-menu", applicationController);
-
 	var menu = Menu.buildFromTemplate(applicationController.mainMenu);
 	Menu.setApplicationMenu(menu);
 
-	window.panda = new Panda();
-	$("#boot-info").fadeOut("fast", function(){
-		$("#workspace").removeClass("hidden").hide().fadeIn("fast");
-	});
+
 
 	applicationController.events.emit("init-gui", applicationController);
 

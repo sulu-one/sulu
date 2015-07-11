@@ -1,178 +1,20 @@
-.hidden{
-  display: none;
+.social-icon{
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
 }
 
-table{
-  width: 100%;
-  height: 100%;
+.social-icon:hover{
+  box-shadow: 0 20px 40px 0 rgba(0, 0, 0, 0.3);
 }
 
-.clusterize-scroll{
-  max-height: 400px;
-  overflow: auto;
-}
-html, body{
-  background-color: #121212;
-  color: #777;
+.social-icon:active{
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.3);
 }
 
-.breadcrumb{
-  background-color: #101010;
+.social-icon{
+  border-radius: 2px;
 }
 
-#scrollArea1 .filesystemitem, #scrollArea2 .filesystemitem{
-  cursor: pointer;
-}
-
-#scrollArea1 .filesystemitem:hover .filesystemitem-filename, #scrollArea2 .filesystemitem:hover .filesystemitem-filename{
-  color:#E0E0E0;
-  text-decoration: underline;
-}
-
-
-.file-view-active .breadcrumb{
-  background-color: #292929;
-}
-
-.file-view-active .breadcrumb a{
-  color: #F53D00;
-}
-
-.file-view-active .filesystemitem-selected{
-  color: #F53D00;
-  
-}
-
-.filesystemitem-selected{
-  background-color:#292929;
-  color: #337ab7;
-}
-
-
- 
-.bubblingG {
-text-align: center;
-width:80px;
-height:50px;
-}
-
-.bubblingG span {
-display: inline-block;
-vertical-align: middle;
-width: 10px;
-height: 10px;
-margin: 25px auto;
-background: #3379B7;
--moz-border-radius: 50px;
--moz-animation: bubblingG 1.3s infinite alternate;
--webkit-border-radius: 50px;
--webkit-animation: bubblingG 1.3s infinite alternate;
--ms-border-radius: 50px;
--ms-animation: bubblingG 1.3s infinite alternate;
--o-border-radius: 50px;
--o-animation: bubblingG 1.3s infinite alternate;
-border-radius: 50px;
-animation: bubblingG 1.3s infinite alternate;
-}
-
-#bubblingG_1 {
--moz-animation-delay: 0s;
--webkit-animation-delay: 0s;
--ms-animation-delay: 0s;
--o-animation-delay: 0s;
-animation-delay: 0s;
-}
-
-#bubblingG_2 {
--moz-animation-delay: 0.39s;
--webkit-animation-delay: 0.39s;
--ms-animation-delay: 0.39s;
--o-animation-delay: 0.39s;
-animation-delay: 0.39s;
-}
-
-#bubblingG_3 {
--moz-animation-delay: 0.78s;
--webkit-animation-delay: 0.78s;
--ms-animation-delay: 0.78s;
--o-animation-delay: 0.78s;
-animation-delay: 0.78s;
-}
-
-@-moz-keyframes bubblingG {
-0% {
-width: 10px;
-height: 10px;
-background-color:#3379B7;
--moz-transform: translateY(0);
-}
-
-100% {
-width: 24px;
-height: 24px;
-background-color:#FFFFFF;
--moz-transform: translateY(-21px);
-}
-
-}
-
-@-webkit-keyframes bubblingG {
-0% {
-width: 10px;
-height: 10px;
-background-color:#3379B7;
--webkit-transform: translateY(0);
-}
-
-100% {
-width: 24px;
-height: 24px;
-background-color:#FFFFFF;
--webkit-transform: translateY(-21px);
-}
-
-}
-
-
-100% {
-width: 24px;
-height: 24px;
-background-color:#FFFFFF;
--ms-transform: translateY(-21px);
-}
-
-}
-
-@-o-keyframes bubblingG {
-0% {
-width: 10px;
-height: 10px;
-background-color:#3379B7;
--o-transform: translateY(0);
-}
-
-100% {
-width: 24px;
-height: 24px;
-background-color:#FFFFFF;
--o-transform: translateY(-21px);
-}
-
-}
-
-@keyframes bubblingG {
-0% {
-width: 10px;
-height: 10px;
-background-color:#3379B7;
-transform: translateY(0);
-}
-
-100% {
-width: 24px;
-height: 24px;
-background-color:#FFFFFF;
-transform: translateY(-21px);
-}
-
+.social-share-button{
+  width: 32px;
+  height: 32px;
 }

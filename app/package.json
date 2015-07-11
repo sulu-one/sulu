@@ -18,6 +18,7 @@
   },
   "scripts": {},
   "dependencies": {
+    "Select2": "git+https://github.com/select2/select2.git",
     "clusterize.js": "^0.8.2",
     "jquery": "^2.1.4",
     "keymaster": "^1.6.2",

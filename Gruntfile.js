@@ -55,7 +55,8 @@ Task.prototype.copy = function() {
 						"!LICENSE"
 					],
 					dest: "./../sulu-" + taskName + "/",
-					flatten: false
+					flatten: false,
+					mode:true
 				},
 				{
 					expand: true,
@@ -64,14 +65,16 @@ Task.prototype.copy = function() {
 						"node_modules_fallback/**"
 					],
 					dest: "./../sulu-" + taskName + "/resources/app/",
-					flatten: false
+					flatten: false,
+					mode:true
 				},
 				{
 					expand: true,
 					cwd: "./",
 					src: [ "dist-readme.txt", "LICENSE.md", ".gitignore" ],
 					dest: "./../sulu-" + taskName,
-					flatten: false
+					flatten: false,
+					mode:true
 				}
 			]
 		}

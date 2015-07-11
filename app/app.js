@@ -366,6 +366,29 @@ window.addEventListener("resize", resizeScrollViews);
 resizeScrollViews();
 
 if (applicationController.initialize()){
+	var test = require("./node_modules/Select2/dist/js/select2.full.min.js");
+	var data = [
+		{ id: 0, text: 'enhancement' }, 
+		{ id: 1, text: 'bug' }, 
+		{ id: 2, text: 'duplicate' }, 
+		{ id: 3, text: 'invalid' }, 
+		{ id: 4, text: 'wontfix' }
+	];
+
+	debugger;
+
+	$(document).ready(function() {
+		$("#command-palette").select2({
+		 	tags: "false",
+			placeholder: "Select a state",
+			data: data,
+		 	theme: "classic"
+		}).on("select2:select", function(){
+			document.title = $(this).val();
+			$(this).val(null).trigger("change");
+		}).val(null).trigger("change");
+	});
+
 	$("#boot-info-text").html("<h1>Loading packages...</h1>");
 
 	applicationController.events.emit("init-main-menu", applicationController);

@@ -12,29 +12,11 @@
 
 	<link rel="stylesheet" href="node_modules/clusterize.js/clusterize.css">
 	<link rel="stylesheet" href="packages/file-icons/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="./node_modules/Select2/dist/css/select2.min.css">
 <!-- 	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="app.css"> -->
+-->
+	<link rel="stylesheet" href="app.css"> 
 
-	<style type="text/css">
-		.social-icon{
-			box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
-		}
-		.social-icon:hover{
-			box-shadow: 0 20px 40px 0 rgba(0, 0, 0, 0.3);
-		}
-		.social-icon:active{
-			box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.3);
-		}
-		.social-icon{
-			border-radius: 2px;
-		}
-		.social-share-button{
-			width: 32px;
-			height: 32px;
-
-		}
- 
-	</style>
 </head>
 <body>
 	<div id="boot-info">
@@ -81,6 +63,13 @@
 	</div>
 	<div id="workspace" class="hidden" style="height: 100%;">
 		<div class="mdl-grid">
+			<div class="mdl-cell mdl-cell--12-col">
+				<div style="width:100%">
+					<select id="command-palette" style="width:100%" multiple="multiple" placeholder="foo"></select>
+				</div>
+			</div>
+		</div>
+		<div class="mdl-grid">
 			<div class="mdl-cell mdl-cell--6-col">
 				<!--table-->
 				<div class="clusterize">
@@ -111,57 +100,7 @@
 			</div>
 		</div>
 	</div>
-<!-- 		<div class="row">
-			<div class="col-xs-6">
-				<div class="file-view file-view-1">
-					<ol class="breadcrumb">
-						<li><a href="#">c:</a></li>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Library</a></li>
-						<li class="active">Data</li>
-					</ol>
 
-					<div class="row">
-						<div class="col-xs-1"></div>
-						<div class="col-xs-2">Filename</div>
-						<div class="col-xs-2">Ext</div>
-						<div class="col-xs-2">Size</div>
-						<div class="col-xs-4">Date</div>
-						<div class="col-xs-1">Att</div>
-					</div>
-					<div class="row">
-						<div class="col-xs-12">
-
-						</div>
-					</div>
-				</div>
-
-			</div>
-			<div class="col-xs-6">
-				<div class="file-view file-view-2">
-					<ol class="breadcrumb">
-						<li><a href="#">c:</a></li>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Library</a></li>
-						<li class="active">Data</li>
-					</ol>
-
-					<div class="row">
-							<div class="col-xs-1"></div>
-							<div class="col-xs-2">Filename</div>
-							<div class="col-xs-2">Ext</div>
-							<div class="col-xs-2">Size</div>
-							<div class="col-xs-4">Date</div>
-							<div class="col-xs-1">Att</div>
-					</div>
-					<div class="row">
-							<div class="col-xs-12">
-								
-							</div>
-					</div>
-				</div>
-			</div>
- -->	 
 	<script src="app.js"></script>
 	<script type="text/javascript" src="node_modules_fallback/look-at-this/dist/look-at-this.min.js"></script>
 	<script type="text/javascript">
@@ -171,7 +110,6 @@
 		window.socialIcons.setup.url = "http://s-a.github.io/sulu/";
 		window.socialIcons.setup.title = "SULU - A Hackable Filesystem Manager";
 	</script>
-
 
 </body>
 </html>

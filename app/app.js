@@ -375,7 +375,7 @@ if (applicationController.initialize()){
 		{ id: 4, text: 'wontfix' }
 	];
 
-	debugger;
+
 
 	$(document).ready(function() {
 		$("#command-palette").select2({

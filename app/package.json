@@ -27,7 +27,7 @@
     "node-notifier": "^4.2.3",
     "package.js": "^1.1.2",
     "shelljs": "^0.5.1",
-    "sulu-core": "0.0.5"
+    "sulu-core": "git+https://github.com/sulu-one/sulu-core.git"
   },
   "devDependencies": {}
 }

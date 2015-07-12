@@ -99,15 +99,18 @@ NPMC.prototype.install = function(config, done){
 		bufferStep 	: 100 / moduleCount
 	};
 	var $bootProgressBar = document.querySelector('#boot-progress-bar');
-	$bootProgressBar.dispatchEvent(event);
+	if ($bootProgressBar){
+		$bootProgressBar.dispatchEvent(event);
+	}
 
 	var installNextModule = function() {
 		var module = modules.shift();
-
+		console.log("installing module " + module);
 		document.getElementById("boot-info-install-status-text").innerHTML = "Installing package " + (currentModule++ + " / " + moduleCount) + " <strong>" + module + "</strong>";
 		event.statusData.buffer += event.statusData.bufferStep;
-		$bootProgressBar.dispatchEvent(event);
-
+		if ($bootProgressBar){
+			$bootProgressBar.dispatchEvent(event);
+		}
 
 		var tick = function(){
 			event.statusData.progress += event.statusData.bufferStep;

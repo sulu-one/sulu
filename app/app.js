@@ -229,6 +229,8 @@ var initFileSystemItemIcon = function(fileSystemItem) {
 
 var ApplicationController = require("./app.controller.js");
 var applicationController = new ApplicationController({nodeModulesFolder: __dirname });
+
+applicationController.loadCSS("app.css");
 var remote = require('remote');
 var Menu = remote.require('menu');
 applicationController.mainMenu = [
@@ -239,20 +241,6 @@ applicationController.mainMenu = [
 //applicationController.window = window.mainWindow;
 
 
-var resizeScrollViews = function function_name () {
-	var w = window,
-    d = document,
-    e = d.documentElement,
-    g = d.getElementsByTagName('body')[0],
-	//    x = w.innerWidth || e.clientWidth || g.clientWidth,
-    y = w.innerHeight|| e.clientHeight|| g.clientHeight;
-
-	/*document.getElementById("scrollArea1").setAttribute("style","max-height:" + (y - 40) + "px");
-	document.getElementById("scrollArea2").setAttribute("style","max-height:" + (y - 40) + "px");*/
-}
-
-window.addEventListener("resize", resizeScrollViews);
-resizeScrollViews();
 
 	applicationController.loadCSS("node_modules_fallback/material-design-lite/material.min.css");
 	applicationController.loadJS("node_modules_fallback/material-design-lite/material.min.js");
@@ -267,7 +255,9 @@ resizeScrollViews();
 		})
 	});
 
-if (applicationController.initialize()){
+
+window.onload = function function_name (argument) {
+	if (applicationController.initialize()){
 
 		var X = require("./node_modules_fallback/look-at-this/dist/look-at-this.min.js");
 		window.socialIcons.setup.githubUrl = "https://github.com/s-a/sulu/";
@@ -275,37 +265,38 @@ if (applicationController.initialize()){
 		//window.socialIcons.setup.media = "http://s-a.github.io/look-at-this/responsive-showcase.gif";
 		window.socialIcons.setup.url = "http://s-a.github.io/sulu/";
 		window.socialIcons.setup.title = "SULU - A Hackable Filesystem Manager";
-/*
-	var test = require("./node_modules/Select2/dist/js/select2.full.min.js");
-	var data = [
-		{ id: 0, text: 'enhancement' }, 
-		{ id: 1, text: 'bug' }, 
-		{ id: 2, text: 'duplicate' }, 
-		{ id: 3, text: 'invalid' }, 
-		{ id: 4, text: 'wontfix' }
-	];
+		/*
+			var test = require("./node_modules/Select2/dist/js/select2.full.min.js");
+			var data = [
+				{ id: 0, text: 'enhancement' }, 
+				{ id: 1, text: 'bug' }, 
+				{ id: 2, text: 'duplicate' }, 
+				{ id: 3, text: 'invalid' }, 
+				{ id: 4, text: 'wontfix' }
+			];
 
-	$(document).ready(function() {
-		$("#command-palette").select2({
-		 	tags: "false",
-			placeholder: "Select a state",
-			data: data,
-		 	theme: "classic"
-		}).on("select2:select", function(){
-			document.title = $(this).val();
-			$(this).val(null).trigger("change");
-		}).val(null).trigger("change");
-	});
-*/
-	$("#boot-info-text").html("<h1>Loading packages...</h1>");
+			$(document).ready(function() {
+				$("#command-palette").select2({
+				 	tags: "false",
+					placeholder: "Select a state",
+					data: data,
+				 	theme: "classic"
+				}).on("select2:select", function(){
+					document.title = $(this).val();
+					$(this).val(null).trigger("change");
+				}).val(null).trigger("change");
+			});
+		*/
+		$("#boot-info-text").html("<h1>Loading packages...</h1>");
 
-	applicationController.events.emit("init-main-menu", applicationController);
-	var menu = Menu.buildFromTemplate(applicationController.mainMenu);
-	Menu.setApplicationMenu(menu);
+		applicationController.events.emit("init-main-menu", applicationController);
+		var menu = Menu.buildFromTemplate(applicationController.mainMenu);
+		Menu.setApplicationMenu(menu);
 
 
 
-	applicationController.events.emit("init-gui", applicationController);
+		applicationController.events.emit("init-gui", applicationController);
 
-	console.log("sulu done.");
+		console.log("sulu done.");
+	}
 }

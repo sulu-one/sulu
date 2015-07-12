@@ -9,18 +9,7 @@ var ApplicationNotifier = function  () {
 
 ApplicationNotifier.prototype.msg = function(msg) {
 	var notifier = require('node-notifier');
-	notifier.notify(msg, function (err, response) {
-	  // response is response from notification 
-	});
-/*
-	notifier.on('click', function (notifierObject, options) {
-	  // Happens if `wait: true` and user clicks notification 
-	});
-
-	notifier.on('timeout', function (notifierObject, options) {
-	  // Happens if `wait: true` and notification closes 
-	});
-*/
+	notifier.notify(msg);
 };
 
 
@@ -31,7 +20,7 @@ var ApplicationCorePackageController = function(applicationController) {
 };
 
 ApplicationCorePackageController.prototype.install = function() {
-	try {
+	/*try {*/
 		npmc.init();
 		npmc.install({prefix : this.applicationController.config.nodeModulesFolder}, function(a,b,c) {
 			var installedPackages = a/*[]*/;
@@ -56,10 +45,10 @@ ApplicationCorePackageController.prototype.install = function() {
 				document.location.reload(true);
 			},2000);
 		});
-	} catch (e) {
+	/*} catch (e) {
 		alert(e);
 		throw e;
-	}
+	}*/
 };
 
 
@@ -84,8 +73,6 @@ ApplicationController.prototype.requireAll = function() {
 	try{
 		window.jQuery = window.$ = require("jquery");
 		window.key = require("keymaster");
-		window.Clusterize = require("clusterize.js");
-		this.loadCSS(path.join(__dirname, "node_modules", "clusterize.js", "clusterize.css"));
 		this.packageController = require("package.js");
 		var folders = [path.join(__dirname, "node_modules")];
 

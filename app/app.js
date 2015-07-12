@@ -45,7 +45,7 @@ var path = require("path");
 						ext: extension,
 						isDirectory: !stats.isFile()
 					};
-					
+
 					fileSystemItem = initFileSystemItemIcon(fileSystemItem);
 					//console.log(fileSystemItem);
 					if (fileSystemItem.isDirectory){
@@ -55,13 +55,12 @@ var path = require("path");
 					}
 				}
 				dirs.push.apply(dirs, files);
-			
+
 				view[viewIndex].dir = newDir;
 		  		callback({summary:summary, items:dirs, viewIndex: viewIndex});
 			}
 		});
 	};
-
 
 	//cmd /K "cd C:\Windows\"
 
@@ -123,12 +122,10 @@ var path = require("path");
 		}
 	};
 
-
 	Panda.prototype.refreshGui = function() {
 		$(".file-view").removeClass("file-view-active");
 		$(".file-view-" + this.fileViewController.activeView).addClass("file-view-active");
 	};
-
 
 	Panda.prototype.initGUIEvents = function() {
 		var self = this;
@@ -144,14 +141,11 @@ var path = require("path");
 			fileSystemItemDataRow.toggleClass("filesystemitem-selected");
 			var filename = fileSystemItemDataRow.data("filename");
 			var isDirectory = (fileSystemItemDataRow.data("isdirectory"));
-			 
+
 			console.log(filename, isDirectory);
 
 			if (isDirectory){
-/*				$.getJSON("/fs", {cd: filename, view: activeView}, function(fs) {
-					initialize(fs.items, fs.summary, fs.viewIndex);
-				});
-*/				
+
 				readDirectoyContents({cd: filename, view: activeView}, function(fs) {
 					initialize(fs.items, fs.summary, fs.viewIndex);
 				});
@@ -159,28 +153,21 @@ var path = require("path");
 			self.refreshGui();
 		};
 
-		$( document ).on( "dblclick", ".filesystemitem", {}, filesystemitemDblClick);   
-		//$( document ).on( "click", ".filesystemitem", {}, filesystemitemClick);   
+		$( document ).on( "dblclick", ".filesystemitem", {}, filesystemitemDblClick);
+		//$( document ).on( "click", ".filesystemitem", {}, filesystemitemClick);
 	};
 
 	Panda.prototype.init = function() {
 		this.initGUIEvents();
 		this.refreshGui();
-		//$.getScript( "/plugins", function( data, textStatus, jqxhr ) {});
-		
+
 		readDirectoyContents({view:1}, function(fs) {
 			initialize(fs.items, fs.summary, fs.viewIndex);
 		});
 		readDirectoyContents({view:2}, function(fs) {
 			initialize(fs.items, fs.summary, fs.viewIndex);
 		});
-		//$.getJSON("/fs", );
 
-/*
-		$.getJSON("/fs", {view:2}, function(fs) {
-			initialize(fs.items, fs.summary, fs.viewIndex);
-		});
-*/
 		var self = this;
 
 	    key("tab", function(/*event, handler*/){
@@ -233,8 +220,7 @@ var applicationController = new ApplicationController({nodeModulesFolder: __dirn
 applicationController.loadCSS("app.css");
 var remote = require('remote');
 var Menu = remote.require('menu');
-applicationController.mainMenu = [
-];
+applicationController.mainMenu = [];
 
 
 //applicationController.app = app; // Module to control application life.
@@ -268,10 +254,10 @@ window.onload = function function_name (argument) {
 		/*
 			var test = require("./node_modules/Select2/dist/js/select2.full.min.js");
 			var data = [
-				{ id: 0, text: 'enhancement' }, 
-				{ id: 1, text: 'bug' }, 
-				{ id: 2, text: 'duplicate' }, 
-				{ id: 3, text: 'invalid' }, 
+				{ id: 0, text: 'enhancement' },
+				{ id: 1, text: 'bug' },
+				{ id: 2, text: 'duplicate' },
+				{ id: 3, text: 'invalid' },
 				{ id: 4, text: 'wontfix' }
 			];
 

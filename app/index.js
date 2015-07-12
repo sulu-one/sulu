@@ -1,5 +1,7 @@
 var app = require('app');  // Module to control application life.
 var BrowserWindow = require('browser-window');  // Module to create native browser window.
+var fs = require('fs');  
+var path = require('path');  
 
 // Report crashes to our server.
 //require('crash-reporter').start();
@@ -25,10 +27,11 @@ app.on('ready', function() {
   mainWindow.loadUrl('file://' + __dirname + '/index.html');
 
 
-  // Open the devtools.
   mainWindow.maximize();
-  mainWindow.openDevTools();
-  
+  var cfg = path.join(__dirname, "config.js");
+  if (fs.existsSync( cfg )){
+    mainWindow.openDevTools();
+  }
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
     // Dereference the window object, usually you would store windows

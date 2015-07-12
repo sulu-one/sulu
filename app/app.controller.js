@@ -1,3 +1,4 @@
+var fs = require("fs");
 var path = require("path");
 var npmc = require("./npmc.js"); // find NPM on the system
 var events = require('events');
@@ -65,6 +66,12 @@ ApplicationCorePackageController.prototype.install = function() {
 
 var ApplicationController = function(config) {
 	this.config = config;
+
+	if (fs.existsSync(path.join(__dirname, "config.js"))){
+		this.settings = require(path.join(__dirname, "config.js"));
+	} else {
+		this.settings = {};
+	}
 	var applicationNotifier = new ApplicationNotifier();
 	this.corePackageController = new ApplicationCorePackageController(this);
 	this.msg = applicationNotifier.msg;
@@ -78,11 +85,17 @@ ApplicationController.prototype.requireAll = function() {
 		window.jQuery = window.$ = require("jquery");
 		window.key = require("keymaster");
 		window.Clusterize = require("clusterize.js");
+		this.loadCSS(path.join(__dirname, "node_modules", "clusterize.js", "clusterize.css"));
 		this.packageController = require("package.js");
+		var folders = [path.join(__dirname, "node_modules")];
 
+		// development mode?
+		if (this.settings.packageFolder){
+			folders = [this.settings.packageFolder];
+		}
 		this.packageController.autoload({
 			debug: true,
-			directories: [path.join(__dirname, "node_modules")],
+			directories: folders,
 			identify: function() {
 				return (this.meta.suluPackage === true);
 			},
@@ -128,7 +141,7 @@ ApplicationController.prototype.loadJS = function(path) {
 ApplicationController.prototype.initialize = function() {
 	var result = this.requireAll();
 	if (!result){
-		//this.corePackageController.install();
+		this.corePackageController.install();
 	}
 	return result;
 };

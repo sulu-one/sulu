@@ -70,47 +70,8 @@ var path = require("path");
 		return this;
 	};
 
-	var Menu = function  (command) {
-		var menu = [];
-		var items = [];
-		menu.push('<li class="dropdown">');
-			menu.push('<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">' + command.menu + ' <span class="caret"></span></a>');
-			items.push('<ul class="dropdown-menu" role="menu">');
-				/*items.push('<li class="divider"></li>');
-				items.push('<li><a href="#">Copy filename(s) with path <sup>strg+x</sup></a></li>');
-				items.push('<li><a href="#">Copy filename(s) without path  <sup>strg+y</sup></a></li>');*/
-			items.push('</ul>');
-		menu.push('</li>');
-		var $el = $(menu.join("\n"));
-		var $items = $(items.join("\n"));
-		$el.append($items);
-		return {$el: $el, $items : $items};
-	};
-
-	var MenuItem = function(command){
-		/*items.push('<li class="divider"></li>');
-		items.push('<li><a href="#">Copy filename(s) with path <sup>strg+x</sup></a></li>');*/
-		return $('<li><a href="javascript:void(0);">' + command.caption + '  <sup>' + command.key.toUpperCase() + '</sup></a></li>');
-	};
-
-	var MenuController = function() {
-		this.menus = [];
-		return this;
-	};
-
-	MenuController.prototype.add = function(command) {
-		if (!this.menus[command.menu]){
-			this.menus[command.menu] = new Menu(command);
-			$("#main-menu").append(this.menus[command.menu].$el);
-		}
-		var menuItem = new MenuItem(command);
-		this.menus[command.menu].$items.append(menuItem);
-		return menuItem;
-	};
-
 	var Panda = function  () {
 		this.plugins = [];
-		this.menuController = new MenuController();
 		this.fileViewController = new FileViewController(this);
 		var self = this;
 		$(function() {
@@ -236,78 +197,6 @@ var path = require("path");
 
 	Panda.prototype.selectedFiles = function() {
 		return ["mock"];
-	};
-
-	Panda.prototype.getPluginById = function(id) {
-		var result = null;
-		for (var i = 0; i < this.plugins.length; i++) {
-			var plugin = this.plugins[i];
-			if (plugin.id === id){
-				result = plugin;
-				break;
-			}
-		}
-
-		if (!result){
-			throw "plugin " + id + " not found";
-		}
-
-		return result;
-	};
-
-	Panda.prototype.resolvePluginCommand = function(pluginId, methodName) {
-		var plugin = this.getPluginById(pluginId);
-		if (!plugin){
-			throw "plugin " + pluginId + " not found";
-		}
-
-		var method = plugin[methodName];
-		if (!method){
-			throw "plugin method " + methodName + " not found";
-		}
-
-		return method;
-	};
-
-	Panda.prototype.resolvePluginCommandArguments = function(pluginId, command) {
-		// TODO: 
-		console.log("xxx");
-	};
-
-	Panda.prototype.registerPlugin = function(Plugin) {
-		var plugin = new Plugin();
-		this.registerMethods(plugin);
-		/*if (plugin.init){
-			plugin.init(function() {
-
-			});
-		}*/ 
-	};
-
-	Panda.prototype.registerMethods = function(plugin) {
-		if (plugin.commands){
-			this.plugins.push(plugin);
-			for (var i = 0; i < plugin.commands.length; i++) {
-				this.registerMethod(plugin, plugin.commands[i]);
-			}
-		}
-	};
-
-	Panda.prototype.registerMethod = function(plugin, command) {
-    	var self = this;
-    	var func = self.resolvePluginCommand(plugin.id, command.command);
-    	var args = self.resolvePluginCommandArguments(command);
-		var methodeCall = function(){
-			return func(args);
-			console.log(command);
-		};
-
-		self.menuController.add(command).click(function  () {
-			return methodeCall();
-		});
-	    key(command.key, function(/*event, handler*/){
-	    	return methodeCall();
-	    });
 	};
 
 

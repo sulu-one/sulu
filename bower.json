@@ -1,0 +1,19 @@
+{
+  "name": "sulu",
+  "version": "0.1.2",
+  "homepage": "https://github.com/sulu-one/sulu",
+  "authors": [
+    "s-a <stephan.ahlf@googlemail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "~1.1.0"
+  }
+}

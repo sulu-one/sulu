@@ -21,7 +21,8 @@
         "it",
         "describe",
         "should",
-        "module"
+        "module",
+        "__dirname"
     ],
 
     "debug"         : false,
@@ -66,7 +67,7 @@
     "white"         : true,
     "indent"        : 2,
     "maxdepth"      : 3,
-    "maxcomplexity"	: 6,
+    "maxcomplexity"	: 7,
     "maxparams"     : 3,
     "maxstatements" : 40
 }

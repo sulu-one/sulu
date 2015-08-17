@@ -1,0 +1,41 @@
+<dom-module id="element-core-data-view">
+	<template>
+		<div class="clusterize">
+		  <div id="{{scrollAreaID}}" class="clusterize-scroll">
+			<table style="width:100%;" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+			  <tbody id="{{contentAreaID}}" class="clusterize-content">
+				<tr class="clusterize-no-data">
+				  <td>
+					  <i>{{loadingMessage}}</i>
+				  </td>
+				</tr>
+			  </tbody>
+			</table>
+		  </div>
+		</div>
+	</template>
+
+	<script>
+		var FileSystemView = require("./file-system-view.js");
+		window.Polymer({
+			is: "element-core-data-view",
+				ready: function() {
+					var self = this;
+					this.loadingMessage = "Loading data...";
+					var id = this.getAttribute("view-id");
+					this.scrollAreaID = "scrollArea" + id;
+					this.contentAreaID = "contentArea" + id;
+
+					$(function() {
+						var fileSystemView = new FileSystemView(id);
+						fileSystemView.bind();
+						$( self ).
+							data("controller", fileSystemView).
+							on( "dblclick", ".filesystemitem", {}, fileSystemView.dblclick);
+						window.resizeScrollViews();
+					});
+				}
+			}
+		);
+	</script>
+</dom-module>

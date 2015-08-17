@@ -17,14 +17,6 @@
     "url": "https://github.com/s-a/sulu"
   },
   "scripts": {},
-  "dependencies": {
-    "jquery": "^2.1.4",
-    "keymaster": "^1.6.2",
-    "look-at-this": "^0.1.14",
-    "material-design-lite": "^1.0.0",
-    "node-notifier": "^4.2.3",
-    "package.js": "^1.1.2",
-    "sulu-core": "git+https://github.com/sulu-one/sulu-core.git"
-  },
+  "dependencies": {},
   "devDependencies": {}
 }

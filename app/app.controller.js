@@ -1,6 +1,5 @@
 var fs = require("fs");
 var path = require("path");
-var npmc = require("./npmc.js"); // find NPM on the system
 var events = require('events');
 
 var ApplicationNotifier = function  () {
@@ -20,35 +19,6 @@ var ApplicationCorePackageController = function(applicationController) {
 };
 
 ApplicationCorePackageController.prototype.install = function() {
-	/*try {*/
-		npmc.init();
-		npmc.install({prefix : this.applicationController.config.nodeModulesFolder}, function(a,b,c) {
-			var installedPackages = a/*[]*/;
-			/*for (var k in c) {
-				if (c.hasOwnProperty(k)){
-					var pac = c[k].what;
-					installedPackages.push(pac);
-				}
-			}*/
-			var icon = path.join(__dirname, "logo.jpg");
-			console.log(icon);
-
-			this.applicationController.msg({
-				title: 'SULU Packages installed',
-				message: installedPackages/*.join(", ")*/,
-				icon: icon, // absolute path (not balloons) 
-				sound: false, // Only Notification Center or Windows Toasters 
-				wait: true // wait with callback until user action is taken on notification 
-			})
-
-			window.setTimeout(function() {
-				document.location.reload(true);
-			},2000);
-		});
-	/*} catch (e) {
-		alert(e);
-		throw e;
-	}*/
 };
 
 
@@ -74,12 +44,7 @@ ApplicationController.prototype.requireAll = function() {
 		window.jQuery = window.$ = require("jquery");
 		window.key = require("keymaster");
 		this.packageController = require("package.js");
-		var folders = [path.join(__dirname, "node_modules")];
-
-		// development mode?
-		if (this.settings.packageFolder){
-			folders = [this.settings.packageFolder];
-		}
+		var folders = [path.join(__dirname, "packages")];
 		this.packageController.autoload({
 			debug: true,
 			directories: folders,
@@ -99,7 +64,6 @@ ApplicationController.prototype.requireAll = function() {
 ApplicationController.prototype.loadCSS = function(path) {
 	var head  = document.getElementsByTagName('head')[0];
 	var link  = document.createElement('link');
-	// link.id   = "cssId";
 	link.rel  = 'stylesheet';
 	link.type = 'text/css';
 	link.href = path;
@@ -127,9 +91,6 @@ ApplicationController.prototype.loadJS = function(path) {
 
 ApplicationController.prototype.initialize = function() {
 	var result = this.requireAll();
-	if (!result){
-		this.corePackageController.install();
-	}
 	return result;
 };
 

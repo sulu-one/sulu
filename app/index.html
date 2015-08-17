@@ -7,49 +7,7 @@
 	<script src="app.js"></script>
 </head>
 <body>
-	<!-- <progress-info-box></progress-info-box> -->
-	<div id="boot-info">
-		<div class="mdl-grid">
-			<div class="mdl-cell mdl-cell--4-col">
-			</div>
-			<div class="mdl-cell mdl-cell--4-col">
-				<div class="mdl-card mdl-shadow--2dp demo-card-wide">
-					<div class="mdl-card__title">
-						<h2 class="mdl-card__title-text">Welcome!</h2>
-					</div>
-					<div class="mdl-card__supporting-text">
-						<span id="boot-info-install-status-text">Downloading and installing!</span> Please wait. This could take a moment...
-					</div>
-					<!-- MDL Progress Bar with Indeterminate Progress -->
-					<div style="width:100%" id="boot-progress-bar" class="mdl-progress mdl-js-progress progress-demo"></div>
-					<script type="text/javascript">
-						document.querySelector('#boot-progress-bar').addEventListener('mdl-componentupgraded', function(e) {
-								if(this.MaterialProgress && e.statusData){
-							    	this.MaterialProgress.setProgress(e.statusData.progress);
-							    	this.MaterialProgress.setBuffer(e.statusData.buffer);
-								}
-						  	}
-					  	);
-				  	</script>
-					<div class="mdl-card__actions mdl-card--border">
-						<span class="mdl-card__supporting-text">Share</span>
-						<div id="social-icons" class="mdl-card__supporting-text" data-networks=""></div>	<!-- <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-						  Get Started
-						</a> -->
-
-					</div> 
-					<!-- <div class="mdl-card__menu">
-						<button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-						  <i class="material-icons">share</i>
-						</button>
-					</div> -->
-				</div>
-			</div>
-			<div class="mdl-cell mdl-cell--4-col">
-			</div>
-		</div>
-	</div>
-	<div id="workspace" class="hidden" style="height: 100%;">
+	<div id="workspace" style="height: 100%;">
 		<!-- <div class="mdl-grid">
 			<div class="mdl-cell mdl-cell--12-col">
 				<select id="command-palette" style="width:100%" multiple="multiple" placeholder="foo"></select>
@@ -57,23 +15,13 @@
 		</div> -->
 		<div class="mdl-grid">
 			<div class="mdl-cell mdl-cell--6-col">
-				<name-tag></name-tag>
-				<element-core-data-view></element-core-data-view>
+				<!-- <name-tag></name-tag> -->
+				<element-core-data-view view-id="1"></element-core-data-view>
 			</div>
 			<div class="mdl-cell mdl-cell--6-col">
-				<name-tag></name-tag>
-				<!--table-->
-				<div class="clusterize">
-				  <div id="scrollArea2" class="clusterize-scroll">
-				    <table style="width:100%;height: 100%;" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-				      <tbody id="contentArea2" class="clusterize-content">
-				        <tr class="clusterize-no-data">
-				          <td>Loading data…</td>
-				        </tr>
-				      </tbody>
-				    </table>
-				  </div>
-				</div>
+				<element-core-data-view view-id="2"></element-core-data-view>
+				<!-- <name-tag></name-tag> -->
+				<!-- <element-core-data-view></element-core-data-view> -->
 			</div>
 		</div>
 	</div>

@@ -20,10 +20,9 @@ app.on('window-all-closed', function() {
 // This method will be called when Electron has done everything
 // initialization and ready for creating browser windows.
 app.on('ready', function() {
-  var meta = require("./../package.json");
   // Create the browser window.
   mainWindow = new BrowserWindow({ 
-    width: 800, height: 600, title : "sulu" + meta.version,
+    width: 800, height: 600, title : "sulu",
     icon: __dirname + '/icon.png',
     transparent: false
   });

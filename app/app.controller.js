@@ -41,7 +41,7 @@ var ApplicationController = function(config) {
 ApplicationController.prototype.requireAll = function() {
 	var result = false;
 	try{
-		window.jQuery = window.$ = require("jquery");
+		
 		window.key = require("keymaster");
 		this.packageController = require("package.js");
 		var folders = [path.join(__dirname, "packages")];

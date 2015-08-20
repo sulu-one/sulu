@@ -1,0 +1,18 @@
+<dom-module id="element-path">
+	<template>
+		<template is="dom-repeat" items="{{items}}">
+	       <a href="#">{{item}}</a>{{sep}}
+	   	</template>
+	</template>
+
+	<script>
+		window.Polymer({
+			is: "element-path",
+				ready: function() {
+					this.sep = require("path").sep;
+					this.items = this.getAttribute("dir").split(require("path").sep);
+				}
+			}
+		);
+	</script>
+</dom-module>

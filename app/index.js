@@ -24,7 +24,8 @@ app.on('ready', function() {
   mainWindow = new BrowserWindow({ 
     width: 800, height: 600, title : "sulu",
     icon: __dirname + '/icon.png',
-    transparent: false
+    transparent: false,
+    frame: false
   });
   // and load the index.html of the app.
   mainWindow.loadUrl('file://' + __dirname + '/index.html');
@@ -33,8 +34,8 @@ app.on('ready', function() {
   mainWindow.maximize();
   var cfg = path.join(__dirname, "config.js");
   if (fs.existsSync( cfg )){
-    mainWindow.openDevTools();
   }
+    mainWindow.openDevTools();
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
     // Dereference the window object, usually you would store windows

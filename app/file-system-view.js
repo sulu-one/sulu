@@ -5,13 +5,13 @@ var path = require("path");
 var View = function(id) {
 	this.id = id;
 	this.path = path.join(__dirname, "examples");
+	this.sep = require("path").sep;
 	return this;
 };
 
 
-View.prototype.dblclick = function(e) {
+View.prototype.dblclick = function(/*e*/) {
 	//self.fileViewController.activeView = activeView;
-
 	var fileSystemItemDataRow = $(this);
 	fileSystemItemDataRow.toggleClass("filesystemitem-selected");
 	var filename = fileSystemItemDataRow.data("filename");
@@ -22,6 +22,7 @@ View.prototype.dblclick = function(e) {
 	if (isDirectory){
 		var view = $(this).parents("element-core-data-view").data("controller");
 		view.cd(filename);
+		view.el.set("path", view.path.split(view.sep));
 	}
 	////self.refreshGui();
 };
@@ -29,7 +30,7 @@ View.prototype.dblclick = function(e) {
 View.prototype.renderRow = function(fileSystemItem) {
 	var file = fileSystemItem;
 	var row = [];
-	row.push('<tr data-rowid="' + file.rowId + '" class="row filesystemitem" data-isdirectory="' + file.isDirectory + '" data-filename="' + file.name + '">');
+	row.push('<tr data-rowid="' + file.rowId + '" class="row filesystemitem' + (file.isDirectory ? " filesystemitem-directory" : "") + '" data-isdirectory="' + file.isDirectory + '" data-filename="' + file.name + '">');
 		row.push('<td class="mdl-data-table__cell--non-numeric"><span class="' + file.icon + '"></span></td>');
 		row.push('<td class="mdl-data-table__cell--non-numeric"><span class="filesystemitem-filename">' + file.name + '</span></td>');
 		row.push('<td class="mdl-data-table__cell--non-numeric">' + file.ext + '</td>');

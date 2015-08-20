@@ -1,0 +1,23 @@
+<dom-module id="element-core-data-view-favourites">
+	<template>
+		<paper-menu-button>
+		  <paper-icon-button icon="menu" class="dropdown-trigger"><i class="fa fa-bars"></i></paper-icon-button>
+		  <paper-menu class="dropdown-content">
+			<paper-item>Share</paper-item>
+			<paper-item>Settings</paper-item>
+			<paper-item>Help</paper-item>
+		  </paper-menu>
+		</paper-menu-button>
+	</template>
+
+	<script>
+		window.Polymer({
+			is: "element-core-data-view-favourites",
+				ready: function() {
+				/*	var id = this.getAttribute("view-id");
+					this.menuID = "mnu-" + id;*/
+				}
+			}
+		);
+	</script>
+</dom-module>

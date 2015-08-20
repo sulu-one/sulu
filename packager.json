@@ -11,6 +11,6 @@
   },
   "win" : {
     "title" : "sulu",
-    "icon" : "assets/win/icon.ico"
+    "icon" : "src/icon.ico"
   }
 }

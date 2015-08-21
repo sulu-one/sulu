@@ -4,26 +4,7 @@
 	<title></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
-	<script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
-	<link rel="import" href="bower_components/font-roboto/roboto.html">
-	<link rel="import" href="bower_components/paper-tabs/paper-tabs.html">
-	<link rel="import" href="bower_components/iron-icons/iron-icons.html">
-	<link rel="import" href="bower_components/iron-icon/iron-icon.html">
-	<link rel="import" href="bower_components/iron-image/iron-image.html">
-	<link rel="import" href="bower_components/paper-menu/paper-menu.html">
-	<link rel="import" href="bower_components/paper-item/paper-item.html">
-	<link rel="import" href="bower_components/paper-toast/paper-toast.html">
-	<link rel="import" href="bower_components/paper-button/paper-button.html">
-	<link rel="import" href="bower_components/paper-dialog/paper-dialog.html">
-	<link rel="import" href="bower_components/paper-menu-button/paper-menu-button.html">
-	<link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
-	<link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
-	<link rel="import" href="element-data-view.html">
-	<link rel="import" href="element-data-view-favourites.html">
-	<link rel="stylesheet" type="text/css" href="app.css">
-
-	<script src="app.js"></script>
+	<link rel="import" href="boot.html">
 </head>
 <body unresolved>
 	<div class="horizontal layout" style="height:100%">
@@ -36,15 +17,15 @@
 			<element-core-data-view view-id="2"></element-core-data-view>
 		</div>
 	</div>
-	<paper-toast id="toast2" text="Connection timed out. Showing limited messages.">
-	  <span role="button" tabindex="0" style="color: #eeff41;margin: 10px" onclick="console.log('RETRY')">Retry</span>
+	<paper-toast id="toast" text="Connection timed out. Showing limited messages.">
+		<!-- <span role="button" tabindex="0" style="color: #eeff41;margin: 10px" onclick="console.log('RETRY')">Retry</span> -->
 	</paper-toast>
 
-	<paper-dialog id="modal" modal>
-	 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-	 <div class="buttons">
-	   <paper-button dialog-confirm autofocus>Tap me to close</paper-button>
-	 </div>
-   </paper-dialog>
+	<paper-dialog id="dialog" modal>
+		<div id="dialog-content"></div>
+		<div id="dialog-buttons" class="buttons"></div>
+	</paper-dialog>
+	<script src="node_modules/keymaster/keymaster.js"></script>
+	<script src="app.js"></script>
 </body>
 </html>

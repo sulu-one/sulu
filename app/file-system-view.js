@@ -11,6 +11,16 @@ var View = function(id) {
 };
 
 
+View.prototype.selected = function() {
+	var result = [];
+	for (var i = 0; i < this.data.length; i++) {
+		if (this.data[i].selected){
+			result.push(this.data[i]);
+		}
+	}
+	return result;
+};
+
 View.prototype.dblclick = function(/*e*/) {
 	//self.fileViewController.activeView = activeView;
 	var fileSystemItemDataRow = $(this);
@@ -28,16 +38,9 @@ View.prototype.dblclick = function(/*e*/) {
 
 View.prototype.click = function(/*e*/) {
 	var fileSystemItemDataRow = $(this);
-	var filename = fileSystemItemDataRow.data("filename");
+	var fileSystemItemId = $(this).data("rowid");
 	var view = $(this).parents("element-core-data-view").data("controller");
-	if (fileSystemItemDataRow.hasClass("selected")){
-		var index = view.selectedItems.indexOf(filename);
-		if (index !== 0) {
-		  view.selectedItems.splice( index, 1 );
-		}
-	} else {
-		view.selectedItems.push(filename)
-	}
+	view.data[fileSystemItemId].selected = !view.data[fileSystemItemId].selected
 	fileSystemItemDataRow.toggleClass("selected");
 };
 

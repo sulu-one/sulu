@@ -47,17 +47,16 @@
 					this.contentAreaID = "contentArea" + id;
 
 					var fileSystemView = new FileSystemView(id);
-					fileSystemView.bind();
 					self.sep = require("path").sep;
 					self.path = fileSystemView.path.split(this.sep);
-					
 					fileSystemView.el = this;
-
-					$( self ).
-						data("controller", fileSystemView).
-						on( "click", ".filesystemitem", {}, fileSystemView.click).
-						on( "dblclick", ".filesystemitem", {}, fileSystemView.dblclick);
 					$(function() {
+						fileSystemView.bind();
+
+						$( self ).
+							data("controller", fileSystemView).
+							on( "click", ".filesystemitem", {}, fileSystemView.click).
+							on( "dblclick", ".filesystemitem", {}, fileSystemView.dblclick);
 						window.resizeScrollViews();
 					});
 				}

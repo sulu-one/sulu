@@ -24,12 +24,6 @@ View.prototype.dblclick = function(/*e*/) {
 		view.cd(filename);
 		view.el.set("path", view.path.split(view.sep));
 	}
-
-	var dialog = document.getElementById("modal");
-      if (dialog) {
-        dialog.open();
-      }
-	////self.refreshGui();
 };
 
 View.prototype.click = function(/*e*/) {
@@ -45,7 +39,6 @@ View.prototype.click = function(/*e*/) {
 		view.selectedItems.push(filename)
 	}
 	fileSystemItemDataRow.toggleClass("selected");
-	document.querySelector('#toast2').show();
 };
 
 View.prototype.renderRow = function(fileSystemItem) {

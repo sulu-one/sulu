@@ -16,7 +16,9 @@
     "type": "git",
     "url": "https://github.com/s-a/sulu"
   },
-  "scripts": {},
+  "scripts": {
+    "install-polymer" : "bower install --save PolymerElements/paper-icon-button"
+  },
   "dependencies": {
     "jquery": "^2.1.4",
     "keymaster": "^1.6.2",

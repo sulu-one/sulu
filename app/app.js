@@ -1,16 +1,16 @@
 var path = require("path");
 //cmd /K "cd C:\Windows\"
-window.resizeScrollViews = function function_name () {
+window.resizeScrollViews = function resizeScrollViews () {
 	var w = window,
-    d = document,
-    e = d.documentElement,
-    g = d.getElementsByTagName('body')[0],
+	d = document,
+	e = d.documentElement,
+	g = d.getElementsByTagName('body')[0],
 	//    x = w.innerWidth || e.clientWidth || g.clientWidth,
-    y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+	y = w.innerHeight|| e.clientHeight|| g.clientHeight;
 
 	var el = document.getElementsByClassName("clusterize-scroll");
 	for (var i = 0; i < el.length; i++) {
-	 	el[i].setAttribute("style","max-height:" + (y - 80) + "px");
+		el[i].setAttribute("style","max-height:" + (y - 130) + "px");
 	}
 };
 
@@ -38,6 +38,6 @@ window.onload = function appLoad() {
 		Menu.setApplicationMenu(menu);
 		applicationController.events.emit("init-gui", applicationController);
 		applicationController.events.on("core-init-done", function(){});
-
+		
 	}
 };

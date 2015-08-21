@@ -13,7 +13,9 @@
 	<link rel="import" href="bower_components/iron-image/iron-image.html">
 	<link rel="import" href="bower_components/paper-menu/paper-menu.html">
 	<link rel="import" href="bower_components/paper-item/paper-item.html">
+	<link rel="import" href="bower_components/paper-toast/paper-toast.html">
 	<link rel="import" href="bower_components/paper-button/paper-button.html">
+	<link rel="import" href="bower_components/paper-dialog/paper-dialog.html">
 	<link rel="import" href="bower_components/paper-menu-button/paper-menu-button.html">
 	<link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
 	<link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
@@ -24,15 +26,25 @@
 	<script src="app.js"></script>
 </head>
 <body unresolved>
-	<div id="workspace" style="height: 100%;">
-		<div style="width:49%;display:inline-block;">
+	<div class="horizontal layout" style="height:100%">
+		<div class="flex-6">
 			<element-core-data-view-favourites view-id="1"></element-core-data-view-favourites>
 			<element-core-data-view view-id="1"></element-core-data-view>
 		</div>
-		<div  style="width:49%;display:inline-block;">
+		<div class="flex-6">
 			<element-core-data-view-favourites view-id="2"></element-core-data-view-favourites>
 			<element-core-data-view view-id="2"></element-core-data-view>
 		</div>
 	</div>
+	<paper-toast id="toast2" text="Connection timed out. Showing limited messages.">
+	  <span role="button" tabindex="0" style="color: #eeff41;margin: 10px" onclick="console.log('RETRY')">Retry</span>
+	</paper-toast>
+
+	<paper-dialog id="modal" modal>
+	 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+	 <div class="buttons">
+	   <paper-button dialog-confirm autofocus>Tap me to close</paper-button>
+	 </div>
+   </paper-dialog>
 </body>
 </html>

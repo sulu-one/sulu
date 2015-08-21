@@ -5,11 +5,51 @@
 */
 
 body {
-    background-color: #121718;
+    -webkit-user-select: none;
+    user-select: none;
+/*    background-color: #121718;
     color: #F0F0F0;
+*/
     font-family: 'Roboto', 'Noto', sans-serif
 }
 
 .filesystemitem-directory{
-	color:yellow;
+	/*color:yellow;*/
+}
+
+
+.element-core-data-view{
+	margin: 6px;
+	/*color: #5B6945;*/
+}
+
+::-webkit-scrollbar {
+    height: 12px;
+    width: 12px;
+    background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #5B6945;
+}
+
+::-webkit-scrollbar-corner {
+    background: #000;
+}
+
+
+.filesystemitem{
+}
+
+.filesystemitem:hover,.active{
+    text-decoration: underline;
+}
+
+.selected{
+    color:red;
+}
+
+
+.element-core-data-view-path span{
+    margin: 0;
 }

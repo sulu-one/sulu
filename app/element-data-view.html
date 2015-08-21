@@ -1,22 +1,36 @@
 <dom-module id="element-core-data-view">
 	<template>
-		
-		<template  is="dom-repeat" items="{{path}}">
-	       <span>{{item}}</span> / 
-	   	</template>
+		<span class="element-core-data-view-path">
+			<template is="dom-repeat" items="{{path}}">
+			   <span>{{item}}</span><span>/</span>
+			</template>
+		</span>
+
 
 		<div class="clusterize">
-		  <div id="{{scrollAreaID}}" class="clusterize-scroll">
-			<table style="width:100%;" class="">
-			  <tbody id="{{contentAreaID}}" class="clusterize-content">
-				<tr class="clusterize-no-data">
-				  <td>
-					  <i>{{loadingMessage}}</i>
-				  </td>
-				</tr>
-			  </tbody>
-			</table>
-		  </div>
+			<div class="horizontal layout">
+				<div class="flex-1">
+				</div>
+				<div class="flex-7">
+					name
+				</div>
+				<div class="flex-1">
+					ext
+				</div>
+				<div class="flex-1">
+					size
+				</div>
+				<div class="flex-1">
+					attr
+				</div>
+			</div>
+			<div id="{{scrollAreaID}}" class="clusterize-scroll">
+				<div id="{{contentAreaID}}" class="clusterize-content">
+					<div class="clusterize-no-data">
+						<i>{{loadingMessage}}</i>
+					</div>
+				</div>
+			</div>
 		</div>
 	</template>
 
@@ -26,7 +40,6 @@
 		window.Polymer({
 			is: "element-core-data-view",
 				ready: function() {
-					debugger;
 					var self = this;
 					this.loadingMessage = "Loading data...";
 					var id = this.getAttribute("view-id");
@@ -42,6 +55,7 @@
 
 					$( self ).
 						data("controller", fileSystemView).
+						on( "click", ".filesystemitem", {}, fileSystemView.click).
 						on( "dblclick", ".filesystemitem", {}, fileSystemView.dblclick);
 					$(function() {
 						window.resizeScrollViews();

@@ -6,6 +6,7 @@ var View = function(id) {
 	this.id = id;
 	this.path = path.join(__dirname, "examples");
 	this.sep = require("path").sep;
+	this.selectedItems = [];
 	return this;
 };
 
@@ -13,7 +14,6 @@ var View = function(id) {
 View.prototype.dblclick = function(/*e*/) {
 	//self.fileViewController.activeView = activeView;
 	var fileSystemItemDataRow = $(this);
-	fileSystemItemDataRow.toggleClass("filesystemitem-selected");
 	var filename = fileSystemItemDataRow.data("filename");
 	var isDirectory = (fileSystemItemDataRow.data("isdirectory"));
 
@@ -24,20 +24,42 @@ View.prototype.dblclick = function(/*e*/) {
 		view.cd(filename);
 		view.el.set("path", view.path.split(view.sep));
 	}
+
+	var dialog = document.getElementById("modal");
+      if (dialog) {
+        dialog.open();
+      }
 	////self.refreshGui();
+};
+
+View.prototype.click = function(/*e*/) {
+	var fileSystemItemDataRow = $(this);
+	var filename = fileSystemItemDataRow.data("filename");
+	var view = $(this).parents("element-core-data-view").data("controller");
+	if (fileSystemItemDataRow.hasClass("selected")){
+		var index = view.selectedItems.indexOf(filename);
+		if (index !== 0) {
+		  view.selectedItems.splice( index, 1 );
+		}
+	} else {
+		view.selectedItems.push(filename)
+	}
+	fileSystemItemDataRow.toggleClass("selected");
+	document.querySelector('#toast2').show();
 };
 
 View.prototype.renderRow = function(fileSystemItem) {
 	var file = fileSystemItem;
 	var row = [];
-	row.push('<tr data-rowid="' + file.rowId + '" class="row filesystemitem' + (file.isDirectory ? " filesystemitem-directory" : "") + '" data-isdirectory="' + file.isDirectory + '" data-filename="' + file.name + '">');
-		row.push('<td class="mdl-data-table__cell--non-numeric"><span class="' + file.icon + '"></span></td>');
-		row.push('<td class="mdl-data-table__cell--non-numeric"><span class="filesystemitem-filename">' + file.name + '</span></td>');
-		row.push('<td class="mdl-data-table__cell--non-numeric">' + file.ext + '</td>');
-		row.push('<td class="mdl-data-table__cell--non-numeric">' + (!file.isDirectory ? file.stats.size : "") + '</td>');
-		row.push('<td class="mdl-data-table__cell--non-numeric">' + (file.stats.mtime || "").toString().replace("T", " ").replace(".000Z", "") + '</td>');
-		row.push('<td class="mdl-data-table__cell--non-numeric">-a--</td>');
-	row.push('</tr>');
+	row.push('<div style="position:relative" data-rowid="' + file.rowId + '" class="horizontal layout row filesystemitem' + (file.isDirectory ? " filesystemitem-directory" : "") + '" data-isdirectory="' + file.isDirectory + '" data-filename="' + file.name + '">');
+		row.push('<div class="flex-1"><span class="' + file.icon + '"></span></div>');
+		row.push('<div class="flex-7"><span class="filesystemitem-filename">' + file.name + '</span></div>');
+		row.push('<div class="flex-1">' + file.ext + '</div>');
+		row.push('<div class="flex-1">' + (!file.isDirectory ? file.stats.size : "") + '</div>');
+		row.push('<div class="flex-1">' + (file.stats.mtime || "").toString().replace("T", " ").replace(".000Z", "") + '</div>');
+		row.push('<div class="flex-1">-a--</div>');
+		row.push('<paper-ripple></paper-ripple>');
+	row.push('</div>');
 	return row.join("\n");
 };
 
@@ -110,7 +132,15 @@ View.prototype.dir = function(done) {
 
 			for (var i = 0; i < directoryContent.length; i++) {
 				var filename = directoryContent[i];
-				var stats = fs.statSync(path.join(self.path, filename));
+
+				var stats = {};
+				try {
+					stats = fs.statSync(path.join(self.path, filename));
+				} catch(e){
+					stats.isFile = function() {
+						return true;
+					}
+				}
 
 				var extension = path.extname(filename);
 				var fileSystemItem = {

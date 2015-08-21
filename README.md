@@ -13,12 +13,21 @@
 ## [Contributing](/CONTRIBUTING.md)
 
 ```bash
+
+
+# installation 
+
 git clone https://github.com/sulu-one/sulu.git;
 cd sulu;
 npm install;
 cd app;
 npm install;
 bower install;
+
+# run
+
+npm run dev;
+
 ```
 
 ## [License](/LICENSE.md)

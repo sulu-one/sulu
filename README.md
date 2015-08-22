@@ -8,6 +8,8 @@
 
 [![Codacy Badge](https://www.codacy.com/project/badge/e5ce84ae276649d5ab61f4f1b264e5e0)](https://www.codacy.com/app/stephanahlf/sulu)  
 
+## Screenshot
+![Screenshot](/screenshot.png)  
 
 
 ## [Contributing](/CONTRIBUTING.md)

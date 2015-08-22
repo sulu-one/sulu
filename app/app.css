@@ -41,7 +41,7 @@ body {
 .filesystemitem{
 }
 
-.filesystemitem:hover,.active{
+.filesystemitem:hover,.filesystemitem:active{
     text-decoration: underline;
 }
 
@@ -52,4 +52,8 @@ body {
 
 .element-core-data-view-path span{
     margin: 0;
+}
+
+element-core-data-view.active > div{
+    background-color: #EEEEEE
 }

@@ -1,6 +1,16 @@
 var GUI = function(app) {
 	this.app = app;
+	this.app.registerHotKey("tab", this.toggleActiveView);
 	return this;
+};
+
+GUI.prototype.toggleActiveView = function() {
+	if (!this.GUI.source){
+		this.GUI.activeView({id:"1"});
+	} else {
+		this.GUI.activeView(this.GUI.target.model);
+	}
+	return false;
 };
 
 GUI.prototype.activeView = function(view) {
@@ -11,11 +21,14 @@ GUI.prototype.activeView = function(view) {
 			var currentView = {
 				el   	: $(this),
 				model 	: model
-			}
+			};
+
 			if (view.id === model.id){
 				self.source = currentView;
+				currentView.el.addClass("active");
 			} else {
 				self.target = currentView;
+				currentView.el.removeClass("active");
 			}
 		});
 	} else {

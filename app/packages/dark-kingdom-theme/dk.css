@@ -17,8 +17,9 @@ body, paper-menu.paper-menu-0,paper-dialog.paper-dialog-0,.paper-checkbox-0 {
 
 
 
+
 .selected{
-    color:red;
+    color:#CC0000;
 }
 
 .active-filesystem-view{

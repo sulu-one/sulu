@@ -8,14 +8,11 @@ body {
     -webkit-user-select: none;
     user-select: none;
     font-size: 14px;
-/*    background-color: #121718;
-    color: #F0F0F0;
-*/
     font-family: 'Roboto', 'Noto', sans-serif
 }
 
 .filesystemitem-directory{
-	/*color:yellow;*/
+	color:#FCD97E;
 }
 
 

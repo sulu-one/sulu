@@ -36,7 +36,7 @@
 
 	<script>
 		var FileSystemView = require("./file-system-view.js");
-		var $ = require("jquery");
+		window.$ = require("jquery");
 		window.Polymer({
 			is: "element-core-data-view",
 				ready: function() {
@@ -55,8 +55,9 @@
 
 						$( self ).
 							data("controller", fileSystemView).
-							on( "click", ".filesystemitem", {}, fileSystemView.click).
-							on( "dblclick", ".filesystemitem", {}, fileSystemView.dblclick);
+							on( "dblclick", ".filesystemitem", {}, fileSystemView.dblclick).
+							on( "click", ".filesystemitem", {}, fileSystemView.click)
+							;
 						window.resizeScrollViews();
 					});
 				}

@@ -1,10 +1,12 @@
+/*var child_process = require('child_process');*/
+
+
 var Command = function() {
 	return this;
 }
 
-Command.prototype.copy = function() {
-	var fileSystemViews = this.fileSystemViews();
-	var view = fileSystemViews[0].model;
+Command.prototype.copy = function copy() {
+	var view = this.GUI.activeView().model;
 	var selectedFileSystemItems = view.selected();
 
 	if (selectedFileSystemItems.length === 0){
@@ -20,6 +22,8 @@ Command.prototype.copy = function() {
 		this.dlg({polymerElementName: "polymer-cat", buttons: buttons}, function(){
 			if (this.result !== -1){
 				this.app.msg(selectedFileSystemItems.length + " files copied. (" + this.result + ", " + this.model.copyFilePermissions + ")");
+				/*cp -R {copy,shell} c:\temp*/
+				//child_process.execSync('start "SULU COPY" /D "c:\\temp" "cmd.exe" /K dir && cp --help');
 			}
 		});
 	}

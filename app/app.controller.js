@@ -1,58 +1,8 @@
 var fs = require("fs");
 var path = require("path");
 var events = require('events');
-
-var ApplicationNotifier = function  (app) {
-	this.app = app;
-	this.ironOverlayClosed = function() {};
-	document.querySelector('#dialog').addEventListener('iron-overlay-closed', this.ironOverlayClosed);
-	return this;
-};
-
-ApplicationNotifier.prototype.msg = function(msg) {
-	/*var notifier = require('node-notifier');
-	notifier.notify(msg);*/
-	document.querySelector('#toast').text = msg;
-	document.querySelector('#toast').show();
-};
-
-ApplicationNotifier.prototype.dlg = function(settings, done) {
-	var self = this;
-	if (!settings.buttons){
-		settings.buttons = {id: 0, text: "Cancel"}
-	}
-
-	var buttons = [];
-	for (var i = 0; i < settings.buttons.length; i++) {
-		var btn = settings.buttons[i];
-		buttons.push('<paper-button dialog-confirm onclick="document.querySelector(\'#dialog\').action=\'' + btn.id + '\';" ' + (btn.autofocus ? 'autofocus' : '') + '>' + btn.text + '</paper-button>');
-	}
-	document.querySelector('#dialog-buttons').innerHTML = buttons.join("");
-
-	var content = '<' + settings.polymerElementName + ' id="' + settings.polymerElementName + '"></' + settings.polymerElementName + '>';
-	document.querySelector('#dialog-content').innerHTML = content;
-
-	var dlg = document.querySelector('#dialog');
-	dlg.removeEventListener('iron-overlay-closed', this.ironOverlayClosed);
-	this.ironOverlayClosed = done;
-	dlg.action = "-1";
-	this.ironOverlayClosed = function(e) {
-		var btnIndex = parseInt(e.target.action, 10);
-		var model = $("#" + settings.polymerElementName).data("controller");
-		if (done){
-			var context = {event:e, result : btnIndex, model: model, app: self, el: this};
-			done.bind(context)();
-		}
-	};
-	dlg.addEventListener('iron-overlay-closed', this.ironOverlayClosed);
-	dlg.open();
-};
-
-
-
-
-
-
+var ApplicationNotifier = require("./app.notifier.js");
+var GUI = require("./app.GUI.js");
 
 var ApplicationController = function(config) {
 	this.config = config;
@@ -62,6 +12,7 @@ var ApplicationController = function(config) {
 	} else {
 		this.settings = {};
 	}
+	this.GUI = new GUI(this);
 	var applicationNotifier = new ApplicationNotifier(this);
 	this.msg = applicationNotifier.msg;
 	this.dlg = applicationNotifier.dlg;
@@ -74,14 +25,7 @@ ApplicationController.prototype.registerHotKey = function(key, fn) {
 };
 
 ApplicationController.prototype.fileSystemViews = function() {
-	var result = [];
-	$("element-core-data-view").each(function(/*i,n*/) {
-		result.push({
-			el   	: $(this),
-			model 	: $(this).data("controller")
-		});
-	});
-	return result;
+	console.error("obsolete!", "use app.GUI.fileSystemViews", "instead");
 };
 
 ApplicationController.prototype.requireAll = function() {

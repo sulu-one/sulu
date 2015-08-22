@@ -6,7 +6,6 @@ var View = function(id) {
 	this.id = id;
 	this.path = path.join(__dirname, "examples");
 	this.sep = require("path").sep;
-	this.selectedItems = [];
 	return this;
 };
 
@@ -22,7 +21,6 @@ View.prototype.selected = function() {
 };
 
 View.prototype.dblclick = function(/*e*/) {
-	//self.fileViewController.activeView = activeView;
 	var fileSystemItemDataRow = $(this);
 	var filename = fileSystemItemDataRow.data("filename");
 	var isDirectory = (fileSystemItemDataRow.data("isdirectory"));
@@ -34,13 +32,16 @@ View.prototype.dblclick = function(/*e*/) {
 		view.cd(filename);
 		view.el.set("path", view.path.split(view.sep));
 	}
+	return false;
 };
 
 View.prototype.click = function(/*e*/) {
 	var fileSystemItemDataRow = $(this);
 	var fileSystemItemId = $(this).data("rowid");
 	var view = $(this).parents("element-core-data-view").data("controller");
-	view.data[fileSystemItemId].selected = !view.data[fileSystemItemId].selected
+	view.data[fileSystemItemId].selected = !view.data[fileSystemItemId].selected;
+	window.applicationController.GUI.activeView(view);
+
 	fileSystemItemDataRow.toggleClass("selected");
 };
 

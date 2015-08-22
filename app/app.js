@@ -1,5 +1,5 @@
 var path = require("path");
-//cmd /K "cd C:\Windows\"
+
 window.resizeScrollViews = function resizeScrollViews () {
 	var w = window,
 	d = document,
@@ -18,13 +18,6 @@ window.addEventListener("resize", window.resizeScrollViews);
 
 var ApplicationController = require("./app.controller.js");
 var applicationController = new ApplicationController({nodeModulesFolder: __dirname });
-/*applicationController.loadCSS("app.css");*/
-var remote = require('remote');
-var Menu = remote.require('menu');
-applicationController.mainMenu = [];
-/*applicationController.loadJS("node_modules/material-design-lite/material.min.js");
-applicationController.loadCSS("node_modules/material-design-lite/material.min.css");
-*/
 window.Clusterize = require("clusterize.js");
 
 window.onload = function appLoad() {
@@ -34,10 +27,9 @@ window.onload = function appLoad() {
 		applicationController.loadCSS(path.join(__dirname, "node_modules", "clusterize.js", "clusterize.css"));
 
 		applicationController.events.emit("init-main-menu", applicationController);
-		var menu = Menu.buildFromTemplate(applicationController.mainMenu);
-		Menu.setApplicationMenu(menu);
+		/*var menu = Menu.buildFromTemplate(applicationController.mainMenu);
+		Menu.setApplicationMenu(menu);*/
 		applicationController.events.emit("init-gui", applicationController);
 		applicationController.events.on("core-init-done", function(){});
-		
 	}
 };

@@ -4,7 +4,7 @@ var GUI = function(app) {
 	return this;
 };
 
-GUI.prototype.toggleActiveView = function() {
+GUI.prototype.toggleActiveView = function GUI_toggleActiveView() {
 	if (!this.GUI.source){
 		this.GUI.activeView({id:"1"});
 	} else {
@@ -25,10 +25,10 @@ GUI.prototype.activeView = function(view) {
 
 			if (view.id === model.id){
 				self.source = currentView;
-				currentView.el.addClass("active");
+				currentView.el.parent().addClass("active-filesystem-view");
 			} else {
 				self.target = currentView;
-				currentView.el.removeClass("active");
+				currentView.el.parent().removeClass("active-filesystem-view");
 			}
 		});
 	} else {

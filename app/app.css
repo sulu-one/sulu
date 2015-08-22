@@ -24,17 +24,17 @@ body {
 }
 
 ::-webkit-scrollbar {
-    height: 12px;
+    height: 6px;
     width: 12px;
-    background: #000;
+    background: #E0E0E0;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #5B6945;
+    background: #BABABA;
 }
 
 ::-webkit-scrollbar-corner {
-    background: #000;
+    background: #E0E0E0;
 }
 
 
@@ -43,17 +43,4 @@ body {
 
 .filesystemitem:hover,.filesystemitem:active{
     text-decoration: underline;
-}
-
-.selected{
-    color:red;
-}
-
-
-.element-core-data-view-path span{
-    margin: 0;
-}
-
-element-core-data-view.active > div{
-    background-color: #EEEEEE
 }

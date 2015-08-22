@@ -20,7 +20,23 @@ var ApplicationController = function(config) {
 	return this;
 };
 
+ApplicationController.prototype.getFunctionName = function(fn) {
+	var ret = fn.toString();
+	ret = ret.substr('function '.length);
+	ret = ret.substr(0, ret.indexOf('(')).trim();
+	if (ret === "") {
+		ret = null;
+	}
+	if (!ret){
+		throw 'could not determine function name of \"' + fn.toString() + '\"';
+	}
+	return ret;
+}
+
 ApplicationController.prototype.registerHotKey = function(key, fn) {
+
+	var n  = this.getFunctionName(fn);
+	console.log(n);
 	window.key(key, fn.bind(this));
 };
 

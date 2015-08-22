@@ -99,10 +99,10 @@ View.prototype.mimeIconType = function(fileSystemItem) {
 		result = "fa fa-folder";
 	} else {
 		result = "fa fa-file-o";
+		window.applicationController.events.emit("init-filesystem-item-icon", fileSystemItem);
+		result = fileSystemItem.icon;
 	}
 
-	/////this.events.emit("init-filesystem-item-icon", fileSystemItem);
-	//console.log(fileSystemItem.icon, fileSystemItem.name);
 	return result;
 };
 

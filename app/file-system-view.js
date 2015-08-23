@@ -4,12 +4,58 @@ var path = require("path");
 
 var View = function(id) {
 	this.id = id;
+	this.activeRow = null;
 	this.path = path.join(__dirname, "examples");
 	this.sep = require("path").sep;
 	return this;
 };
 
 
+/* Gets or sets active row */
+View.prototype.row = function($row) {
+	if ($row){
+		if (this.activeRow){
+			this.activeRow.removeClass("active");
+		}
+		this.activeRow = $row;
+		this.activeRow.addClass("active");
+	}
+	return this.activeRow;
+};
+
+View.prototype.isInView = function($elem) {
+	var id = "scrollArea" + this.id;
+	var $scrollArea = $('#' + id);
+
+	var docViewTop = $scrollArea.scrollTop();
+	var docViewBottom = /*docViewTop + */$scrollArea.innerHeight();
+	var elemTop = $elem.offset().top;
+	var elemBottom = elemTop + $elem.outerHeight();
+	return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+};
+/*
+function isScrolledIntoView(elem, divID){
+	var docViewTop = $('#' + divID).scrollTop();
+	var docViewBottom = docViewTop + $('#' + divID).height();
+	var elemTop = $(elem).offset().top;
+	var elemBottom = elemTop + $(elem).height();
+	return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+}
+*/
+
+/* Sets and gets the next active row */
+View.prototype.nextRow = function() {
+	this.row(this.row().next());
+	return this.row();
+};
+
+/* Sets and gets the previous active row */
+View.prototype.previousRow = function() {
+	this.row(this.row().prev());
+	return this.row();
+};
+
+/* get selected rows */
 View.prototype.selected = function() {
 	var result = [];
 	for (var i = 0; i < this.data.length; i++) {
@@ -43,6 +89,7 @@ View.prototype.click = function(/*e*/) {
 	window.applicationController.GUI.activeView(view);
 
 	fileSystemItemDataRow.toggleClass("selected");
+	view.row(fileSystemItemDataRow);
 };
 
 View.prototype.renderRow = function(fileSystemItem) {

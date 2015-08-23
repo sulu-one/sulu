@@ -18,13 +18,27 @@ body, paper-menu.paper-menu-0,paper-dialog.paper-dialog-0,.paper-checkbox-0 {
 
 
 
-.selected{
-    color:#CC0000;
-}
-
 .active-filesystem-view{
     color:#F0F0F0;
 }
+
+
+.filesystemitem{
+	border: solid 1px #121718;
+}
+
+.filesystemitem.selected{
+    color:#CC0000;
+}
+
+.active-filesystem-view .filesystemitem.active{
+    border: solid 1px #F0F0F0;
+}
+
+.filesystemitem.active{
+    border: solid 1px #8A8A8A;
+}
+
 
 
 paper-ripple {

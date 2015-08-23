@@ -17,6 +17,7 @@ app.on('window-all-closed', function() {
   }
 });
 
+app.setAppUserModelId('<sulu>');
 // This method will be called when Electron has done everything
 // initialization and ready for creating browser windows.
 app.on('ready', function() {

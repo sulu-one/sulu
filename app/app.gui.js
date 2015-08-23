@@ -1,7 +1,25 @@
 var GUI = function(app) {
 	this.app = app;
 	this.app.registerHotKey("tab", this.toggleActiveView);
+	this.app.registerHotKey("down", this.setNextActiveRow);
+	this.app.registerHotKey("up", this.setPreviousActiveRow);
 	return this;
+};
+
+GUI.prototype.setNextActiveRow = function setNextActiveRow() {
+	var nextRow = this.GUI.source.model.nextRow();
+
+	if (this.GUI.source.model.isInView(nextRow)){
+		return false;
+	}
+};
+
+GUI.prototype.setPreviousActiveRow = function setPreviousActiveRow() {
+	var nextRow = this.GUI.source.model.previousRow();
+
+	if (this.GUI.source.model.isInView(nextRow)){
+		return false;
+	}
 };
 
 GUI.prototype.toggleActiveView = function GUI_toggleActiveView() {

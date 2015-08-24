@@ -13,25 +13,36 @@ var View = function(id) {
 
 /* Gets or sets active row */
 View.prototype.row = function($row) {
-	if ($row){
+	if ($row && $row.get(0)){
 		if (this.activeRow){
 			this.activeRow.removeClass("active");
 		}
 		this.activeRow = $row;
 		this.activeRow.addClass("active");
 	}
+	this.activeRowId = this.activeRow.data("rowid");
 	return this.activeRow;
 };
 
 View.prototype.isInView = function($elem) {
-	var id = "scrollArea" + this.id;
-	var $scrollArea = $('#' + id);
-
-	var docViewTop = $scrollArea.scrollTop();
-	var docViewBottom = /*docViewTop + */$scrollArea.innerHeight();
-	var elemTop = $elem.offset().top;
-	var elemBottom = elemTop + $elem.outerHeight();
-	return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+	var inView = false;
+	if ($elem.get(0)){
+		var id = "scrollArea" + this.id;
+		var $scrollArea = $('#' + id);
+		var docViewTop = $scrollArea.scrollTop();
+		var docViewBottom = docViewTop + $scrollArea.height();
+		var elemTop = $elem.get(0).offsetTop - $scrollArea.offset().top;
+		var elemBottom = elemTop + $elem.height();
+		inView = ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+		/*$('body').css('background', inView ? 'green' : 'tomato');
+		console.log('=============')
+		console.log('docViewTop', docViewTop);
+		console.log('docViewBottom', docViewBottom);
+		console.log('elemTop', elemTop);
+		console.log('elemBottom', elemBottom);
+		console.log('inView', inView);*/
+	}
+	return inView;
 };
 /*
 function isScrolledIntoView(elem, divID){
@@ -87,15 +98,15 @@ View.prototype.click = function(/*e*/) {
 	var view = $(this).parents("element-core-data-view").data("controller");
 	view.data[fileSystemItemId].selected = !view.data[fileSystemItemId].selected;
 	window.applicationController.GUI.activeView(view);
-
 	fileSystemItemDataRow.toggleClass("selected");
 	view.row(fileSystemItemDataRow);
+//	view.cluster.update(view.renderRows(view.data));
 };
 
 View.prototype.renderRow = function(fileSystemItem) {
 	var file = fileSystemItem;
 	var row = [];
-	row.push('<div style="position:relative" data-rowid="' + file.rowId + '" class="horizontal layout row filesystemitem' + (file.isDirectory ? " filesystemitem-directory" : "") + '" data-isdirectory="' + file.isDirectory + '" data-filename="' + file.name + '">');
+	row.push('<div style="position:relative" data-rowid="' + file.rowId + '" class="horizontal layout row filesystemitem' + (file.isDirectory ? " filesystemitem-directory" : "") + (file.selected ? " selected" : "") + '" data-isdirectory="' + file.isDirectory + '" data-filename="' + file.name + '">');
 		row.push('<div class="flex-1"><span class="' + file.icon + '"></span></div>');
 		row.push('<div class="flex-7"><span class="filesystemitem-filename">' + file.name + '</span></div>');
 		row.push('<div class="flex-1">' + file.ext + '</div>');
@@ -124,7 +135,29 @@ View.prototype.bind = function(){
 			self.cluster = new window.Clusterize({
 				rows: self.renderRows(self.data),
 				scrollId: 'scrollArea' + self.id,
-				contentId: 'contentArea' + self.id
+				contentId: 'contentArea' + self.id,
+				afterInsertToDOM : function(data){
+					var $scrollArea = $("#scrollArea" + self.id);
+					if (!self.activeRow){
+						self.activeRow = $scrollArea.find(".filesystemitem:first");
+						self.activeRowId = parseInt(self.activeRow.data("rowid"), 10);
+					}
+
+					for (var i = 0; i < data.rows.length; i++) {
+						var row = data.rows[i];
+						var rowID = parseInt($(row).data("rowid"), 10);
+						if (!isNaN(rowID)){
+							var rowModel = self.data[rowID];
+							if (rowModel.selected){
+								$scrollArea.find("div[data-rowid='" + rowID + "']").addClass("selected");
+							}
+						}
+					}
+
+					if (self.activeRow){
+						$scrollArea.find("div[data-rowid='" + (self.activeRowId) + "']").click();
+					}
+				}
 			});
 		});
 	}
@@ -132,6 +165,8 @@ View.prototype.bind = function(){
 
 View.prototype.cd = function(dir){
 	var self = this;
+	self.activeRow = null;
+	self.activeRowId = null;
 	this.path = path.join(this.path, dir);
 	self.dir(function() {
 		self.cluster.update(self.renderRows(self.data));

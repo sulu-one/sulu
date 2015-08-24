@@ -26,7 +26,7 @@ GUI.prototype.toggleActiveView = function GUI_toggleActiveView() {
 	if (!this.GUI.source){
 		this.GUI.activeView({id:"1"});
 	} else {
-		this.GUI.activeView(this.GUI.target.model);
+		this.GUI.activeView(this.GUI.target.model);//.model.row().click();
 	}
 	return false;
 };
@@ -44,14 +44,14 @@ GUI.prototype.activeView = function(view) {
 			if (view.id === model.id){
 				self.source = currentView;
 				currentView.el.parent().addClass("active-filesystem-view");
+				currentView.el.find(".clusterize-content").focus()
 			} else {
 				self.target = currentView;
 				currentView.el.parent().removeClass("active-filesystem-view");
 			}
 		});
-	} else {
-		return self.source;
 	}
+	return self.source;
 };
 
 GUI.prototype.fileSystemViews = function() {

@@ -3,7 +3,35 @@ var GUI = function(app) {
 	this.app.registerHotKey("tab", this.toggleActiveView);
 	this.app.registerHotKey("down", this.setNextActiveRow);
 	this.app.registerHotKey("up", this.setPreviousActiveRow);
+	this.app.registerHotKey("enter", this.enterActiveRow);
+	this.app.registerHotKey("backspace", this.backToParentFolder);
+	this.app.registerHotKey("space", this.selectActiveRow);
+	this.app.registerHotKey("esc", this.unselectAllRows);
 	return this;
+};
+
+
+GUI.prototype.selectActiveRow = function selectActiveRow() {
+	var view = this.GUI.source;
+	view.model.selectActiveRow();
+	return false;
+};
+
+GUI.prototype.unselectAllRows = function unselectAllRows() {
+	var view = this.GUI.source;
+	view.model.unselectAllRows();
+	return false;
+};
+
+GUI.prototype.backToParentFolder = function backToParentFolder() {
+	var view = this.GUI.source;
+	view.model.cd("..");
+};
+
+GUI.prototype.enterActiveRow = function enterActiveRow() {
+	var view = this.GUI.source;
+	var row = view.model.row();
+	row.dblclick();
 };
 
 GUI.prototype.setNextActiveRow = function setNextActiveRow() {

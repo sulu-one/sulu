@@ -6,12 +6,9 @@ select
 
 
 file view navigation
- - up / down
- - enter (like dblclick folder)
  - click file path items
 
 history
- - history.back (backspace)
  - history.forward (strl+alt+right)
 
 favourites (ctrl-1 to ctrl-0)
@@ -32,8 +29,6 @@ realy focus file system view on tab
 
 remove all hot keys on dialog show (register again on dialog close)  
 
-
-
 emit event on process filesystem item while navigation to implement plugins for archive filetypes like .zip  
 
-implement git commands and overview;  
+implement git commands and overview (plugin);  

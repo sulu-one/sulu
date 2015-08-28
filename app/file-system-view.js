@@ -1,6 +1,6 @@
 var fs = require("fs");
 var path = require("path");
-
+var drivelist = require('drivelist');
 
 var View = function(id) {
 	this.id = id;
@@ -79,26 +79,42 @@ View.prototype.selected = function() {
 
 View.prototype.dblclick = function(/*e*/) {
 	var fileSystemItemDataRow = $(this);
+	var id = parseInt(fileSystemItemDataRow.data("rowid"), 10);
 	var filename = fileSystemItemDataRow.data("filename");
-	var isDirectory = (fileSystemItemDataRow.data("isdirectory"));
+	/*var isDirectory = (fileSystemItemDataRow.data("directory"));
+	var isDisk = (fileSystemItemDataRow.data("disk"));*/
 
-	console.log(filename, isDirectory);
-
-	if (isDirectory){
-		var view = $(this).parents("element-core-data-view").data("controller");
+	//console.log(filename, isDirectory);
+	var view = $(this).parents("element-core-data-view").data("controller");
+	var rowData = view.data[id];
+	if (rowData.isDirectory || rowData.isDisk){
 		view.cd(filename);
-		view.el.set("path", view.path.split(view.sep));
 	}
+
 	return false;
+};
+
+View.prototype.selectActiveRow = function() {
+	var id = this.activeRow.data("rowid");
+	this.data[id].selected = !this.data[id].selected;
+	this.activeRow.toggleClass("selected");
+};
+
+View.prototype.unselectAllRows = function() {
+	this.activeRow.parent().find(".selected").removeClass("selected");
+	for (var i = 0; i < this.data.length; i++) {
+		var row = this.data[i];
+		row.selected = false;
+	}
 };
 
 View.prototype.click = function(/*e*/) {
 	var fileSystemItemDataRow = $(this);
-	var fileSystemItemId = $(this).data("rowid");
+//	var fileSystemItemId = $(this).data("rowid");
+/*	view.data[fileSystemItemId].selected = !view.data[fileSystemItemId].selected;
+	fileSystemItemDataRow.toggleClass("selected");*/
 	var view = $(this).parents("element-core-data-view").data("controller");
-	view.data[fileSystemItemId].selected = !view.data[fileSystemItemId].selected;
 	window.applicationController.GUI.activeView(view);
-	fileSystemItemDataRow.toggleClass("selected");
 	view.row(fileSystemItemDataRow);
 //	view.cluster.update(view.renderRows(view.data));
 };
@@ -106,7 +122,7 @@ View.prototype.click = function(/*e*/) {
 View.prototype.renderRow = function(fileSystemItem) {
 	var file = fileSystemItem;
 	var row = [];
-	row.push('<div style="position:relative" data-rowid="' + file.rowId + '" class="horizontal layout row filesystemitem' + (file.isDirectory ? " filesystemitem-directory" : "") + (file.selected ? " selected" : "") + '" data-isdirectory="' + file.isDirectory + '" data-filename="' + file.name + '">');
+	row.push('<div style="position:relative" data-rowid="' + file.rowId + '" class="horizontal layout row filesystemitem' + (file.isDisk ? " filesystemitem-disk" : "") + (file.isDirectory ? " filesystemitem-directory" : "") + (file.selected ? " selected" : "") + '" data-isdirectory="' + file.isDirectory + '" data-filename="' + file.name + '">');
 		row.push('<div class="flex-1"><span class="' + file.icon + '"></span></div>');
 		row.push('<div class="flex-7"><span class="filesystemitem-filename">' + file.name + '</span></div>');
 		row.push('<div class="flex-1">' + file.ext + '</div>');
@@ -167,10 +183,31 @@ View.prototype.cd = function(dir){
 	var self = this;
 	self.activeRow = null;
 	self.activeRowId = null;
-	this.path = path.join(this.path, dir);
-	self.dir(function() {
-		self.cluster.update(self.renderRows(self.data));
-	});
+
+	if (!path.isAbsolute(dir) && dir === ".." && path.join(this.path, "..") === this.path){
+		// root of disc
+		drivelist.list(function(error, disks) {
+			if (error) {throw new Error(error);}
+			console.log(disks);
+			self.data = [];
+			for (var i = 0; i < disks.length; i++) {
+				var disk = disks[i];
+				self.data.push({isDisk: true, icon: "fa fa-hdd-o", name: disk.mountpoint + self.sep, stats:{size: disk.size}, ext: disk.description});
+			}
+			self.cluster.update(self.renderRows(self.data));
+			self.el.set("path", self.path.split(self.sep));
+		});
+	} else {
+		if (path.isAbsolute(dir)){
+			this.path = dir;
+		} else {
+			this.path = path.join(this.path, dir);
+		}
+		self.dir(function() {
+			self.cluster.update(self.renderRows(self.data));
+			self.el.set("path", self.path.split(self.sep));
+		});
+	}
 };
 
 
@@ -206,7 +243,8 @@ View.prototype.dir = function(done) {
 				stats:{size : 0, date: ""},
 				name: "..",
 				ext: "",
-				isDirectory: true
+				isDirectory: true,
+				idDisk: false
 			});
 
 			for (var i = 0; i < directoryContent.length; i++) {
@@ -228,7 +266,8 @@ View.prototype.dir = function(done) {
 					stats: {size:stats.size, date:stats.mtime},
 					name: path.basename(filename, extension),
 					ext: extension,
-					isDirectory: !stats.isFile()
+					isDirectory: !stats.isFile(),
+					isdisk: false
 				};
 
 				fileSystemItem.icon = self.mimeIconType(fileSystemItem);

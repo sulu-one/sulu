@@ -35,6 +35,7 @@
     "copy:osx": "cd dist && cd osx64 && xcopy /b /Y /E . c:\\git\\sulu-dist-osx64\\"
   },
   "dependencies": {
+    "drivelist": "^1.3.0"
   },
   "devDependencies": {
     "electron-builder": "^2.0.0",

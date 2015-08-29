@@ -20,13 +20,14 @@
     "install-polymer": "bower install --save PolymerElements/paper-icon-button"
   },
   "dependencies": {
-    "drivelist": "^1.3.0",
     "clusterize.js": "^0.12.0",
+    "drivelist": "^1.3.0",
     "font-awesome": "^4.4.0",
     "jquery": "^2.1.4",
     "keymaster": "^1.6.2",
     "material-design-lite": "^1.0.2",
     "node-notifier": "^4.2.3",
+    "node-prompt-here": "^1.0.1",
     "package.js": "^1.1.3",
     "progress-stream": "^1.1.1"
   },

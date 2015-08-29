@@ -88,7 +88,12 @@ View.prototype.dblclick = function(/*e*/) {
 	var view = $(this).parents("element-core-data-view").data("controller");
 	var rowData = view.data[id];
 	if (rowData.isDirectory || rowData.isDisk){
-		view.cd(filename);
+		var f = rowData.name;
+		if (rowData.ext){
+			f += rowData.ext;
+		}
+		console.log(f);
+		view.cd(f);
 	}
 
 	return false;
@@ -192,7 +197,7 @@ View.prototype.cd = function(dir){
 			self.data = [];
 			for (var i = 0; i < disks.length; i++) {
 				var disk = disks[i];
-				self.data.push({isDisk: true, icon: "fa fa-hdd-o", name: disk.mountpoint + self.sep, stats:{size: disk.size}, ext: disk.description});
+				self.data.push({isDisk: true, icon: "fa fa-hdd-o", name: disk.mountpoint + self.sep, stats:{size: disk.size}/*, ext: disk.description*/});
 			}
 			self.cluster.update(self.renderRows(self.data));
 			self.el.set("path", self.path.split(self.sep));

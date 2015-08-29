@@ -22,6 +22,9 @@ body, paper-menu.paper-menu-0,paper-dialog.paper-dialog-0,.paper-checkbox-0 {
     color:#F0F0F0;
 }
 
+.filesystemitem-directory{
+	color:#FCD97E;
+}
 
 .filesystemitem{
 	border: solid 1px #121718;
@@ -39,8 +42,6 @@ body, paper-menu.paper-menu-0,paper-dialog.paper-dialog-0,.paper-checkbox-0 {
     border: solid 1px #8A8A8A;
 }
 
-
-
 paper-ripple {
-    color: yellow;
+    color: #F0F0F0;
 }

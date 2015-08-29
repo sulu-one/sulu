@@ -31,6 +31,7 @@ GUI.prototype.backToParentFolder = function backToParentFolder() {
 GUI.prototype.enterActiveRow = function enterActiveRow() {
 	var view = this.GUI.source;
 	var row = view.model.row();
+	view.model.activeRow.find("paper-ripple").animate()
 	row.dblclick();
 };
 

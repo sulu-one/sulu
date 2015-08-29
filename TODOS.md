@@ -1,7 +1,7 @@
 select
  - all (ctrl+a)
  - invert (ctrl+shift+a)
- - by current selected file extension (ctrl+alt+a)
+ - by current selected file extension (ctrl+e)
  - shift click (between by current selected filesystem item and clicked one)
 
 
@@ -25,7 +25,9 @@ copy
 move  
 delete  
 
-realy focus file system view on tab  
+command palette (plugin)
+
+custom-key-bindings.json
 
 remove all hot keys on dialog show (register again on dialog close)  
 

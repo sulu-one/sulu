@@ -17,6 +17,7 @@ var ApplicationController = function(config) {
 	this.msg = applicationNotifier.msg;
 	this.dlg = applicationNotifier.dlg;
 	this.events = new events.EventEmitter();
+
 	return this;
 };
 
@@ -34,10 +35,10 @@ ApplicationController.prototype.getFunctionName = function(fn) {
 }
 
 ApplicationController.prototype.registerHotKey = function(key, fn) {
-
 	var n  = this.getFunctionName(fn);
 	console.log(n);
-	window.key(key, fn.bind(this));
+	window.key(key, "global", fn.bind(this));
+	window.key.setScope("global");
 };
 
 ApplicationController.prototype.fileSystemViews = function() {

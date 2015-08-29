@@ -11,14 +11,10 @@ body {
     font-family: 'Roboto', 'Noto', sans-serif
 }
 
-.filesystemitem-directory{
-	color:#FCD97E;
-}
 
 
 .element-core-data-view{
 	margin: 6px;
-	/*color: #5B6945;*/
 }
 
 ::-webkit-scrollbar {

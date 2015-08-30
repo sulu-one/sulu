@@ -1,9 +1,22 @@
+/**
+ * @module ApplicationController
+ * @copyright (c) 2015 Stephan Ahlf
+ * @license MIT
+ * @author Stephan Ahlf
+*/
 var fs = require("fs");
 var path = require("path");
 var events = require('events');
 var ApplicationNotifier = require("./app.notifier.js");
 var GUI = require("./app.GUI.js");
 
+
+/**
+ * @class ApplicationController
+ * @param {String} a - the first param
+ * @param {String} b - the second param
+ * @returns {String} the result
+*/
 var ApplicationController = function(config) {
 	this.config = config;
 
@@ -21,6 +34,12 @@ var ApplicationController = function(config) {
 	return this;
 };
 
+
+/**
+* Determines if a function has a name.
+* @param {function} fn - a JavaScript function
+* @returns {String} The name of function
+*/
 ApplicationController.prototype.getFunctionName = function(fn) {
 	var ret = fn.toString();
 	ret = ret.substr('function '.length);
@@ -34,17 +53,27 @@ ApplicationController.prototype.getFunctionName = function(fn) {
 	return ret;
 }
 
+/**
+* Registers a shortcut (https://github.com/madrobby/keymaster#supported-keys).
+* @param {String} key - A comma seperated list of short cut keys.
+* @param {function} fn - A named JavaScript function.
+*/
 ApplicationController.prototype.registerHotKey = function(key, fn) {
 	var n  = this.getFunctionName(fn);
 	console.log(n);
 	window.key(key, "global", fn.bind(this));
 	window.key.setScope("global");
 };
-
+/*
 ApplicationController.prototype.fileSystemViews = function() {
 	console.error("obsolete!", "use app.GUI.fileSystemViews", "instead");
 };
+*/
 
+
+/**
+* Auto scans and loads installed packages.
+*/
 ApplicationController.prototype.requireAll = function() {
 	var result = false;
 	try{
@@ -67,6 +96,10 @@ ApplicationController.prototype.requireAll = function() {
 	return result;
 };
 
+/**
+* Import external CSS code file.
+* @param {String} path - Relative or absulote path to file.
+*/
 ApplicationController.prototype.loadCSS = function(path) {
 	var head  = document.getElementsByTagName('head')[0];
 	var link  = document.createElement('link');
@@ -77,6 +110,10 @@ ApplicationController.prototype.loadCSS = function(path) {
 	head.appendChild(link);
 };
 
+/**
+* Import external HTML code file.
+* @param {String} path - Relative or absulote path to file.
+*/
 ApplicationController.prototype.loadHTML = function(path) {
 	var head  = document.getElementsByTagName('head')[0];
 	var link  = document.createElement('link');
@@ -86,6 +123,10 @@ ApplicationController.prototype.loadHTML = function(path) {
 	head.appendChild(link);
 };
 
+/**
+* Import external JavaScript code file.
+* @param {String} path - Relative or absulote path to file.
+*/
 ApplicationController.prototype.loadJS = function(path) {
 	var head  = document.getElementsByTagName('head')[0];
 	var script  = document.createElement('script');

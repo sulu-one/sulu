@@ -15,7 +15,9 @@
     "url": ""
   },
   "scripts": {
-  	"docs": "jsdox ./app --output docs --index README",
+    "dox": "jsdox ./app --output docs --index README",
+    "jsdoc2md": "jsdoc2md \"app/*.js\" > api.md",
+  	"jsdoc": "jsdoc ./app",
     "dev": "electron ./app",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm -rf ./dist",

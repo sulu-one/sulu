@@ -1,3 +1,15 @@
+/**
+ * @copyright (c) 2015 Stephan Ahlf
+ * @license MIT
+ * @author Stephan Ahlf
+*/
+
+
+
+/**
+ * @class GUI
+ * @param {ApplicationController} app - the ApplicationController
+*/
 var GUI = function(app) {
 	this.app = app;
 	this.app.registerHotKey("tab", this.toggleActiveView);
@@ -11,23 +23,35 @@ var GUI = function(app) {
 };
 
 
+/**
+ * Mark active row of active file system view as selected.
+*/
 GUI.prototype.selectActiveRow = function selectActiveRow() {
 	var view = this.GUI.source;
 	view.model.selectActiveRow();
 	return false;
 };
 
+/**
+ * Mark all rows of active file system view as not selected.
+*/
 GUI.prototype.unselectAllRows = function unselectAllRows() {
 	var view = this.GUI.source;
 	view.model.unselectAllRows();
 	return false;
 };
 
+/**
+ * Navigates to parent folder in active file system view.
+*/
 GUI.prototype.backToParentFolder = function backToParentFolder() {
 	var view = this.GUI.source;
 	view.model.cd("..");
 };
 
+/**
+ * Navigates to active row in active file system view.
+*/
 GUI.prototype.enterActiveRow = function enterActiveRow() {
 	var view = this.GUI.source;
 	var row = view.model.row();
@@ -35,6 +59,9 @@ GUI.prototype.enterActiveRow = function enterActiveRow() {
 	row.dblclick();
 };
 
+/**
+ * Sets active row status to next row in active file system view.
+*/
 GUI.prototype.setNextActiveRow = function setNextActiveRow() {
 	var nextRow = this.GUI.source.model.nextRow();
 
@@ -43,6 +70,9 @@ GUI.prototype.setNextActiveRow = function setNextActiveRow() {
 	}
 };
 
+/**
+ * Sets active row status to previous row in active file system view.
+*/
 GUI.prototype.setPreviousActiveRow = function setPreviousActiveRow() {
 	var nextRow = this.GUI.source.model.previousRow();
 
@@ -51,6 +81,9 @@ GUI.prototype.setPreviousActiveRow = function setPreviousActiveRow() {
 	}
 };
 
+/**
+ * Toggles active file system view.
+*/
 GUI.prototype.toggleActiveView = function GUI_toggleActiveView() {
 	if (!this.GUI.source){
 		this.GUI.activeView({id:"1"});
@@ -60,6 +93,10 @@ GUI.prototype.toggleActiveView = function GUI_toggleActiveView() {
 	return false;
 };
 
+/**
+ * Gets or sets the active file system view.
+ * @param {View} view - the file-system-view
+*/
 GUI.prototype.activeView = function(view) {
 	var self = this;
 	if (view){
@@ -83,6 +120,9 @@ GUI.prototype.activeView = function(view) {
 	return self.source;
 };
 
+/**
+ * Return the DOM and datamodel of all file system views.
+*/
 GUI.prototype.fileSystemViews = function() {
 	var result = [];
 	$("element-core-data-view").each(function(/*i,n*/) {

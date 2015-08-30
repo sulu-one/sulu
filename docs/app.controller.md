@@ -1,4 +1,4 @@
-# ApplicationController
+# Global
 
 
 
@@ -9,7 +9,7 @@
 ## Class: ApplicationController
 
 
-### ApplicationController.ApplicationController.getFunctionName(fn) 
+### ApplicationController.getFunctionName(fn) 
 
 Determines if a function has a name.
 
@@ -19,7 +19,7 @@ Determines if a function has a name.
 
 **Returns**: `String`, The name of function
 
-### ApplicationController.ApplicationController.registerHotKey(key, fn) 
+### ApplicationController.registerHotKey(key, fn) 
 
 Registers a shortcut (https://github.com/madrobby/keymaster#supported-keys).
 
@@ -30,12 +30,12 @@ Registers a shortcut (https://github.com/madrobby/keymaster#supported-keys).
 **fn**: `function`, A named JavaScript function.
 
 
-### ApplicationController.ApplicationController.requireAll() 
+### ApplicationController.requireAll() 
 
 Auto scans and loads installed packages.
 
 
-### ApplicationController.ApplicationController.loadCSS(path) 
+### ApplicationController.loadCSS(path) 
 
 Import external CSS code file.
 
@@ -44,7 +44,7 @@ Import external CSS code file.
 **path**: `String`, Relative or absulote path to file.
 
 
-### ApplicationController.ApplicationController.loadHTML(path) 
+### ApplicationController.loadHTML(path) 
 
 Import external HTML code file.
 
@@ -53,7 +53,7 @@ Import external HTML code file.
 **path**: `String`, Relative or absulote path to file.
 
 
-### ApplicationController.ApplicationController.loadJS(path) 
+### ApplicationController.loadJS(path) 
 
 Import external JavaScript code file.
 

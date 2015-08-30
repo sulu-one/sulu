@@ -1,3 +1,13 @@
+/**
+ * @copyright (c) 2015 Stephan Ahlf
+ * @license MIT
+ * @author Stephan Ahlf
+*/
+
+/**
+ * @class ApplicationNotifier
+ * @param {ApplicationController} app - the ApplicationController
+*/
 var ApplicationNotifier = function  (app) {
 	this.app = app;
 	this.ironOverlayClosed = function() {};
@@ -5,6 +15,11 @@ var ApplicationNotifier = function  (app) {
 	return this;
 };
 
+
+/**
+* Show a toaster with a given message string.
+* @param {String} msg - the toaster message
+*/
 ApplicationNotifier.prototype.msg = function(msg) {
 	/*var notifier = require('node-notifier');
 	notifier.notify(msg);*/
@@ -12,6 +27,12 @@ ApplicationNotifier.prototype.msg = function(msg) {
 	document.querySelector('#toast').show();
 };
 
+
+/**
+* Show a dialog with the given settings.
+* @param {String} settings - the dialog settings
+* @param {Function} done - the dialog close callback
+*/
 ApplicationNotifier.prototype.dlg = function(settings, done) {
 	var self = this;
 	if (!settings.buttons){

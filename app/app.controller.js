@@ -1,5 +1,4 @@
 /**
- * @module ApplicationController
  * @copyright (c) 2015 Stephan Ahlf
  * @license MIT
  * @author Stephan Ahlf
@@ -13,9 +12,7 @@ var GUI = require("./app.GUI.js");
 
 /**
  * @class ApplicationController
- * @param {String} a - the first param
- * @param {String} b - the second param
- * @returns {String} the result
+ * @param {Object} config - ApplicationController configuration
 */
 var ApplicationController = function(config) {
 	this.config = config;

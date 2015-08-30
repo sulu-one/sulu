@@ -7,6 +7,7 @@
 /**
  * @class ApplicationNotifier
  * @param {ApplicationController} app - the ApplicationController
+ * @borrows ApplicationController as app
 */
 var ApplicationNotifier = function  (app) {
 	this.app = app;

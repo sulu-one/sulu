@@ -168,8 +168,12 @@ Return the DOM and datamodel of all file system views.
 
 * [ApplicationNotifier](#ApplicationNotifier)
   * [new ApplicationNotifier(app)](#new_ApplicationNotifier_new)
-  * [.msg(msg)](#ApplicationNotifier+msg)
-  * [.dlg(settings, done)](#ApplicationNotifier+dlg)
+  * _instance_
+    * [.msg(msg)](#ApplicationNotifier+msg)
+    * [.dlg(settings, done)](#ApplicationNotifier+dlg)
+  * _static_
+    * [.app](#ApplicationNotifier.app)
+      * [new app(config)](#new_ApplicationNotifier.app_new)
 
 <a name="new_ApplicationNotifier_new"></a>
 ### new ApplicationNotifier(app)
@@ -198,6 +202,16 @@ Show a dialog with the given settings.
 | --- | --- | --- |
 | settings | <code>String</code> | the dialog settings |
 | done | <code>function</code> | the dialog close callback |
+
+<a name="ApplicationNotifier.app"></a>
+### ApplicationNotifier.app
+**Kind**: static class of <code>[ApplicationNotifier](#ApplicationNotifier)</code>  
+<a name="new_ApplicationNotifier.app_new"></a>
+#### new app(config)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| config | <code>Object</code> | ApplicationController configuration |
 
 <a name="fs"></a>
 ## fs

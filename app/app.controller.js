@@ -1,5 +1,5 @@
 /**
- * @copyright (c) 2015 Stephan Ahlf
+ * @copyright (c) 2016 Stephan Ahlf
  * @license MIT
  * @author Stephan Ahlf
 */

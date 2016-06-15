@@ -35,12 +35,10 @@
     "build": "npm run clean && npm run build:win32 && npm run build:win64 && npm run build:linux32 && npm run build:linux64",
     "copy:osx": "cd dist && cd osx64 && xcopy /b /Y /E . c:\\git\\sulu-dist-osx64\\"
   },
-  "dependencies": {
-  },
   "devDependencies": {
     "electron-builder": "^2.0.0",
     "electron-packager": "^5.0.1",
-    "electron-prebuilt": "^0.31.1",
+    "electron-prebuilt": "^1.2.2",
     "grunt": "^0.4.5",
     "grunt-bump": "^0.3.1",
     "grunt-contrib-clean": "^0.6.0",
@@ -48,5 +46,9 @@
     "grunt-contrib-rename": "0.0.3",
     "grunt-shell": "^1.1.2",
     "load-grunt-tasks": "^3.2.0"
+  },
+  "dependencies": {
+    "electron-builder": "^5.4.1",
+    "electron-packager": "^7.0.4"
   }
 }

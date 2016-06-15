@@ -31,7 +31,7 @@ app.on('ready', function() {
   // and load the index.html of the app.
   mainWindow.loadURL('file://' + __dirname + '/index.html');
 
-  mainWindow.openDevTools({detach : false});
+  //  mainWindow.openDevTools({detach : false});
 
   mainWindow.maximize();
   var cfg = path.join(__dirname, "config.js");

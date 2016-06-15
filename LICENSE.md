@@ -1,6 +1,6 @@
 # License
 
-Copyright (c) 2015 Stephan Ahlf <stephan.ahlf@gmail.com>
+Copyright (c) 2016 Stephan Ahlf <stephan.ahlf@gmail.com>
 This software is dual licensed under MIT and GNU GENERAL PUBLIC LICENSE Version 3.
 
 ## Development dependecies

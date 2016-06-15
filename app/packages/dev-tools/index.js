@@ -1,4 +1,5 @@
-var remote = require("remote");
+var remote = require('electron').remote;
+
 var Command = function  () {
 	return this;
 };

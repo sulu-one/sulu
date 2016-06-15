@@ -1,5 +1,5 @@
-var app = require('app');  // Module to control application life.
-var BrowserWindow = require('browser-window');  // Module to create native browser window.
+const {app} = require('electron');
+const {BrowserWindow} = require('electron');
 var fs = require('fs');  
 var path = require('path');  
 
@@ -29,8 +29,9 @@ app.on('ready', function() {
     frame: false
   });
   // and load the index.html of the app.
-  mainWindow.loadUrl('file://' + __dirname + '/index.html');
+  mainWindow.loadURL('file://' + __dirname + '/index.html');
 
+  mainWindow.openDevTools({detach : false});
 
   mainWindow.maximize();
   var cfg = path.join(__dirname, "config.js");

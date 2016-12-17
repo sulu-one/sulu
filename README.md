@@ -48,6 +48,8 @@ npm run dev;
 
 ```
 
+## [API](./api.md)
+
 ## [License](/LICENSE.md)
 Copyright (c) 2015 Stephan Ahlf <stephan.ahlf@gmail.com>  
 This software is licensed under MIT.  

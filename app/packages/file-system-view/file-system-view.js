@@ -187,8 +187,7 @@ View.prototype.bind = function(){
 View.prototype.cd = function(dir){
 	var self = this;
 	self.activeRow = null;
-	self.activeRowId = null;
-
+	self.activeRowId = null; 
 	if (!path.isAbsolute(dir) && dir === ".." && path.join(this.path, "..") === this.path){
 		// root of disc
 		drivelist.list(function(error, disks) {
@@ -202,12 +201,15 @@ View.prototype.cd = function(dir){
 			self.cluster.update(self.renderRows(self.data));
 			self.el.set("path", self.path.split(self.sep));
 			self.el.set("xpath", []);
-			for(var i = 0; i < self.el.get("path").length; i++){ 
-				self.push("xpath", {
-					folder : self.el.get("path")[i],
-					path : self.el.get("path").slice(0, i + 1).join(self.sep) 
-				});
-			}
+		 	for(var i = 0; i < self.el.get("path").length; i++){ 
+		 		if (self.el.get("path")[i] !== "") {
+					self.el.push("xpath", {
+						folder : self.el.get("path")[i],
+						path : self.el.get("path").slice(0, i + 1).join(self.sep) 
+					});
+		 		}
+			} 
+
 		});
 	} else {
 		if (path.isAbsolute(dir)){
@@ -220,10 +222,12 @@ View.prototype.cd = function(dir){
 			self.el.set("path", self.path.split(self.sep));
 			self.el.set("xpath", []);
 		 	for(var i = 0; i < self.el.get("path").length; i++){ 
-				self.el.push("xpath", {
-					folder : self.el.get("path")[i],
-					path : self.el.get("path").slice(0, i + 1).join(self.sep) 
-				});
+		 		if (self.el.get("path")[i] !== "") {
+					self.el.push("xpath", {
+						folder : self.el.get("path")[i],
+						path : self.el.get("path").slice(0, i + 1).join(self.sep) 
+					});
+		 		}
 			} 
 		});
 	}
@@ -307,8 +311,9 @@ View.prototype.dir = function(done) {
 
 
 View.prototype.pathLinkClick = function(e, detail) {  
- 	this.cd(e.target.parentElement.dataset.path);
+ 	this.cd(e.target.parentElement.dataset.path + this.sep);
 	e.preventDefault();
+ 
 	console.log( this.id, "cdw", this.path );
 	return false;
 }; 

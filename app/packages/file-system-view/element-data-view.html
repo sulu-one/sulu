@@ -52,6 +52,7 @@
 					this.path = fileSystemView.path.split(this.sep);
 					fileSystemView.el = this;
 
+					this.set("seperator",this.sep);
 					this.xpath = [];
 					for(var i = 0; i < this.path.length; i++){ 
 						this.push("xpath", {

@@ -62,11 +62,9 @@ ApplicationNotifier.prototype.dlg = function(settings, done) {
 			done.bind(context)();
 		}
 		window.key.setScope("global");
-		console.log("global");
 	};
 	dlg.addEventListener('iron-overlay-closed', this.ironOverlayClosed);
 	window.key.setScope("modal-dialog");
-	console.log("modal-dialog");
 	dlg.open();
 };
 

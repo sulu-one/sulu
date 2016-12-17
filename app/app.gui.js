@@ -12,11 +12,11 @@
 */
 var GUI = function(app) {
 	this.app = app;
-	this.app.registerHotKey("tab", this.toggleActiveView);
-	this.app.registerHotKey("down", this.setNextActiveRow);
-	this.app.registerHotKey("up", this.setPreviousActiveRow);
+	this.app.registerHotKey("tab", this.toggleActiveFileSystemView);
+	this.app.registerHotKey("down", this.makeNextRowActive);
+	this.app.registerHotKey("up", this.makePreviousRowActive);
 	this.app.registerHotKey("enter", this.enterActiveRow);
-	this.app.registerHotKey("backspace", this.backToParentFolder);
+	this.app.registerHotKey("backspace", this.navigateBackToParentFolder);
 	this.app.registerHotKey("space", this.selectActiveRow);
 	this.app.registerHotKey("esc", this.unselectAllRows);
 	return this;
@@ -44,7 +44,7 @@ GUI.prototype.unselectAllRows = function unselectAllRows() {
 /**
  * Navigates to parent folder in active file system view.
 */
-GUI.prototype.backToParentFolder = function backToParentFolder() {
+GUI.prototype.navigateBackToParentFolder = function navigateBackToParentFolder() {
 	var view = this.GUI.source;
 	view.model.cd("..");
 };
@@ -62,7 +62,7 @@ GUI.prototype.enterActiveRow = function enterActiveRow() {
 /**
  * Sets active row status to next row in active file system view.
 */
-GUI.prototype.setNextActiveRow = function setNextActiveRow() {
+GUI.prototype.makeNextRowActive = function makeNextRowActive() {
 	var nextRow = this.GUI.source.model.nextRow();
 
 	if (this.GUI.source.model.isInView(nextRow)){
@@ -73,7 +73,7 @@ GUI.prototype.setNextActiveRow = function setNextActiveRow() {
 /**
  * Sets active row status to previous row in active file system view.
 */
-GUI.prototype.setPreviousActiveRow = function setPreviousActiveRow() {
+GUI.prototype.makePreviousRowActive = function makePreviousRowActive() {
 	var nextRow = this.GUI.source.model.previousRow();
 
 	if (this.GUI.source.model.isInView(nextRow)){
@@ -84,7 +84,7 @@ GUI.prototype.setPreviousActiveRow = function setPreviousActiveRow() {
 /**
  * Toggles active file system view.
 */
-GUI.prototype.toggleActiveView = function GUI_toggleActiveView() {
+GUI.prototype.toggleActiveFileSystemView = function toggleActiveFileSystemView() {
 	if (!this.GUI.source){
 		this.GUI.activeView({id:"1"});
 	} else {

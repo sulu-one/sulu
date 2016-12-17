@@ -57,7 +57,7 @@ ApplicationController.prototype.getFunctionName = function(fn) {
 */
 ApplicationController.prototype.registerHotKey = function(key, fn) {
 	var n  = this.getFunctionName(fn);
-	console.log(n);
+	console.info("press \"" + key + "\" to \"" + n + "\"");
 	window.key(key, "global", fn.bind(this));
 	window.key.setScope("global");
 };

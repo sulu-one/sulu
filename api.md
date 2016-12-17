@@ -110,11 +110,11 @@ Import external JavaScript code file.
     * [new GUI(app)](#new_GUI_new)
     * [.selectActiveRow()](#GUI+selectActiveRow)
     * [.unselectAllRows()](#GUI+unselectAllRows)
-    * [.backToParentFolder()](#GUI+backToParentFolder)
+    * [.navigateBackToParentFolder()](#GUI+navigateBackToParentFolder)
     * [.enterActiveRow()](#GUI+enterActiveRow)
-    * [.setNextActiveRow()](#GUI+setNextActiveRow)
-    * [.setPreviousActiveRow()](#GUI+setPreviousActiveRow)
-    * [.toggleActiveView()](#GUI+toggleActiveView)
+    * [.makeNextRowActive()](#GUI+makeNextRowActive)
+    * [.makePreviousRowActive()](#GUI+makePreviousRowActive)
+    * [.toggleActiveFileSystemView()](#GUI+toggleActiveFileSystemView)
     * [.activeView(view)](#GUI+activeView)
     * [.fileSystemViews()](#GUI+fileSystemViews)
 
@@ -138,9 +138,9 @@ Mark active row of active file system view as selected.
 Mark all rows of active file system view as not selected.
 
 **Kind**: instance method of <code>[GUI](#GUI)</code>  
-<a name="GUI+backToParentFolder"></a>
+<a name="GUI+navigateBackToParentFolder"></a>
 
-### guI.backToParentFolder()
+### guI.navigateBackToParentFolder()
 Navigates to parent folder in active file system view.
 
 **Kind**: instance method of <code>[GUI](#GUI)</code>  
@@ -150,21 +150,21 @@ Navigates to parent folder in active file system view.
 Navigates to active row in active file system view.
 
 **Kind**: instance method of <code>[GUI](#GUI)</code>  
-<a name="GUI+setNextActiveRow"></a>
+<a name="GUI+makeNextRowActive"></a>
 
-### guI.setNextActiveRow()
+### guI.makeNextRowActive()
 Sets active row status to next row in active file system view.
 
 **Kind**: instance method of <code>[GUI](#GUI)</code>  
-<a name="GUI+setPreviousActiveRow"></a>
+<a name="GUI+makePreviousRowActive"></a>
 
-### guI.setPreviousActiveRow()
+### guI.makePreviousRowActive()
 Sets active row status to previous row in active file system view.
 
 **Kind**: instance method of <code>[GUI](#GUI)</code>  
-<a name="GUI+toggleActiveView"></a>
+<a name="GUI+toggleActiveFileSystemView"></a>
 
-### guI.toggleActiveView()
+### guI.toggleActiveFileSystemView()
 Toggles active file system view.
 
 **Kind**: instance method of <code>[GUI](#GUI)</code>  

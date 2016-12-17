@@ -37,7 +37,7 @@ app.on('ready', function() {
   var cfg = path.join(__dirname, "config.js");
   if (fs.existsSync( cfg )){
   }
-  mainWindow.setMenu(null);  
+  //// mainWindow.setMenu(null);  
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
     // Dereference the window object, usually you would store windows

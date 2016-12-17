@@ -77,6 +77,7 @@ ApplicationController.prototype.requireAll = function() {
 		window.key = require("keymaster");
 		this.packageController = require("package.js");
 		var folders = [path.join(__dirname, "packages")];
+		 
 		this.packageController.autoload({
 			debug: true,
 			directories: folders,

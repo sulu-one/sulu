@@ -11,6 +11,22 @@
 ## Screenshot
 ![Screenshot](/demo.gif)  
 
+## Short cuts
+
+(so far) check console (F12) to get a list full list
+
+- "tab" - "toggleActiveFileSystemView"
+- "down" - "makeNextRowActive"
+- "up" - "makePreviousRowActive"
+- "enter" - "enterActiveRow"
+- "backspace" - "navigateBackToParentFolder"
+- "space" - "selectActiveRow"
+- "esc" - "unselectAllRows"
+- "f5" - "copy"
+- "f12" - "toggleDevTools"
+- "ctrl+alt+left" - "historyJumpBackward"
+- "ctrl+alt+right" - "historyJumpForward"
+- "ctrl+enter" - "openShell"
 
 ## [Contributing](/CONTRIBUTING.md)
 

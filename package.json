@@ -18,38 +18,13 @@
     "docs": "jsdoc2md \"app/*.js\" > api.md",
     "start": "electron ./app",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "clean": "rm -rf ./dist",
-    "clean:linux32": "rm -rf ./dist/linux32",
-    "clean:linux64": "rm -rf ./dist/linux64",
-    "clean:win32": "rm -rf ./dist/sulu-win32-ia32",
-    "clean:win64": "rm -rf ./dist/win64",
-    "clean:osx": "rm -rf ./dist/osx64",
-    "build:linux32": "npm run clean:linux32 && electron-packager ./app \"sulu\" --out=dist --platform=linux --arch=ia32 --version=0.31.1 --icon=src/icon.ico && mv dist/sulu-linux-ia32 dist/linux32",
-    "build:linux64": "npm run clean:linux64 && electron-packager ./app \"sulu\" --out=dist --platform=linux --arch=x64 --version=0.31.1 --icon=src/icon.ico && mv dist/sulu-linux-x64 dist/linux64",
-    "build:win32": "npm run clean:win32 && electron-packager ./app \"sulu\" --version-string.CompanyName=\"suluONE\" --version-string.ProductName=\"sulu\" --version-string.OriginalFilename=\"sulu.exe\" --version-string.InternalName=\"sulu\" --version-string.LegalCopyright=\"Stephan Ahlf\" --version-string.FileDescription=\"Hackable file manager application on Linux, Windows and OS X. https://github.com/sulu-one/sulu\" --version-string.ProductVersion=\"0.0.1\" --ignore=resources/default_app --out=dist --platform=win32 --arch=ia32 --version=0.31.1 --icon=src/icon.ico",
-    "build:win64": "npm run clean:win64 && electron-packager ./app \"sulu\" --ignore=resources/default_app --out=dist --platform=win32 --arch=x64 --version=0.31.1 --icon=src/icon.ico",
-    "build:osx": "npm run clean:osx && electron-packager ./app \"sulu\" --ignore=resources/default_app --out=dist --platform=darwin --arch=x64 --version=0.31.1 --icon=src/icon.icns",
-    "pack": "npm run pack:macos && npm run pack:win32 && npm run pack:win64",
-    "pack:macos": "npm run build:macos && electron-builder \"dist/macos/sulu.app\" --platform=macos --out=\"dist/macos\" --config=packager.json",
-    "pack:win32": "electron-builder \"dist/sulu-win32-ia32\" --platform=win32 --out=\"dist/win32\" --config=packager.json",
-    "build": "npm run clean && npm run build:win32 && npm run build:win64 && npm run build:linux32 && npm run build:linux64",
-    "copy:osx": "cd dist && cd osx64 && xcopy /b /Y /E . c:\\git\\sulu-dist-osx64\\"
+    "clean": "rm -rf ./dist"
   },
-  "devDependencies": {
-    "electron-builder": "^2.0.0",
-    "electron-packager": "^5.0.1",
-    "electron-prebuilt": "^1.2.2",
-    "grunt": "^0.4.5",
-    "grunt-bump": "^0.3.1",
-    "grunt-contrib-clean": "^0.6.0",
-    "grunt-contrib-copy": "^0.8.0",
-    "grunt-contrib-rename": "0.0.3",
-    "grunt-shell": "^1.1.2",
-    "load-grunt-tasks": "^3.2.0"
+  "devDependencies": { 
+    
   },
   "dependencies": {
     "electron": "^1.4.12",
-    "electron-builder": "^5.4.1",
-    "electron-packager": "^7.0.4"
+    "electron-prebuilt": "^1.2.2"
   }
 }

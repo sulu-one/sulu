@@ -1,8 +1,10 @@
 <dom-module id="element-core-data-view">
-	<template>
+	<template> 
 		<span class="element-core-data-view-path">
-			<template is="dom-repeat" items="{{path}}">
-			   <span>{{item}}</span><span>/</span>
+			<template is="dom-repeat" items="{{xpath}}">
+			   <a on-click="cwd" data-path$="{{item.path}}" class="element-core-data-view-path-item" href="" class="element-core-data-view-path-item"> 
+			   		<span class="element-core-data-view-path-item">[[item.folder]]</span><span class="element-core-data-view-path-item">[[sep]]</span>
+			   </a>
 			</template>
 		</span>
 
@@ -34,7 +36,8 @@
 		</div>
 	</template>
 
-	<script>
+	<script> 
+
 		window.Polymer({
 			is: "element-core-data-view",
 				ready: function() {
@@ -45,19 +48,31 @@
 					this.contentAreaID = "contentArea" + id;
 
 					var fileSystemView = new FileSystemView(id);
-					self.sep = require("path").sep;
-					self.path = fileSystemView.path.split(this.sep);
+					this.sep = require("path").sep;
+					this.path = fileSystemView.path.split(this.sep);
 					fileSystemView.el = this;
-					$(function() {
-						fileSystemView.bind();
 
+					this.xpath = [];
+					for(var i = 0; i < this.path.length; i++){ 
+						this.push("xpath", {
+							folder : this.path[i],
+							path : this.path.slice(0, i + 1).join(this.sep) 
+						});
+					} 
+
+					self.cwd = fileSystemView.pathLinkClick.bind(fileSystemView);
+
+					$(function() {
+						fileSystemView.bind(); 
 						$( self ).
 							data("controller", fileSystemView).
 							on( "dblclick", ".filesystemitem", {}, fileSystemView.dblclick).
 							on( "click", ".filesystemitem", {}, fileSystemView.click)
+							//on( "click", ".element-core-data-view-path-link", {}, fileSystemView.pathLinkClick)
 							;
 						window.resizeScrollViews();
 					});
+ 
 				}
 			}
 		);

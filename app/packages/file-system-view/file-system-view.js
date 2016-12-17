@@ -201,6 +201,13 @@ View.prototype.cd = function(dir){
 			}
 			self.cluster.update(self.renderRows(self.data));
 			self.el.set("path", self.path.split(self.sep));
+			self.el.set("xpath", []);
+			for(var i = 0; i < self.el.get("path").length; i++){ 
+				self.push("xpath", {
+					folder : self.el.get("path")[i],
+					path : self.el.get("path").slice(0, i + 1).join(self.sep) 
+				});
+			}
 		});
 	} else {
 		if (path.isAbsolute(dir)){
@@ -211,6 +218,13 @@ View.prototype.cd = function(dir){
 		self.dir(function() {
 			self.cluster.update(self.renderRows(self.data));
 			self.el.set("path", self.path.split(self.sep));
+			self.el.set("xpath", []);
+		 	for(var i = 0; i < self.el.get("path").length; i++){ 
+				self.el.push("xpath", {
+					folder : self.el.get("path")[i],
+					path : self.el.get("path").slice(0, i + 1).join(self.sep) 
+				});
+			} 
 		});
 	}
 };
@@ -291,5 +305,12 @@ View.prototype.dir = function(done) {
 	});
 };
 
+
+View.prototype.pathLinkClick = function(e, detail) {  
+ 	this.cd(e.target.parentElement.dataset.path);
+	e.preventDefault();
+	console.log( this.id, "cdw", this.path );
+	return false;
+}; 
 
 module.exports = View;

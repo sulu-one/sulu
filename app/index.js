@@ -26,7 +26,7 @@ app.on('ready', function() {
     width: 800, height: 600, title : "sulu",
     icon: __dirname + '/icon.png',
     transparent: false,
-    frame: false
+    frame: true
   });
   // and load the index.html of the app.
   mainWindow.loadURL('file://' + __dirname + '/index.html');

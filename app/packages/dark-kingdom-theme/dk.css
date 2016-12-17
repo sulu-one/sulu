@@ -45,3 +45,9 @@ body, paper-menu.paper-menu-0,paper-dialog.paper-dialog-0,.paper-checkbox-0 {
 paper-ripple {
     color: #F0F0F0;
 }
+
+
+.element-core-data-view-path-item{
+	margin: 0;
+	padding: 0;	
+}

@@ -53,8 +53,14 @@ paper-ripple {
 	text-decoration: none;
 }
 
-.element-core-data-view-path-item:hover{
-	margin: 0;
-	padding: 0;	
+.element-core-data-view-path-item:hover{ 
 	text-decoration: underline;
+	color: #FF9900;
+}
+
+.active-filesystem-view .element-core-data-view-path-item {
+	color: #FF9900;
+}
+
+.active-filesystem-view .element-core-data-view-path-item:hover{  
 }

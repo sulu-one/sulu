@@ -185,6 +185,25 @@ View.prototype.bind = function(){
 	}
 };
 
+View.prototype.updateGridViewData = function(isHistoryJump){
+	var self = this;
+	self.cluster.update(self.renderRows(self.data));
+	self.el.set("path", self.path.split(self.sep));
+	self.el.set("xpath", []);
+ 	for(var i = 0; i < self.el.get("path").length; i++){ 
+ 		if (self.el.get("path")[i] !== "") {
+			self.el.push("xpath", {
+				folder : self.el.get("path")[i],
+				path : self.el.get("path").slice(0, i + 1).join(self.sep) 
+			});
+ 		}
+	} 
+	if (isHistoryJump === undefined){
+		self.history.push(self.el.get("path").join(self.sep));
+	} 
+	self.setFirstRowActive();
+}
+
 View.prototype.cd = function(dir, isHistoryJump){
 	var self = this;
 	self.activeRow = null;
@@ -199,20 +218,7 @@ View.prototype.cd = function(dir, isHistoryJump){
 				var disk = disks[i];
 				self.data.push({isDisk: true, icon: "fa fa-hdd-o", name: disk.mountpoint + self.sep, stats:{size: disk.size}/*, ext: disk.description*/});
 			}
-			self.cluster.update(self.renderRows(self.data));
-			self.el.set("path", self.path.split(self.sep));
-			self.el.set("xpath", []);
-		 	for(var i = 0; i < self.el.get("path").length; i++){ 
-		 		if (self.el.get("path")[i] !== "") {
-					self.el.push("xpath", {
-						folder : self.el.get("path")[i],
-						path : self.el.get("path").slice(0, i + 1).join(self.sep) 
-					});
-		 		}
-			} 
-			if (isHistoryJump === undefined){
-				self.history.push(self.el.get("path").join(self.sep));
-			}
+			self.updateGridViewData(isHistoryJump);
 		});
 	} else {
 		if (path.isAbsolute(dir)){
@@ -221,25 +227,22 @@ View.prototype.cd = function(dir, isHistoryJump){
 			this.path = path.join(this.path, dir);
 		}
 		self.dir(function() {
-			self.cluster.update(self.renderRows(self.data));
-			self.el.set("path", self.path.split(self.sep));
-			self.el.set("xpath", []);
-		 	for(var i = 0; i < self.el.get("path").length; i++){ 
-		 		if (self.el.get("path")[i] !== "") {
-					self.el.push("xpath", {
-						folder : self.el.get("path")[i],
-						path : self.el.get("path").slice(0, i + 1).join(self.sep) 
-					});
-		 		}
-			} 
-			if (isHistoryJump === undefined){
-				self.history.push(self.el.get("path").join(self.sep));
-			}
+			self.updateGridViewData(isHistoryJump);
 		});
 	}
 };
 
 
+
+View.prototype.setFirstRowActive = function(fileSystemItem) {
+	var self = this;
+	self.activeRowId = 0; 
+	var $scrollArea = $("#scrollArea" + self.id);
+	if (!self.activeRow){
+		self.activeRow = $scrollArea.find(".filesystemitem:first");
+		self.row(self.activeRow);
+	}
+};
 
 View.prototype.mimeIconType = function(fileSystemItem) {
 	var result = "";

@@ -45,14 +45,14 @@ body, paper-menu.paper-menu-0,paper-dialog.paper-dialog-0,.paper-checkbox-0 {
 paper-ripple {
     color: #F0F0F0;
 }
-
-
- .element-core-data-view-path-item {
+ 
+.element-core-data-view-path-item {
 	color: inherit;
 	margin: 0;
 	padding: 0;	
 	text-decoration: none;
 }
+
 .element-core-data-view-path-item:hover{
 	margin: 0;
 	padding: 0;	

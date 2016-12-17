@@ -7,6 +7,7 @@ var View = function(id) {
 	this.activeRow = null;
 	this.path = path.join(__dirname, "examples");
 	this.sep = require("path").sep;
+	this.history = [this.path];
 	return this;
 };
 
@@ -184,7 +185,7 @@ View.prototype.bind = function(){
 	}
 };
 
-View.prototype.cd = function(dir){
+View.prototype.cd = function(dir, isHistoryJump){
 	var self = this;
 	self.activeRow = null;
 	self.activeRowId = null; 
@@ -209,7 +210,9 @@ View.prototype.cd = function(dir){
 					});
 		 		}
 			} 
-
+			if (isHistoryJump === undefined){
+				self.history.push(self.el.get("path").join(self.sep));
+			}
 		});
 	} else {
 		if (path.isAbsolute(dir)){
@@ -229,6 +232,9 @@ View.prototype.cd = function(dir){
 					});
 		 		}
 			} 
+			if (isHistoryJump === undefined){
+				self.history.push(self.el.get("path").join(self.sep));
+			}
 		});
 	}
 };

@@ -9,7 +9,7 @@ Command.prototype.toggleDevTools = function toggleDevTools() {
 	return false
 };
 
-var Plugin = function  (client) {
+var Plugin = function devTools(client) {
 	this.command = new Command();
 	client.app.registerHotKey("f12", this.command.toggleDevTools);
 };

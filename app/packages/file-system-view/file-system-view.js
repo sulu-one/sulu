@@ -257,9 +257,7 @@ View.prototype.mimeIconType = function(fileSystemItem) {
 
 
 View.prototype.dir = function(done) {
-	var self = this;
-
-	console.log( self.id, "cdw", this.path );
+	var self = this; 
 	fs.readdir(self.path, function  (err, directoryContent) {
 		if (err){
 			console.error(err);

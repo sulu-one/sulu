@@ -1,3 +1,4 @@
 {
-	"suluPackage" : true
+	"suluPackage" : true,
+	"name" : "sulu-devTools"
 }

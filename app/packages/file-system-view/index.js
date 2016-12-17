@@ -21,6 +21,7 @@ Command.prototype.historyJumpBackward = function historyJumpBackward() {
 	} else {
 	 	this.GUI.app.msg("No more history items available");
 	}
+
 	return false
 };
 

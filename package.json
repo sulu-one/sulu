@@ -21,7 +21,8 @@
     "docs": "jsdoc2md \"app/*.js\" > api.md",
     "start": "electron ./app",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "clean": "rm -rf ./dist"
+    "clean": "rm -rf ./dist",
+    "bump": "npm version patch && git push && git push --tags && npm publish"
   },
   "devDependencies": { 
       

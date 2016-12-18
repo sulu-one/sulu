@@ -22,7 +22,7 @@ Command.prototype.createFolder = function createFolder() {
 		var file = view.activeRowData(); 
 		var defaultText = (file ? file.name : "new_folder");
 		var self = this;
-		this.GUI.dialogs.prompt("Create a new folder in \"" + view.path + "\"", defaultText, function(input) {
+		this.GUI.dialogs.prompt("New folder in \"" + view.path + "\"", defaultText, function(input) {
 			if (input !== undefined){
 				mkdirSync(path.join(view.path, input));
 			}

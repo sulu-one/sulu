@@ -8,12 +8,12 @@ var FileIcons = function(client) {
 
 FileIcons.prototype.init = function(client) {
 	client.app.events.on("init-filesystem-item-icon", this.getFileSystemItemIcon);
-	client.app.loadCSS(require("path").join(__dirname, 'font-awesome', 'css', 'font-awesome.min.css'));
-	client.app.loadCSS(require("path").join(__dirname, 'devicons', 'devicon.min.css'));
-	client.app.loadCSS(require("path").join(__dirname, 'devicons', 'devicon-colors.css'));
+	client.app.loadCSS(require("path").join(__dirname, "font-awesome", "css", "font-awesome.min.css"));
+	client.app.loadCSS(require("path").join(__dirname, "devicons", "devicon.min.css"));
+	client.app.loadCSS(require("path").join(__dirname, "devicons", "devicon-colors.css"));
 };
 
-FileIcons.prototype.getFileSystemItemIcon = function(fileSystemItem) {
+FileIcons.prototype.getFileSystemItemIcon = function(fileSystemItem) { 
 	var result = "";
 
 	if (fileSystemItem.isDirectory){
@@ -22,9 +22,10 @@ FileIcons.prototype.getFileSystemItemIcon = function(fileSystemItem) {
 		var ext = fileSystemItem.ext.toLowerCase();
 		var fn = fileSystemItem.name.toLowerCase() + ext; 
 		result = fileNameClasses[fn] || iconClasses[ext] || "fa fa-file-o";
+	} 
+	if (!fileSystemItem.icon){ 
+		fileSystemItem.icon  = result ; 
 	}
-
-	fileSystemItem.icon = result + " file-system-icon";
 
 	return fileSystemItem;
 };

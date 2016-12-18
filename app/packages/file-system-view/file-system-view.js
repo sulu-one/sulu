@@ -1,6 +1,6 @@
 var fs = require("fs");
 var path = require("path");
-var drivelist = require('drivelist');
+var drivelist = require("drivelist");
 	
 var View = function(id) {
 	this.id = id;
@@ -29,7 +29,7 @@ View.prototype.isInView = function($elem) {
 	var inView = false;
 	if ($elem.get(0)){
 		var id = "scrollArea" + this.id;
-		var $scrollArea = $('#' + id);
+		var $scrollArea = $("#" + id);
 		var docViewTop = $scrollArea.scrollTop();
 		var docViewBottom = docViewTop + $scrollArea.height();
 		var elemTop = $elem.get(0).offsetTop - $scrollArea.offset().top;
@@ -137,14 +137,14 @@ View.prototype.renderRow = function(fileSystemItem) {
 	var file = fileSystemItem;
 	var row = [];
 	row.push('<div style="position:relative" data-rowid="' + file.rowId + '" class="horizontal layout row filesystemitem' + (file.isDisk ? " filesystemitem-disk" : "") + (file.isDirectory ? " filesystemitem-directory" : "") + (file.selected ? " selected" : "") + '" data-isdirectory="' + file.isDirectory + '" data-filename="' + file.name + file.ext + '">');
-		row.push('<div class="flex-1"><span class="' + file.icon + '"></span></div>');
-		row.push('<div class="flex-5"><span class="filesystemitem-filename">' + file.name + '</span></div>');
-		row.push('<div class="flex-2">' + file.ext + '</div>');
-		row.push('<div class="flex-2">' + (!file.isDirectory ? file.stats.size : "") + '</div>');
-		row.push('<div class="flex-1">' + (file.stats.mtime || "").toString().replace("T", " ").replace(".000Z", "") + '</div>');
+		row.push('<div class="flex-1"><span class="' + file.bookmarkClass + '"></span> <span class="' + file.icon + '"></span></div>');
+		row.push('<div class="flex-5"><span class="filesystemitem-filename">' + file.name + "</span></div>");
+		row.push('<div class="flex-2">' + file.ext + "</div>");
+		row.push('<div class="flex-2">' + (!file.isDirectory ? file.stats.size : "") + "</div>");
+		row.push('<div class="flex-1">' + (file.stats.mtime || "").toString().replace("T", " ").replace(".000Z", "") + "</div>");
 		row.push('<div class="flex-1">-a--</div>');
-		row.push('<paper-ripple></paper-ripple>');
-	row.push('</div>');
+		row.push("<paper-ripple></paper-ripple>");
+	row.push("</div>");
 	return row.join("\n");
 };
 
@@ -164,8 +164,8 @@ View.prototype.bind = function(){
 		self.dir(function() {
 			self.cluster = new window.Clusterize({
 				rows: self.renderRows(self.data),
-				scrollId: 'scrollArea' + self.id,
-				contentId: 'contentArea' + self.id,
+				scrollId: "scrollArea" + self.id,
+				contentId: "contentArea" + self.id,
 				afterInsertToDOM : function(data){
 					var $scrollArea = $("#scrollArea" + self.id);
 					if (!self.activeRow){
@@ -213,11 +213,11 @@ View.prototype.updateGridViewData = function(isHistoryJump){
 }
 
 function bytesToSize(bytes) {
-    var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-    if (bytes == 0) return '0 Bytes';
+    var sizes = ["Bytes", "KB", "MB", "GB", "TB"];
+    if (bytes == 0) return "0 Bytes";
     var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
-    if (i == 0) return bytes + ' ' + sizes[i];
-    return (bytes / Math.pow(1024, i)).toFixed(1) + ' ' + sizes[i];
+    if (i == 0) return bytes + " " + sizes[i];
+    return (bytes / Math.pow(1024, i)).toFixed(1) + " " + sizes[i];
 };
 
 var getStateByPath = function(files, name){
@@ -327,7 +327,7 @@ View.prototype.mimeIconType = function(fileSystemItem) {
 		result = "fa fa-folder";
 	} else {
 		result = "fa fa-file-o";
-		window.applicationController.events.emit("init-filesystem-item-icon", fileSystemItem);
+		window.applicationController.events.emit("init-filesystem-item-icon", fileSystemItem); 
 		result = fileSystemItem.icon;
 	}
 

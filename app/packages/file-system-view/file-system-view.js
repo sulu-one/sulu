@@ -136,7 +136,7 @@ View.prototype.click = function(/*e*/) {
 View.prototype.renderRow = function(fileSystemItem) {
 	var file = fileSystemItem;
 	var row = [];
-	row.push('<div style="position:relative" data-rowid="' + file.rowId + '" class="horizontal layout row filesystemitem' + (file.isDisk ? " filesystemitem-disk" : "") + (file.isDirectory ? " filesystemitem-directory" : "") + (file.selected ? " selected" : "") + '" data-isdirectory="' + file.isDirectory + '" data-filename="' + file.name + '">');
+	row.push('<div style="position:relative" data-rowid="' + file.rowId + '" class="horizontal layout row filesystemitem' + (file.isDisk ? " filesystemitem-disk" : "") + (file.isDirectory ? " filesystemitem-directory" : "") + (file.selected ? " selected" : "") + '" data-isdirectory="' + file.isDirectory + '" data-filename="' + file.name + file.ext + '">');
 		row.push('<div class="flex-1"><span class="' + file.icon + '"></span></div>');
 		row.push('<div class="flex-5"><span class="filesystemitem-filename">' + file.name + '</span></div>');
 		row.push('<div class="flex-2">' + file.ext + '</div>');
@@ -220,7 +220,45 @@ function bytesToSize(bytes) {
     return (bytes / Math.pow(1024, i)).toFixed(1) + ' ' + sizes[i];
 };
 
-View.prototype.cd = function(dir, isHistoryJump){
+var getStateByPath = function(files, name){
+	for (var i = 0; i < files.length; i++) {
+		var file = files[i];
+		if (file.name === name){
+			return
+		}
+	}
+};
+
+View.prototype.recoverViewState = function(selectedFiles){
+	for (var f = selectedFiles.length - 1; f >= 0; f--) {
+		var oldFileState = selectedFiles[f];
+		for (var i = this.data.length - 1; i >= 0; i--) {
+			if (this.data[i].name + this.data[i].ext === oldFileState.name + oldFileState.ext){
+				this.data[i].selected = true;
+				break;
+			}
+		}
+	}
+};
+
+View.prototype.refresh = function(){
+	var selectedFiles = this.selected(); 
+	var activeRow = this.activeRowData();
+	var oldActiveRowId = this.activeRow.data("rowid");
+	var self = this;
+
+	this.cd(this.path, true, function () { 
+		self.recoverViewState(selectedFiles);
+		self.updateGridViewData(true);
+		if (!self.setActiveRowByFileName(activeRow.name + activeRow.ext)){
+			if (!self.setActiveRowByRowId(oldActiveRowId)){
+				self.setActiveRowByRowId(1);
+			};
+		};
+	});
+}
+
+View.prototype.cd = function(dir, isHistoryJump, done){
 	var self = this;
 	self.activeRow = null;
 	self.activeRowId = null; 
@@ -236,6 +274,7 @@ View.prototype.cd = function(dir, isHistoryJump){
 				self.data.push({isDisk: true, icon: "fa fa-hdd-o", name: disk.mountpoint + self.sep, stats:{size: bytesToSize(disk.size)}/*, ext: disk.description*/});
 			}
 			self.updateGridViewData(isHistoryJump);
+			if (done) done();
 		});
 	} else {
 		if (path.isAbsolute(dir)){
@@ -245,10 +284,30 @@ View.prototype.cd = function(dir, isHistoryJump){
 		}
 		self.dir(function() {
 			self.updateGridViewData(isHistoryJump);
+			if (done) done();
 		});
 	}
 };
 
+
+
+View.prototype.setActiveRowByRowId = function(rowid) {
+	var self = this;
+	self.activeRowId = 0; 
+	var $scrollArea = $("#scrollArea" + self.id); 
+	self.activeRow = $scrollArea.find('.filesystemitem[data-rowid="' + rowid + '"]');
+	self.row(self.activeRow);
+	return (self.activeRow.length !== 0) 
+};
+
+View.prototype.setActiveRowByFileName = function(filename) {
+	var self = this;
+	self.activeRowId = 0; 
+	var $scrollArea = $("#scrollArea" + self.id); 
+	self.activeRow = $scrollArea.find('.filesystemitem[data-filename="' + filename + '"]');
+	self.row(self.activeRow);
+	return (self.activeRow.length !== 0) 
+};
 
 
 View.prototype.setFirstRowActive = function(fileSystemItem) {

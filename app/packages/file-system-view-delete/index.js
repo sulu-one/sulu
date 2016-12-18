@@ -19,7 +19,7 @@ Command.prototype.moveToTrash = function moveToTrash() {
 	 			this.GUI.app.msg("failed to delete \"" + fn + "\"");
 			}
 		} 
-		view.cd(view.path, true);
+		view.refresh();
 	}
 
 	return false

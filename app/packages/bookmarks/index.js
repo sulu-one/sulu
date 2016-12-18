@@ -2,6 +2,21 @@
 	return this;
 }
 
+Command.prototype.showBookmarks = function showBookmarks() {
+	
+	var v = this.GUI.activeView();
+	var self = this;
+	if (v){  
+		var view = this.GUI.activeView().model;  
+		var bookmarks = self.config.settings.bookmarks; 
+		view.refreshVirtual(bookmarks); 
+	} else {
+		this.GUI.app.msg("please select a file system view.");
+	}
+	return false;  
+
+};
+
 Command.prototype.toggleBookmark = function toggleBookmark() {
 	var v = this.GUI.activeView();
 	var self = this;
@@ -41,6 +56,7 @@ FileIcons.prototype.init = function(client) {
 	
 	this.command = new Command();
 	client.app.registerHotKey("ctrl+b", this.command.toggleBookmark);
+	client.app.registerHotKey("ctrl+shift+b", this.command.showBookmarks);
 };
 
 FileIcons.prototype.getFileSystemItemIcon = function(fileSystemItem){  

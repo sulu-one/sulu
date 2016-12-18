@@ -81,19 +81,11 @@ View.prototype.selected = function() {
 View.prototype.dblclick = function(/*e*/) {
 	var fileSystemItemDataRow = $(this);
 	var id = parseInt(fileSystemItemDataRow.data("rowid"), 10);
-	var filename = fileSystemItemDataRow.data("filename");
-	/*var isDirectory = (fileSystemItemDataRow.data("directory"));
-	var isDisk = (fileSystemItemDataRow.data("disk"));*/
-
-	//console.log(filename, isDirectory);
+	var filename = fileSystemItemDataRow.data("filename"); 
 	var view = $(this).parents("element-core-data-view").data("controller");
 	var rowData = view.data[id];
-	if (rowData.isDirectory || rowData.isDisk){
-		var f = rowData.name;
-		if (rowData.ext){
-			f += rowData.ext;
-		} 
-		view.cd(f);
+	if (rowData.isDirectory || rowData.isDisk){ 
+		view.cd(filename);
 	}
 
 	return false;
@@ -160,10 +152,9 @@ View.prototype.click = function(/*e*/) {
 View.prototype.renderRow = function(fileSystemItem) {
 	var file = fileSystemItem;
 	var row = [];
-	
-	var bookmarks = applicationController.config.settings.bookmarks;
-
-	row.push('<div style="position:relative" data-rowid="' + file.rowId + '" class="horizontal layout row filesystemitem' + (file.isDisk ? " filesystemitem-disk" : "") + (file.isDirectory ? " filesystemitem-directory" : "") + (file.selected ? " selected" : "") + '" data-isdirectory="' + file.isDirectory + '" data-filename="' + file.name + file.ext + '">');
+	 
+var bookmarks = applicationController.config.settings.bookmarks;
+	row.push('<div style="position:relative" data-rowid="' + file.rowId + '" class="horizontal layout row filesystemitem' + (file.isDisk ? " filesystemitem-disk" : "") + (file.isDirectory ? " filesystemitem-directory" : "") + (file.selected ? " selected" : "") + '" data-isdirectory="' + file.isDirectory + '" data-filename="' + path.join(file.path, file.name) + file.ext + '">');
 	
 	
 		row.push('<div class="flex-1">');
@@ -291,7 +282,16 @@ View.prototype.refresh = function(newActiveItemName){
 			};
 		};
 	});
-}
+};
+
+
+View.prototype.refreshVirtual = function(virtualFileList){ 
+	var self = this; 
+	self.extendPathContentMetaData(virtualFileList, function(){
+		self.updateGridViewData(true);  
+		self.setFirstRowActive(true);
+	});
+};
 
 View.prototype.cd = function(dir, isHistoryJump, done){
 	var self = this;
@@ -345,11 +345,11 @@ View.prototype.setActiveRowByFileName = function(filename) {
 };
 
 
-View.prototype.setFirstRowActive = function() {
+View.prototype.setFirstRowActive = function(force) {
 	var self = this;
 	self.activeRowId = 0; 
 	var $scrollArea = $("#scrollArea" + self.id);
-	if (!self.activeRow){
+	if (!self.activeRow || force){
 		self.activeRow = $scrollArea.find(".filesystemitem:first");
 		self.row(self.activeRow);
 	}
@@ -370,6 +370,62 @@ View.prototype.mimeIconType = function(fileSystemItem) {
 
 
 
+View.prototype.extendPathContentMetaData = function(directoryContent, done) {
+	var self = this;
+	self.files = [];
+	self.dirs = [];
+	self.dirs.push({
+		icon: "fa fa-level-up",
+		path: path.join(self.path, ".."),
+		stats:{size : bytesToSize(0), date: ""},
+		name: "..",
+		ext: "",
+		isDirectory: true,
+		idDisk: false
+	}); 
+	for (var i = 0; i < directoryContent.length; i++) {
+		var filename = directoryContent[i];
+
+		var stats = {};
+		var folder = this.path;
+		try {
+			if (path.isAbsolute(filename)){
+				stats = fs.statSync(filename);
+				folder = path.dirname(filename);
+			} else {
+				stats = fs.statSync(path.join(self.path, filename));
+			}
+		} catch(e){
+			stats.isFile = function() {
+				return true;
+			}
+		}
+
+		var extension = path.extname(filename); 
+		var fileSystemItem = {
+			//icon: "fa fa-file-o",
+			path: folder,
+			stats: {size:bytesToSize(stats.size), date:stats.mtime},
+			name: path.basename(filename, extension),
+			ext: extension,
+			isDirectory: !stats.isFile(),
+			isdisk: false
+		};
+
+		fileSystemItem.icon = self.mimeIconType(fileSystemItem);
+		if (fileSystemItem.isDirectory){
+			self.dirs.push(fileSystemItem);
+		} else {
+			self.files.push(fileSystemItem);
+		}
+	}
+
+	self.data = [];
+	self.data.push.apply(self.data, self.dirs);
+	self.data.push.apply(self.data, self.files);
+	done();
+};
+
 View.prototype.dir = function(done) {
 	var self = this; 
 	fs.readdir(self.path, function  (err, directoryContent) {
@@ -377,53 +433,9 @@ View.prototype.dir = function(done) {
 			window.applicationController.msg(err);
 			console.error(err);
 		} else {
-			self.files = [];
-			self.dirs = [];
-			self.dirs.push({
-				icon: "fa fa-level-up",
-				path: path.join(self.path, ".."),
-				stats:{size : bytesToSize(0), date: ""},
-				name: "..",
-				ext: "",
-				isDirectory: true,
-				idDisk: false
-			});
 
-			for (var i = 0; i < directoryContent.length; i++) {
-				var filename = directoryContent[i];
 
-				var stats = {};
-				try {
-					stats = fs.statSync(path.join(self.path, filename));
-				} catch(e){
-					stats.isFile = function() {
-						return true;
-					}
-				}
-
-				var extension = path.extname(filename);
-				var fileSystemItem = {
-					//icon: "fa fa-file-o",
-					path: this.path,
-					stats: {size:bytesToSize(stats.size), date:stats.mtime},
-					name: path.basename(filename, extension),
-					ext: extension,
-					isDirectory: !stats.isFile(),
-					isdisk: false
-				};
-
-				fileSystemItem.icon = self.mimeIconType(fileSystemItem);
-				if (fileSystemItem.isDirectory){
-					self.dirs.push(fileSystemItem);
-				} else {
-					self.files.push(fileSystemItem);
-				}
-			}
-
-			self.data = [];
-			self.data.push.apply(self.data, self.dirs);
-			self.data.push.apply(self.data, self.files);
-			done();
+			self.extendPathContentMetaData(directoryContent, done);
 		}
 	});
 };

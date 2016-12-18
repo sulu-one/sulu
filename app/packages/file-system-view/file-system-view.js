@@ -241,16 +241,17 @@ View.prototype.recoverViewState = function(selectedFiles){
 	}
 };
 
-View.prototype.refresh = function(){
+View.prototype.refresh = function(newActiveItemName){
 	var selectedFiles = this.selected(); 
 	var activeRow = this.activeRowData();
 	var oldActiveRowId = this.activeRow.data("rowid");
+	var oldItemName = newActiveItemName || (activeRow.name + activeRow.ext);
 	var self = this;
 
 	this.cd(this.path, true, function () { 
 		self.recoverViewState(selectedFiles);
 		self.updateGridViewData(true);
-		if (!self.setActiveRowByFileName(activeRow.name + activeRow.ext)){
+		if (!self.setActiveRowByFileName(oldItemName)){
 			if (!self.setActiveRowByRowId(oldActiveRowId)){
 				self.setActiveRowByRowId(1);
 			};
@@ -310,7 +311,7 @@ View.prototype.setActiveRowByFileName = function(filename) {
 };
 
 
-View.prototype.setFirstRowActive = function(fileSystemItem) {
+View.prototype.setFirstRowActive = function() {
 	var self = this;
 	self.activeRowId = 0; 
 	var $scrollArea = $("#scrollArea" + self.id);

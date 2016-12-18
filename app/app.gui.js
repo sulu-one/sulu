@@ -91,6 +91,9 @@ GUI.prototype.toggleActiveFileSystemView = function toggleActiveFileSystemView()
 	} else {
 		this.GUI.activeView(this.GUI.target.model);//.model.row().click();
 	}
+	if (!this.GUI.activeView().model.activeRow){
+		this.GUI.activeView().model.setFirstRowActive()
+	}
 	return false;
 };
 

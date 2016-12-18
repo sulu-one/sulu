@@ -25,6 +25,7 @@ Command.prototype.createFolder = function createFolder() {
 		this.GUI.dialogs.prompt("New folder in \"" + view.path + "\"", defaultText, function(input) {
 			if (input !== undefined){
 				mkdirSync(path.join(view.path, input));
+				view.refresh(input);
 			}
 		});
 	} else {

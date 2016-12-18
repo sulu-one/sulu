@@ -155,10 +155,8 @@ View.prototype.renderRow = function(fileSystemItem) {
 	 
 var bookmarks = applicationController.config.settings.bookmarks;
 	row.push('<div style="position:relative" data-rowid="' + file.rowId + '" class="horizontal layout row filesystemitem' + (file.isDisk ? " filesystemitem-disk" : "") + (file.isDirectory ? " filesystemitem-directory" : "") + (file.selected ? " selected" : "") + '" data-isdirectory="' + file.isDirectory + '" data-filename="' + path.join(file.path, file.name) + file.ext + '">');
-	
-	
 		row.push('<div class="flex-1">');
-		file.bookmarked = (bookmarks.indexOf(path.join(this.path, file.name) + file.ext) !== -1);
+		file.bookmarked = (bookmarks.indexOf(path.join(file.path, file.name) + file.ext) !== -1);
 		if (file.bookmarked) { 
 			row.push('<span class="' + (file.bookmarkClass || "fa fa-bookmark glow") + '"></span> '); 
 		}

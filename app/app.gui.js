@@ -3,7 +3,7 @@
  * @license MIT
  * @author Stephan Ahlf
 */
-
+var Dialogs = require('dialogs'); 
 
 
 /**
@@ -19,6 +19,7 @@ var GUI = function(app) {
 	this.app.registerHotKey("backspace", this.navigateBackToParentFolder);
 	this.app.registerHotKey("space", this.selectActiveRow);
 	this.app.registerHotKey("esc", this.unselectAllRows);
+	this.dialogs = new Dialogs();
 	return this;
 };
 

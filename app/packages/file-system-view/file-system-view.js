@@ -1,7 +1,7 @@
 var fs = require("fs");
 var path = require("path");
 var drivelist = require('drivelist');
-
+	
 var View = function(id) {
 	this.id = id;
 	this.activeRow = null;
@@ -97,6 +97,15 @@ View.prototype.dblclick = function(/*e*/) {
 	}
 
 	return false;
+};
+
+View.prototype.activeRowData = function() {
+	var result = null;
+	if (this.activeRow){
+		var id = this.activeRow.data("rowid");
+		result = this.data[id];
+	}
+	return result;
 };
 
 View.prototype.selectActiveRow = function() {

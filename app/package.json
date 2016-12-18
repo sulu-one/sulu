@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "clusterize.js": "^0.12.0",
+    "dialogs": "^1.1.17",
     "drivelist": "^3.2.0",
     "font-awesome": "^4.4.0",
     "jquery": "^3.0.0",

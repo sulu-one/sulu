@@ -114,8 +114,32 @@ View.prototype.selectActiveRow = function() {
 	this.activeRow.toggleClass("selected");
 };
 
-View.prototype.unselectAllRows = function() {
-	this.activeRow.parent().find(".selected").removeClass("selected");
+View.prototype.selectByFileExtension = function() {
+	this.unselectAllRows();
+	var ext = this.activeRowData().ext; 
+	for (var i = 0; i < this.data.length; i++) {
+		var row = this.data[i];
+		if (ext === row.ext){
+			row.selected = true;
+		}
+	}
+};
+
+View.prototype.invertSelection = function() { 
+	for (var i = 0; i < this.data.length; i++) {
+		var row = this.data[i];
+		row.selected = !row.selected;
+	}
+};
+
+View.prototype.selectAll = function() { 
+	for (var i = 0; i < this.data.length; i++) {
+		var row = this.data[i];
+		row.selected = true;
+	}
+};
+
+View.prototype.unselectAllRows = function() { 
 	for (var i = 0; i < this.data.length; i++) {
 		var row = this.data[i];
 		row.selected = false;

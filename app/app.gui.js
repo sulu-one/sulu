@@ -19,6 +19,9 @@ var GUI = function(app) {
 	this.app.registerHotKey("backspace", this.navigateBackToParentFolder);
 	this.app.registerHotKey("space", this.selectActiveRow);
 	this.app.registerHotKey("esc", this.unselectAllRows);
+	this.app.registerHotKey("ctrl+a", this.selectAll);
+	this.app.registerHotKey("ctrl+shift+a", this.invertSelection);
+	this.app.registerHotKey("ctrl+s", this.selectByFileExtension);
 	this.dialogs = new Dialogs();
 	return this;
 };
@@ -34,11 +37,42 @@ GUI.prototype.selectActiveRow = function selectActiveRow() {
 };
 
 /**
+ * Mark all rows of file system view.
+*/
+GUI.prototype.selectAll = function selectAll() { 
+	var view = this.GUI.source;
+	view.model.selectAll();
+	view.model.refresh();
+	return false;
+};
+
+/**
+ * Invert selected rows of file system view.
+*/
+GUI.prototype.invertSelection = function invertSelection() { 
+	var view = this.GUI.source;
+	view.model.invertSelection();
+	view.model.refresh();
+	return false;
+};
+
+/**
+ * Mark all rows of same filetype as selected.
+*/
+GUI.prototype.selectByFileExtension = function selectByFileExtension() { 
+	var view = this.GUI.source;
+	view.model.selectByFileExtension();
+	view.model.refresh();
+	return false;
+};
+
+/**
  * Mark all rows of active file system view as not selected.
 */
 GUI.prototype.unselectAllRows = function unselectAllRows() {
 	var view = this.GUI.source;
 	view.model.unselectAllRows();
+	view.model.refresh();
 	return false;
 };
 

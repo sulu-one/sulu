@@ -39,6 +39,7 @@ https://discord.gg/rX7hu3D discord chat.
 
 git clone https://github.com/sulu-one/sulu.git;
 cd sulu;
+npm link .;
 npm install;
 cd app;
 npm install;
@@ -46,7 +47,7 @@ bower install;
 
 # run
 
-npm run dev;
+sulu; 
 
 ```
 

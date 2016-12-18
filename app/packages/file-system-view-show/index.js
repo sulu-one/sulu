@@ -3,22 +3,24 @@ var Command = function() {
 }
 
 Command.prototype.showItemInFolder = function showItemInFolder() {
-	var view = this.GUI.activeView().model;
-	var selectedItems = view.selected();
-	if (selectedItems.length === 0){
-	 	this.GUI.app.msg("select some items to delete.");
-	} else {
+	var v = this.GUI.activeView();
+	if (v){
 		const {shell} = require('electron');
-		for (var i = selectedItems.length - 1; i >= 0; i--) {
-			var item = selectedItems[i];
+		var view = this.GUI.activeView().model; 
+		var file = view.activeRowData();  
+		if (file){
 			var path = require("path"); 
-			var fn =  path.join(view.path, item.name) + item.ext;  
+			var fn =  path.join(view.path, file.name) + file.ext;  
 			shell.showItemInFolder(fn); 
 			const { remote } = require('electron')
 			remote.BrowserWindow.getFocusedWindow().minimize();
-			return false
-		}  
+		} else {
+			this.GUI.app.msg("please select a file.");
+		}
+	} else {
+		this.GUI.app.msg("please select a file system view.");
 	}
+	return false; 
 };
 
 var Plugin = function (client) {

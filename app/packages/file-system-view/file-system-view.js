@@ -136,8 +136,18 @@ View.prototype.click = function(/*e*/) {
 View.prototype.renderRow = function(fileSystemItem) {
 	var file = fileSystemItem;
 	var row = [];
+	
+	var bookmarks = applicationController.config.settings.bookmarks;
+
 	row.push('<div style="position:relative" data-rowid="' + file.rowId + '" class="horizontal layout row filesystemitem' + (file.isDisk ? " filesystemitem-disk" : "") + (file.isDirectory ? " filesystemitem-directory" : "") + (file.selected ? " selected" : "") + '" data-isdirectory="' + file.isDirectory + '" data-filename="' + file.name + file.ext + '">');
-		row.push('<div class="flex-1"><span class="' + file.bookmarkClass + '"></span> <span class="' + file.icon + '"></span></div>');
+	
+	
+		row.push('<div class="flex-1">');
+		file.bookmarked = (bookmarks.indexOf(path.join(this.path, file.name) + file.ext) !== -1);
+		if (file.bookmarked) { 
+			row.push('<span class="' + (file.bookmarkClass || "fa fa-bookmark glow") + '"></span> '); 
+		}
+		row.push('<span class="' + file.icon + '"></span></div>');
 		row.push('<div class="flex-5"><span class="filesystemitem-filename">' + file.name + "</span></div>");
 		row.push('<div class="flex-2">' + file.ext + "</div>");
 		row.push('<div class="flex-2">' + (!file.isDirectory ? file.stats.size : "") + "</div>");

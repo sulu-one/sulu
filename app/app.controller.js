@@ -16,12 +16,9 @@ var GUI = require("./app.GUI.js");
 */
 var ApplicationController = function(config) {
 	this.config = config;
-
-	if (fs.existsSync(path.join(__dirname, "config.js"))){
-		this.settings = require(path.join(__dirname, "config.js"));
-	} else {
-		this.settings = {};
-	}
+	var Config = require("user-appdata");
+	var config = new Config({appname : "sulu", defaultSettings : {}}); 
+	this.config = config;
 	this.GUI = new GUI(this);
 	var applicationNotifier = new ApplicationNotifier(this);
 	this.msg = applicationNotifier.msg;

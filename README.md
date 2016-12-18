@@ -2,6 +2,8 @@
 ## Hackable file manager on Linux, Windows and OS X
 
 ## Prototype at development! Here is a lot of work todo!
+https://discord.gg/rX7hu3D discord chat.
+
 
 [![Dependency Status](https://david-dm.org/sulu-one/sulu.svg)](https://david-dm.org/sulu-one/sulu) 
 [![devDependency Status](https://david-dm.org/sulu-one/sulu/dev-status.svg)](https://david-dm.org/sulu-one/sulu#info=devDependencies)  

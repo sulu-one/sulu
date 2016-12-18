@@ -1,19 +1,22 @@
+body{
+	margin: 0;
+	padding: 0;
+}
+
 body, paper-menu.paper-menu-0,paper-dialog.paper-dialog-0,.paper-checkbox-0 {
 	background-color: #121718;
 	color: #8A8A8A;
 }
 
 ::-webkit-scrollbar {
-	background: #54676D;
-}
-
-::-webkit-scrollbar-thumb {
 	background: #333E42;
 }
 
-::-webkit-scrollbar-corner {
+::-webkit-scrollbar-thumb {
 	background: #54676D;
 }
+
+ 
 
 
 

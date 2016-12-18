@@ -1,0 +1,16 @@
+{
+  "name": "assert",
+  "description": "Assertion lib",
+  "version": "0.1.1",
+  "keywords": [
+    "assert",
+    "test"
+  ],
+  "dependencies": {
+    "component/stack": "*"
+  },
+  "scripts": [
+    "index.js"
+  ],
+  "repo": "https://raw.github.com/component/assert"
+}

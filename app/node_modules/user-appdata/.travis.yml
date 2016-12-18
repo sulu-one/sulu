@@ -1,0 +1,8 @@
+language: node_js
+sudo: required
+node_js:
+  - "4"
+  - "5"
+after_success:
+  - node node_modules/jscoverage/bin/jscoverage lib lib-cov  --exclude *.json,cli.js
+  - NODE_ENV=test mocha -R mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js

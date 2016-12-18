@@ -1,0 +1,24 @@
+{
+  "name": "node-prompt-here",
+  "version": "1.0.1",
+  "description": "Open a console window at given absolute directory",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "bump": "npm version patch && git push && git push --tags && npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/s-a/node-prompt-here.git"
+  },
+  "keywords": [
+    "terminal",
+    "console"
+  ],
+  "author": "Stephan Ahlf <stephan.ahlf@gmail.com> (https://github.com/s-a)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/s-a/node-prompt-here/issues"
+  },
+  "homepage": "https://github.com/s-a/node-prompt-here#readme"
+}

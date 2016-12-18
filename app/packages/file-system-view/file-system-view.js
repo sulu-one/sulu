@@ -130,9 +130,9 @@ View.prototype.renderRow = function(fileSystemItem) {
 	var row = [];
 	row.push('<div style="position:relative" data-rowid="' + file.rowId + '" class="horizontal layout row filesystemitem' + (file.isDisk ? " filesystemitem-disk" : "") + (file.isDirectory ? " filesystemitem-directory" : "") + (file.selected ? " selected" : "") + '" data-isdirectory="' + file.isDirectory + '" data-filename="' + file.name + '">');
 		row.push('<div class="flex-1"><span class="' + file.icon + '"></span></div>');
-		row.push('<div class="flex-7"><span class="filesystemitem-filename">' + file.name + '</span></div>');
-		row.push('<div class="flex-1">' + file.ext + '</div>');
-		row.push('<div class="flex-1">' + (!file.isDirectory ? file.stats.size : "") + '</div>');
+		row.push('<div class="flex-5"><span class="filesystemitem-filename">' + file.name + '</span></div>');
+		row.push('<div class="flex-2">' + file.ext + '</div>');
+		row.push('<div class="flex-2">' + (!file.isDirectory ? file.stats.size : "") + '</div>');
 		row.push('<div class="flex-1">' + (file.stats.mtime || "").toString().replace("T", " ").replace(".000Z", "") + '</div>');
 		row.push('<div class="flex-1">-a--</div>');
 		row.push('<paper-ripple></paper-ripple>');
@@ -204,6 +204,14 @@ View.prototype.updateGridViewData = function(isHistoryJump){
 	self.setFirstRowActive();
 }
 
+function bytesToSize(bytes) {
+    var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+    if (bytes == 0) return '0 Bytes';
+    var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+    if (i == 0) return bytes + ' ' + sizes[i];
+    return (bytes / Math.pow(1024, i)).toFixed(1) + ' ' + sizes[i];
+};
+
 View.prototype.cd = function(dir, isHistoryJump){
 	var self = this;
 	self.activeRow = null;
@@ -217,7 +225,7 @@ View.prototype.cd = function(dir, isHistoryJump){
 			self.data = [];
 			for (var i = 0; i < disks.length; i++) {
 				var disk = disks[i];
-				self.data.push({isDisk: true, icon: "fa fa-hdd-o", name: disk.mountpoint + self.sep, stats:{size: disk.size}/*, ext: disk.description*/});
+				self.data.push({isDisk: true, icon: "fa fa-hdd-o", name: disk.mountpoint + self.sep, stats:{size: bytesToSize(disk.size)}/*, ext: disk.description*/});
 			}
 			self.updateGridViewData(isHistoryJump);
 		});
@@ -271,7 +279,7 @@ View.prototype.dir = function(done) {
 			self.dirs.push({
 				icon: "fa fa-level-up",
 				path: path.join(self.path, ".."),
-				stats:{size : 0, date: ""},
+				stats:{size : bytesToSize(0), date: ""},
 				name: "..",
 				ext: "",
 				isDirectory: true,
@@ -294,7 +302,7 @@ View.prototype.dir = function(done) {
 				var fileSystemItem = {
 					//icon: "fa fa-file-o",
 					path: this.path,
-					stats: {size:stats.size, date:stats.mtime},
+					stats: {size:bytesToSize(stats.size), date:stats.mtime},
 					name: path.basename(filename, extension),
 					ext: extension,
 					isDirectory: !stats.isFile(),

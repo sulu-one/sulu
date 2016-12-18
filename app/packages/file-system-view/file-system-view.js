@@ -149,11 +149,13 @@ View.prototype.click = function(/*e*/) {
 //	view.cluster.update(view.renderRows(view.data));
 };
 
-View.prototype.renderRow = function(fileSystemItem) {
+View.prototype.renderRow = function(fileSystemItem, showFullPath) {
 	var file = fileSystemItem;
 	var row = [];
 	 
-var bookmarks = applicationController.config.settings.bookmarks;
+	var bookmarks = applicationController.config.settings.bookmarks;
+
+
 	row.push('<div style="position:relative" data-rowid="' + file.rowId + '" class="horizontal layout row filesystemitem' + (file.isDisk ? " filesystemitem-disk" : "") + (file.isDirectory ? " filesystemitem-directory" : "") + (file.selected ? " selected" : "") + '" data-isdirectory="' + file.isDirectory + '" data-filename="' + path.join(file.path, file.name) + file.ext + '">');
 		row.push('<div class="flex-1">');
 		file.bookmarked = (bookmarks.indexOf(path.join(file.path, file.name) + file.ext) !== -1);
@@ -161,7 +163,11 @@ var bookmarks = applicationController.config.settings.bookmarks;
 			row.push('<span class="' + (file.bookmarkClass || "fa fa-bookmark glow") + '"></span> '); 
 		}
 		row.push('<span class="' + file.icon + '"></span></div>');
-		row.push('<div class="flex-5"><span class="filesystemitem-filename">' + file.name + "</span></div>");
+		var fn = file.name ;
+		if (showFullPath){
+			fn = path.join(file.path, file.name);
+		}
+		row.push('<div class="flex-5"><span class="filesystemitem-filename">' + fn + "</span></div>");
 		row.push('<div class="flex-2">' + file.ext + "</div>");
 		row.push('<div class="flex-2">' + (!file.isDirectory ? file.stats.size : "") + "</div>");
 		row.push('<div class="flex-1">' + (file.stats.mtime || "").toString().replace("T", " ").replace(".000Z", "") + "</div>");
@@ -171,12 +177,12 @@ var bookmarks = applicationController.config.settings.bookmarks;
 	return row.join("\n");
 };
 
-View.prototype.renderRows = function(fileSystemItems) {
+View.prototype.renderRows = function(fileSystemItems, showFullPath) {
 	var rows = [];
 	for (var i = 0; i < fileSystemItems.length; i++) {
 		var fileSystemItem = fileSystemItems[i];
 		fileSystemItem.rowId = i;
-		rows.push(this.renderRow(fileSystemItem));
+		rows.push(this.renderRow(fileSystemItem, showFullPath));
 	}
 	return rows;
 };
@@ -216,9 +222,9 @@ View.prototype.bind = function(){
 	}
 };
 
-View.prototype.updateGridViewData = function(isHistoryJump){
+View.prototype.updateGridViewData = function(isHistoryJump, showFullPath){
 	var self = this;
-	self.cluster.update(self.renderRows(self.data));
+	self.cluster.update(self.renderRows(self.data, showFullPath));
 	self.el.set("path", self.path.split(self.sep));
 	self.el.set("xpath", []);
  	for(var i = 0; i < self.el.get("path").length; i++){ 
@@ -264,7 +270,7 @@ View.prototype.recoverViewState = function(selectedFiles){
 	}
 };
 
-View.prototype.refresh = function(newActiveItemName){
+View.prototype.refresh = function(newActiveItemName, showFullPath){
 	var selectedFiles = this.selected(); 
 	var activeRow = this.activeRowData();
 	var oldActiveRowId = this.activeRow.data("rowid");
@@ -273,7 +279,7 @@ View.prototype.refresh = function(newActiveItemName){
 
 	this.cd(this.path, true, function () { 
 		self.recoverViewState(selectedFiles);
-		self.updateGridViewData(true);
+		self.updateGridViewData(true, showFullPath);
 		if (!self.setActiveRowByFileName(oldItemName)){
 			if (!self.setActiveRowByRowId(oldActiveRowId)){
 				self.setActiveRowByRowId(1);
@@ -286,7 +292,7 @@ View.prototype.refresh = function(newActiveItemName){
 View.prototype.refreshVirtual = function(virtualFileList){ 
 	var self = this; 
 	self.extendPathContentMetaData(virtualFileList, function(){
-		self.updateGridViewData(true);  
+		self.updateGridViewData(true, true);  
 		self.setFirstRowActive(true);
 	});
 };

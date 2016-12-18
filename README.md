@@ -28,6 +28,7 @@ https://discord.gg/rX7hu3D discord chat.
 - press "ctrl+shift+a" to "invertSelection"
 - press "ctrl+s" to "selectByFileExtension"
 - press "ctrl+b" to "toggleBookmark"
+- press "ctrl+shift+b" to "showBookmarks"
 - press "f5" to "copy"
 - press "f12" to "toggleDevTools"
 - press "ctrl+alt+left" to "historyJumpBackward"

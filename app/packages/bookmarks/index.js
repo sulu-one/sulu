@@ -26,7 +26,7 @@ Command.prototype.toggleBookmark = function toggleBookmark() {
 		var file = view.activeRowData();  
 		if (file){
 			var path = require("path"); 
-			var fn =  path.join(view.path, file.name) + file.ext; 
+			var fn =  path.join(file.path, file.name) + file.ext; 
 			var index = self.config.settings.bookmarks.indexOf(fn);
 			if ( index === -1 ){ 
 			 	self.config.settings.bookmarks.push(fn);

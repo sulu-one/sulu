@@ -15,7 +15,7 @@
   "license": "", 
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/sulu-one/sulu"
   },
   "scripts": {
     "docs": "jsdoc2md \"app/*.js\" > api.md",

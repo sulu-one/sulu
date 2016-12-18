@@ -208,7 +208,8 @@ View.prototype.cd = function(dir, isHistoryJump){
 	var self = this;
 	self.activeRow = null;
 	self.activeRowId = null; 
-	if (!path.isAbsolute(dir) && dir === ".." && path.join(this.path, "..") === this.path){
+
+	if (dir == "" || (!path.isAbsolute(dir) && dir === ".." && path.join(this.path, "..") === this.path)){
 		// root of disc
 		drivelist.list(function(error, disks) {
 			if (error) {throw new Error(error);}
@@ -317,8 +318,12 @@ View.prototype.dir = function(done) {
 };
 
 
-View.prototype.pathLinkClick = function(e, detail) {  
- 	this.cd(e.target.parentElement.dataset.path + this.sep);
+View.prototype.pathLinkClick = function(e, detail) { 
+	var p = e.target.parentElement.dataset.path; 
+	if (p !== ""){
+		p += this.sep;
+	}
+ 	this.cd(p);
 	e.preventDefault();
  
 	console.log( this.id, "cdw", this.path );

@@ -1,31 +1,16 @@
 <dom-module id="element-core-data-view">
 	<template> 
 		<span class="element-core-data-view-path">
+			<a on-click="cwd" data-path="" class="element-core-data-view-path-item" href=""><span class="fa fa-hdd-o"></span></a>
 			<template is="dom-repeat" items="{{xpath}}">
-			   <a on-click="cwd" data-path$="{{item.path}}" class="element-core-data-view-path-item" href="" class="element-core-data-view-path-item"> 
+			   	<a on-click="cwd" data-path$="{{item.path}}" class="element-core-data-view-path-item" href="" > 
 			   		<span class="element-core-data-view-path-item">[[item.folder]]</span><span class="element-core-data-view-path-item">[[sep]]</span>
-			   </a>
+			   	</a>
 			</template>
 		</span>
 
 
-		<div class="clusterize">
-			<div class="horizontal layout">
-				<div class="flex-1">
-				</div>
-				<div class="flex-7">
-					name
-				</div>
-				<div class="flex-1">
-					ext
-				</div>
-				<div class="flex-1">
-					size
-				</div>
-				<div class="flex-1">
-					attr
-				</div>
-			</div>
+		<div class="clusterize"> 
 			<div id="{{scrollAreaID}}" class="clusterize-scroll">
 				<div id="{{contentAreaID}}" class="clusterize-content">
 					<div class="clusterize-no-data">
@@ -39,6 +24,10 @@
 	<script> 
 
 		window.Polymer({
+			rt : function(){
+				debugger
+				return this.get("root");
+			},
 			is: "element-core-data-view",
 				ready: function() {
 					var self = this;
@@ -50,6 +39,8 @@
 					var fileSystemView = new FileSystemView(id);
 					this.sep = require("path").sep;
 					this.path = fileSystemView.path.split(this.sep);
+				 
+				 
 					fileSystemView.el = this;
 
 					this.set("seperator",this.sep);

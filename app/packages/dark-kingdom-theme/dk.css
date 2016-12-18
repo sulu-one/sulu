@@ -23,6 +23,10 @@ body, paper-menu.paper-menu-0,paper-dialog.paper-dialog-0,.paper-checkbox-0 {
 }
 
 .filesystemitem-directory{
+	color:#906804;
+}
+
+.active-filesystem-view .filesystemitem-directory{
 	color:#FCD97E;
 }
 

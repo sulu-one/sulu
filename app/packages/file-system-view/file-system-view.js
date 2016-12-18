@@ -5,7 +5,7 @@ var drivelist = require("drivelist");
 var View = function(id) {
 	this.id = id;
 	this.activeRow = null;
-	this.path = path.join(__dirname, "examples");
+	this.path = process.cwd();
 	this.sep = require("path").sep;
 	this.history = [this.path];
 	return this;

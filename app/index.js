@@ -34,9 +34,7 @@ app.on('ready', function() {
   //  mainWindow.openDevTools({detach : false});
 
   mainWindow.maximize();
-  var cfg = path.join(__dirname, "config.js");
-  if (fs.existsSync( cfg )){
-  }
+
   mainWindow.setMenu(null);  
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {

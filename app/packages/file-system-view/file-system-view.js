@@ -92,8 +92,7 @@ View.prototype.dblclick = function(/*e*/) {
 		var f = rowData.name;
 		if (rowData.ext){
 			f += rowData.ext;
-		}
-		console.log(f);
+		} 
 		view.cd(f);
 	}
 

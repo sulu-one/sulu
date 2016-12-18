@@ -1,7 +1,7 @@
 {
   "name": "sulu",
   "description": "A hackable file manager",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "author": "Stephan Ahlf <stephan.ahlf@gmail.com>",
   "bugs": {
     "url": "https://github.com/s-a/sulu/issues"
@@ -23,7 +23,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm -rf ./dist",
     "bump": "npm version patch && git push && git push --tags && npm publish",
-    "postinstall" : "cd app && npm install"
+    "postinstall": "cd app && npm install"
   },
   "devDependencies": {},
   "dependencies": {

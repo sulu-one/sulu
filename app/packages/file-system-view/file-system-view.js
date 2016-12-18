@@ -374,6 +374,7 @@ View.prototype.dir = function(done) {
 	var self = this; 
 	fs.readdir(self.path, function  (err, directoryContent) {
 		if (err){
+			window.applicationController.msg(err);
 			console.error(err);
 		} else {
 			self.files = [];
@@ -433,7 +434,7 @@ View.prototype.pathLinkClick = function(e, detail) {
 	if (p !== ""){
 		p += this.sep;
 	}
- 	this.cd(p);
+	this.cd(p);
 	e.preventDefault();
  
 	console.log( this.id, "cdw", this.path );

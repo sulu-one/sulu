@@ -4,6 +4,17 @@ var Command = function  () {
 	return this;
 };
 
+Command.prototype.changeDirectory = function changeDirectory() {
+	var self = this;
+	this.GUI.dialogs.prompt("Enter new path", "", function(input) {
+		if (input !== undefined){ 
+			var view = self.GUI.activeView().model;
+			view.cd(input);
+		}
+	});
+};
+
+
 Command.prototype.historyJumpBackward = function historyJumpBackward() {
 	var view = this.GUI.activeView().model;
 	var history = view.history;
@@ -49,13 +60,14 @@ var Plugin = function  (client) {
 	window.FileSystemView = require(path.join(__dirname, "file-system-view.js"));
 	window.$ = require("jquery");
 
-	client.app.loadHTML(path.join(__dirname, 'element-data-view.html'));
-	client.app.loadHTML(path.join(__dirname, 'element-data-view-favourites.html'));
+	client.app.loadHTML(path.join(__dirname, "element-data-view.html"));
+	client.app.loadHTML(path.join(__dirname, "element-data-view-favourites.html"));
 
 	this.command = new Command();
+	// file properties - client.app.registerHotKey("alt+enter", this.command.historyJumpBackward);
 	client.app.registerHotKey("ctrl+alt+left", this.command.historyJumpBackward);
-	client.app.registerHotKey("ctrl+alt+right", this.command.historyJumpForward);
-
+	client.app.registerHotKey("ctrl+alt+right", this.command.historyJumpForward); 
+	client.app.registerHotKey("right", this.command.changeDirectory); 
 };
 
 module.exports = Plugin;

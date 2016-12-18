@@ -22,7 +22,8 @@
     "start": "electron ./app",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm -rf ./dist",
-    "bump": "npm version patch && git push && git push --tags && npm publish"
+    "bump": "npm version patch && git push && git push --tags && npm publish",
+    "postinstall" : "cd app && npm install"
   },
   "devDependencies": {},
   "dependencies": {

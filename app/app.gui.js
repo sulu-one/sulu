@@ -71,10 +71,12 @@ GUI.prototype.onKeyBoardInput = function onKeyBoardInput(e) {
 		this.debouncedKeyBoardInputTimer(); 
 	}
 
-	if ((printable && !e.ctrlKey) || $filter.is(':focus') ){
+	if ((printable && !e.ctrlKey) || $filter.is(":focus")){
 		$filter.focus();
 		this.debouncedKeyBoardInputTimer(); 
 	}
+
+	return true;
 
 }; 
 

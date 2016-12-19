@@ -4,7 +4,7 @@
  * @author Stephan Ahlf
 */ 
 var path = require("path");
-var events = require('events');
+var events = require("events");
 var ApplicationNotifier = require("./app.notifier.js");
 var GUI = require("./app.GUI.js");
 
@@ -35,8 +35,8 @@ var ApplicationController = function(config) {
 */
 ApplicationController.prototype.getFunctionName = function(fn) {
 	var ret = fn.toString();
-	ret = ret.substr('function '.length);
-	ret = ret.substr(0, ret.indexOf('(')).trim();
+	ret = ret.substr("function ".length);
+	ret = ret.substr(0, ret.indexOf("(")).trim();
 	if (ret === "") {
 		ret = null;
 	}
@@ -95,12 +95,12 @@ ApplicationController.prototype.requireAll = function() {
 * @param {String} path - Relative or absulote path to file.
 */
 ApplicationController.prototype.loadCSS = function(path) {
-	var head  = document.getElementsByTagName('head')[0];
-	var link  = document.createElement('link');
-	link.rel  = 'stylesheet';
-	link.type = 'text/css';
+	var head  = document.getElementsByTagName("head")[0];
+	var link  = document.createElement("link");
+	link.rel  = "stylesheet";
+	link.type = "text/css";
 	link.href = path;
-	link.media = 'all';
+	link.media = "all";
 	head.appendChild(link);
 };
 
@@ -109,10 +109,10 @@ ApplicationController.prototype.loadCSS = function(path) {
 * @param {String} path - Relative or absulote path to file.
 */
 ApplicationController.prototype.loadHTML = function(path) {
-	var head  = document.getElementsByTagName('head')[0];
-	var link  = document.createElement('link');
+	var head  = document.getElementsByTagName("head")[0];
+	var link  = document.createElement("link");
 	// link.id   = "cssId";
-	link.rel  = 'import';
+	link.rel  = "import";
 	link.href = path;
 	head.appendChild(link);
 };
@@ -122,10 +122,10 @@ ApplicationController.prototype.loadHTML = function(path) {
 * @param {String} path - Relative or absulote path to file.
 */
 ApplicationController.prototype.loadJS = function(path) {
-	var head  = document.getElementsByTagName('head')[0];
-	var script  = document.createElement('script');
+	var head  = document.getElementsByTagName("head")[0];
+	var script  = document.createElement("script");
 	// link.id   = "cssId";
-	script.type = 'text/javascript';
+	script.type = "text/javascript";
 	script.src = path;
 	head.appendChild(script);
 };

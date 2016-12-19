@@ -146,6 +146,7 @@ View.prototype.click = function(/*e*/) {
 	var view = $(this).parents("element-core-data-view").data("controller");
 	window.applicationController.GUI.activeView(view);
 	view.row(fileSystemItemDataRow);
+	window.document.title = window.applicationController.GUI.activeView().model.path;
 //	view.cluster.update(view.renderRows(view.data));
 };
 
@@ -239,6 +240,7 @@ View.prototype.updateGridViewData = function(isHistoryJump, showFullPath){
 		self.history.push(self.el.get("path").join(self.sep));
 	} 
 	self.setFirstRowActive();
+	window.document.title = window.applicationController.GUI.activeView().model.path;
 }
 
 function bytesToSize(bytes) {

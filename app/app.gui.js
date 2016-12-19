@@ -128,6 +128,7 @@ GUI.prototype.toggleActiveFileSystemView = function toggleActiveFileSystemView()
 	if (!this.GUI.activeView().model.activeRow){
 		this.GUI.activeView().model.setFirstRowActive()
 	}
+	window.document.title = this.GUI.activeView().model.path;
 	return false;
 };
 

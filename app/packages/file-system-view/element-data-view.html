@@ -1,4 +1,13 @@
 <dom-module id="element-core-data-view">
+	<style>
+	:host {
+		--paper-input-container-focus-color: #FF9900;
+		--paper-input-container-input: {
+				font-size: 14px;
+				color: #F0F0F0;
+			};
+	}
+	</style>
 	<template> 
 		<span class="element-core-data-view-path">
 			<a on-click="cwd" data-path="" class="element-core-data-view-path-item" href=""><span class="fa fa-hdd-o"></span></a>
@@ -7,6 +16,7 @@
 			   		<span class="element-core-data-view-path-item">[[item.folder]]</span><span class="element-core-data-view-path-item">[[sep]]</span>
 			   	</a>
 			</template>
+			<paper-input class="filter" style="display: inline-block;" label="filter"></paper-input>
 		</span>
 
 

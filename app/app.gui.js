@@ -3,7 +3,9 @@
  * @license MIT
  * @author Stephan Ahlf
 */
-var Dialogs = require('dialogs'); 
+var Dialogs = require("dialogs"); 
+var TimeController = require("time-controller");
+
 
 
 /**
@@ -22,11 +24,37 @@ var GUI = function(app) {
 	this.app.registerHotKey("ctrl+a", this.selectAll);
 	this.app.registerHotKey("ctrl+shift+a", this.invertSelection);
 	this.app.registerHotKey("ctrl+s", this.selectByFileExtension);
+
+	window.document.onkeydown = this.onKeyBoardInput.bind(this);
+	this.debouncedKeyBoardInputTimer = new TimeController(this.onFilter, this).debounce(280);
+
 	this.dialogs = new Dialogs();
 	return this;
-};
+ 
+}; 
 
+GUI.prototype.onFilter = function onFilter() {  
+	var $filter = this.activeView().el.find(".filter").find("input").val();
+	console.log($filter); 
+}; 
 
+GUI.prototype.onKeyBoardInput = function onKeyBoardInput(e) { 
+	var $filter = this.activeView().el.find(".filter").find("input").focus();
+	$filter.focus();
+	var keycode = e.keyCode;
+
+    var printable = 
+        (keycode > 47 && keycode < 58)   || // number keys
+        (keycode == 32 || keycode == 13)   || // spacebar & return key(s) (if you want to allow carriage returns)
+        (keycode > 64 && keycode < 91)   || // letter keys
+        (keycode > 95 && keycode < 112)  || // numpad keys
+        (keycode > 185 && keycode < 193) || // ;=,-./` (in order)
+        (keycode > 218 && keycode < 223);   // [\]' (in order)
+
+	this.debouncedKeyBoardInputTimer(); 
+}; 
+
+ 
 /**
  * Mark active row of active file system view as selected.
 */

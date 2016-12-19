@@ -2,7 +2,7 @@ body {
     -webkit-user-select: none;
     user-select: none;
     font-size: 14px;
-    font-family: 'Roboto', 'Noto', sans-serif
+    font-family: 'Roboto', 'Noto', sans-serif;  
 }
  
 .element-core-data-view{
@@ -42,3 +42,4 @@ body {
     color: #FFCC00;
     text-shadow: 0px 0px 5px #FFFFFF; 
 }
+

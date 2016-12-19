@@ -3,7 +3,7 @@ body{
 	padding: 0;
 }
 
-body, paper-menu.paper-menu-0,paper-dialog.paper-dialog-0,.paper-checkbox-0 {
+body {
 	background-color: #121718;
 	color: #8A8A8A;
 }

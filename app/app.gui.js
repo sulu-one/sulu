@@ -3,6 +3,7 @@
  * @license MIT
  * @author Stephan Ahlf
 */
+var path = require("path"); 
 var Dialogs = require("dialogs"); 
 var TimeController = require("time-controller");
 
@@ -33,29 +34,48 @@ var GUI = function(app) {
  
 }; 
 
-GUI.prototype.onFilter = function onFilter() {  
-	var $filter = this.activeView().el.find(".filter").find("input").blur();
-	console.log($filter.val()); 
-	($filter.val(""));  
+GUI.prototype.onFilter = function onFilter() {
+	var view = this.activeView();  
+	var $filter = view.el.find(".filter").find("input"); 
+	view.searchFilter = $filter.val().trim(); 
+	view.model.cd(view.model.path, true, function(){
+		if (view.searchFilter === ""){
+		} else {
+			var filteredData = [];
+			for(var i = 0; i < view.model.data.length; i++){
+				var item = view.model.data[i];
+				var fn = item.name + item.ext;
 
+				if (fn.toLowerCase().indexOf(view.searchFilter.toLowerCase()) >= 0){
+					filteredData.push(path.join(item.path, item.name) + item.ext);
+				};
+			}
+			view.model.refreshVirtual(filteredData, false);
+		}
+	});
 }; 
 
 GUI.prototype.onKeyBoardInput = function onKeyBoardInput(e) { 
 
-	var keycode = e.keyCode; 
+	var keycode = e.keyCode;  
+	var $filter = this.activeView().el.find(".filter").find("input");
     var printable = 
         (keycode > 47 && keycode < 58)   || // number keys
-        (keycode == 32 || keycode == 13)   || // spacebar & return key(s) (if you want to allow carriage returns)
         (keycode > 64 && keycode < 91)   || // letter keys
         (keycode > 95 && keycode < 112)  || // numpad keys
         (keycode > 185 && keycode < 193) || // ;=,-./` (in order)
         (keycode > 218 && keycode < 223);   // [\]' (in order)
 
-	if (printable){
-		var $filter = this.activeView().el.find(".filter").find("input").focus();
+	if (keycode === 13 || keycode === 27){
+		$filter.val("");
+		this.debouncedKeyBoardInputTimer(); 
+	}
+
+	if ((printable && !e.ctrlKey) || $filter.is(':focus') ){
 		$filter.focus();
 		this.debouncedKeyBoardInputTimer(); 
 	}
+
 }; 
 
  
@@ -104,7 +124,8 @@ GUI.prototype.selectByFileExtension = function selectByFileExtension() {
 GUI.prototype.unselectAllRows = function unselectAllRows() {
 	var view = this.GUI.source;
 	view.model.unselectAllRows();
-	view.model.refresh();
+	view.model.refresh(); 
+	view.el.find(".filter").find("input").val("");
 	return false;
 };
 

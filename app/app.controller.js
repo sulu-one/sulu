@@ -2,8 +2,7 @@
  * @copyright (c) 2016 Stephan Ahlf
  * @license MIT
  * @author Stephan Ahlf
-*/
-var fs = require("fs");
+*/ 
 var path = require("path");
 var events = require('events');
 var ApplicationNotifier = require("./app.notifier.js");

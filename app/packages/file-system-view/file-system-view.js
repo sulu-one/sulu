@@ -151,31 +151,35 @@ View.prototype.click = function(/*e*/) {
 };
 
 View.prototype.renderRow = function(fileSystemItem, showFullPath) {
-	var file = fileSystemItem;
-	var row = [];
-	 
-	var bookmarks = applicationController.config.settings.bookmarks;
+	var file = fileSystemItem; 
+	if (fileSystemItem.visible === undefined || fileSystemItem.visible === true){
+		var row = [];
+		
+		var bookmarks = applicationController.config.settings.bookmarks;
 
 
-	row.push('<div style="position:relative" data-rowid="' + file.rowId + '" class="horizontal layout row filesystemitem' + (file.isDisk ? " filesystemitem-disk" : "") + (file.isDirectory ? " filesystemitem-directory" : "") + (file.selected ? " selected" : "") + '" data-isdirectory="' + file.isDirectory + '" data-filename="' + path.join(file.path, file.name) + file.ext + '">');
-		row.push('<div class="flex-1">');
-		file.bookmarked = (bookmarks.indexOf(path.join(file.path, file.name) + file.ext) !== -1);
-		if (file.bookmarked) { 
-			row.push('<span class="' + (file.bookmarkClass || "fa fa-bookmark glow") + '"></span> '); 
-		}
-		row.push('<span class="' + file.icon + '"></span></div>');
-		var fn = file.name ;
-		if (showFullPath){
-			fn = path.join(file.path, file.name);
-		}
-		row.push('<div class="flex-5"><span class="filesystemitem-filename">' + fn + "</span></div>");
-		row.push('<div class="flex-2">' + file.ext + "</div>");
-		row.push('<div class="flex-2">' + (!file.isDirectory ? file.stats.size : "") + "</div>");
-		row.push('<div class="flex-1">' + (file.stats.mtime || "").toString().replace("T", " ").replace(".000Z", "") + "</div>");
-		row.push('<div class="flex-1">-a--</div>');
-		row.push("<paper-ripple></paper-ripple>");
-	row.push("</div>");
-	return row.join("\n");
+		row.push('<div style="position:relative" data-rowid="' + file.rowId + '" class="horizontal layout row filesystemitem' + (file.isDisk ? " filesystemitem-disk" : "") + (file.isDirectory ? " filesystemitem-directory" : "") + (file.selected ? " selected" : "") + '" data-isdirectory="' + file.isDirectory + '" data-filename="' + path.join(file.path, file.name) + file.ext + '">');
+			row.push('<div class="flex-1">');
+			file.bookmarked = (bookmarks.indexOf(path.join(file.path, file.name) + file.ext) !== -1);
+			if (file.bookmarked) { 
+				row.push('<span class="' + (file.bookmarkClass || "fa fa-bookmark glow") + '"></span> '); 
+			}
+			row.push('<span class="' + file.icon + '"></span></div>');
+			var fn = file.name ;
+			if (showFullPath){
+				fn = path.join(file.path, file.name);
+			}
+			row.push('<div class="flex-5"><span class="filesystemitem-filename">' + fn + "</span></div>");
+			row.push('<div class="flex-2">' + file.ext + "</div>");
+			row.push('<div class="flex-2">' + (!file.isDirectory ? file.stats.size : "") + "</div>");
+			row.push('<div class="flex-1">' + (file.stats.mtime || "").toString().replace("T", " ").replace(".000Z", "") + "</div>");
+			row.push('<div class="flex-1">-a--</div>');
+			row.push("<paper-ripple></paper-ripple>");
+		row.push("</div>");
+		return row.join("\n");
+	} else {
+		return "";
+	}
 };
 
 View.prototype.renderRows = function(fileSystemItems, showFullPath) {
@@ -291,15 +295,24 @@ View.prototype.refresh = function(newActiveItemName, showFullPath){
 };
 
 
-View.prototype.refreshVirtual = function(virtualFileList){ 
+View.prototype.refreshVirtual = function(virtualFileList, showFullPath){ 
 	var self = this; 
 	self.extendPathContentMetaData(virtualFileList, function(){
-		self.updateGridViewData(true, true);  
+		self.updateGridViewData(true, showFullPath);  
 		self.setFirstRowActive(true);
 	});
 };
 
 View.prototype.cd = function(dir, isHistoryJump, done){
+	if (typeof(dir) !== "string"){
+		debugger;
+		dir = dir.path;
+
+	}
+	if (dir.hasOwnProperty("path")){
+		dir = dir.path;
+		debugger;
+	}
 	var self = this;
 	self.activeRow = null;
 	self.activeRowId = null; 

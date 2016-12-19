@@ -26,7 +26,7 @@ var GUI = function(app) {
 	this.app.registerHotKey("ctrl+s", this.selectByFileExtension);
 
 	window.document.onkeydown = this.onKeyBoardInput.bind(this);
-	this.debouncedKeyBoardInputTimer = new TimeController(this.onFilter, this).debounce(280);
+	this.debouncedKeyBoardInputTimer = new TimeController(this.onFilter, this).debounce(400);
 
 	this.dialogs = new Dialogs();
 	return this;
@@ -34,15 +34,15 @@ var GUI = function(app) {
 }; 
 
 GUI.prototype.onFilter = function onFilter() {  
-	var $filter = this.activeView().el.find(".filter").find("input").val();
-	console.log($filter); 
+	var $filter = this.activeView().el.find(".filter").find("input").blur();
+	console.log($filter.val()); 
+	($filter.val(""));  
+
 }; 
 
 GUI.prototype.onKeyBoardInput = function onKeyBoardInput(e) { 
-	var $filter = this.activeView().el.find(".filter").find("input").focus();
-	$filter.focus();
-	var keycode = e.keyCode;
 
+	var keycode = e.keyCode; 
     var printable = 
         (keycode > 47 && keycode < 58)   || // number keys
         (keycode == 32 || keycode == 13)   || // spacebar & return key(s) (if you want to allow carriage returns)
@@ -51,7 +51,11 @@ GUI.prototype.onKeyBoardInput = function onKeyBoardInput(e) {
         (keycode > 185 && keycode < 193) || // ;=,-./` (in order)
         (keycode > 218 && keycode < 223);   // [\]' (in order)
 
-	this.debouncedKeyBoardInputTimer(); 
+	if (printable){
+		var $filter = this.activeView().el.find(".filter").find("input").focus();
+		$filter.focus();
+		this.debouncedKeyBoardInputTimer(); 
+	}
 }; 
 
  

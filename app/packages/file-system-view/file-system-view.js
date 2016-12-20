@@ -111,8 +111,11 @@ View.prototype.activeRowData = function() {
 
 View.prototype.selectActiveRow = function() {
 	var id = this.activeRow.data("rowid");
-	this.data[id].selected = !this.data[id].selected;
-	this.activeRow.toggleClass("selected");
+	if (this.data[id].name !== ".."){
+		this.data[id].selected = !this.data[id].selected;
+		this.activeRow.toggleClass("selected");
+	}
+	this.el.set("selectedFileCount", this.selected().length);
 };
 
 View.prototype.selectByFileExtension = function() {
@@ -120,24 +123,31 @@ View.prototype.selectByFileExtension = function() {
 	var ext = this.activeRowData().ext; 
 	for (var i = 0; i < this.data.length; i++) {
 		var row = this.data[i];
-		if (ext === row.ext){
+		if (ext === row.ext && row.name !== ".."){
 			row.selected = true;
 		}
 	}
+	this.el.set("selectedFileCount", this.selected().length);
 };
 
 View.prototype.invertSelection = function() { 
 	for (var i = 0; i < this.data.length; i++) {
 		var row = this.data[i];
-		row.selected = !row.selected;
+		if (row.name !== ".."){
+			row.selected = !row.selected;
+		}
 	}
+	this.el.set("selectedFileCount", this.selected().length);
 };
 
 View.prototype.selectAll = function() { 
 	for (var i = 0; i < this.data.length; i++) {
 		var row = this.data[i];
-		row.selected = true;
+		if (row.name !== ".."){
+			row.selected = true;
+		}
 	}
+	this.el.set("selectedFileCount", this.data.length);
 };
 
 View.prototype.unselectAllRows = function() { 
@@ -145,6 +155,7 @@ View.prototype.unselectAllRows = function() {
 		var row = this.data[i];
 		row.selected = false;
 	}
+	this.el.set("selectedFileCount", 0);
 };
 
 View.prototype.click = function(/*e*/) {
@@ -198,6 +209,7 @@ View.prototype.renderRows = function(fileSystemItems, showFullPath) {
 		fileSystemItem.rowId = i;
 		rows.push(this.renderRow(fileSystemItem, showFullPath));
 	}
+	this.el.set("fileCount", rows.length - 1);
 	return rows;
 };
 
@@ -241,13 +253,13 @@ View.prototype.updateGridViewData = function(isHistoryJump, showFullPath){
 	self.cluster.update(self.renderRows(self.data, showFullPath));
 	self.el.set("path", self.path.split(self.sep));
 	self.el.set("xpath", []);
- 	for(var i = 0; i < self.el.get("path").length; i++){ 
- 		if (self.el.get("path")[i] !== "") {
+	for(var i = 0; i < self.el.get("path").length; i++){ 
+		if (self.el.get("path")[i] !== "") {
 			self.el.push("xpath", {
 				folder : self.el.get("path")[i],
 				path : self.el.get("path").slice(0, i + 1).join(self.sep) 
 			});
- 		}
+		}
 	} 
 	if (isHistoryJump === undefined){
 		self.history.push(self.el.get("path").join(self.sep));
@@ -301,6 +313,7 @@ View.prototype.refresh = function(newActiveItemName, showFullPath){
 				self.setActiveRowByRowId(1);
 			};
 		};
+		
 	});
 };
 

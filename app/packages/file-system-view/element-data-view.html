@@ -32,7 +32,8 @@
 			</div> 
 		 
 				<div>
-					<span>Selected files :</span><span>[[selectedFileCount]]</span> 
+					<span>[[selectedFileCount]]</span>/<span>[[fileCount]]</span> 
+					
 				</div>  
 		</div> 
 		<div class="clusterize"> 
@@ -77,7 +78,7 @@
 
 					self.cwd = fileSystemView.pathLinkClick.bind(fileSystemView);
 					this.selectedFileCount = fileSystemView.selected().length.toString();
-			 
+					
 					$(function() {
 						fileSystemView.bind(); 
 						$( self ).

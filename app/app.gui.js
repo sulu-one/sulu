@@ -108,6 +108,7 @@ GUI.prototype.selectAll = function selectAll() {
 	var view = this.GUI.source;
 	view.model.selectAll();
 	view.model.refresh();
+	view.model.el.set("selectedFileCount", view.model.selected().length); 
 	return false;
 };
 
@@ -118,6 +119,7 @@ GUI.prototype.invertSelection = function invertSelection() {
 	var view = this.GUI.source;
 	view.model.invertSelection();
 	view.model.refresh();
+	
 	return false;
 };
 

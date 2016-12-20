@@ -1,5 +1,7 @@
 const {clipboard} = require('electron');
 
+var path = require("path");
+
 var Command = function() {
 	return this;
 }
@@ -8,7 +10,7 @@ Command.prototype.copyFilenamesWithPath = function copyFilenamesWithPath() {
 	var view = this.GUI.activeView().model;
 	var selectedItems = view.selected();
 	if (selectedItems.length === 0){
-	 	this.GUI.app.msg("select some items to copy.");
+	 	this.GUI.app.msg("select some items to to clipboard.");
 	} else {
 		var result = [];
 		for (var i = selectedItems.length - 1; i >= 0; i--) {

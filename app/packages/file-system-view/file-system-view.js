@@ -13,11 +13,18 @@ var View = function(id) {
 
 
 /* Gets or sets active row */
-View.prototype.row = function($row) {
+View.prototype.row = function($row) { 
 	if ($row && $row.get(0)){
-		if (this.activeRow){
-			this.activeRow.removeClass("active");
+		var activeRows = this.el.querySelector(".active");
+		if (activeRows){
+			for(var i = 0; i< activeRows.length; i++){
+				activeRows[i].classList.remove("active");
+			}
+			if (activeRows.classList){ 
+				activeRows.classList.remove("active");
+			}
 		}
+		
 		this.activeRow = $row;
 		this.activeRow.addClass("active");
 	}

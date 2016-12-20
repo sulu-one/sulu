@@ -97,6 +97,7 @@ GUI.prototype.onKeyBoardInput = function onKeyBoardInput(e) {
 GUI.prototype.selectActiveRow = function selectActiveRow() {
 	var view = this.GUI.source;
 	view.model.selectActiveRow();
+	view.model.el.set("selectedFileCount", view.model.selected().length);
 	return false;
 };
 

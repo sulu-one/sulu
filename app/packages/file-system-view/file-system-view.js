@@ -77,9 +77,11 @@ View.prototype.previousRow = function() {
 /* get selected rows */
 View.prototype.selected = function() {
 	var result = [];
-	for (var i = 0; i < this.data.length; i++) {
-		if (this.data[i].selected){
-			result.push(this.data[i]);
+	if (this.data){
+		for (var i = 0; i < this.data.length; i++) {
+			if (this.data[i].selected){
+				result.push(this.data[i]);
+			}
 		}
 	}
 	return result;
@@ -251,7 +253,8 @@ View.prototype.updateGridViewData = function(isHistoryJump, showFullPath){
 		self.history.push(self.el.get("path").join(self.sep));
 	} 
 	self.setFirstRowActive();
-	window.document.title = window.applicationController.GUI.activeView().model.path;
+	window.document.title = window.applicationController.GUI.activeView().model.path + " - SULU"; 
+	self.el.set("selectedFileCount", self.selected().length);
 }
 
 function bytesToSize(bytes) {

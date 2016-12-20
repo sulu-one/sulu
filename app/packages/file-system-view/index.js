@@ -60,8 +60,7 @@ var Plugin = function  (client) {
 	window.FileSystemView = require(path.join(__dirname, "file-system-view.js"));
 	window.$ = require("jquery");
 
-	client.app.loadHTML(path.join(__dirname, "element-data-view.html"));
-	client.app.loadHTML(path.join(__dirname, "element-data-view-favourites.html"));
+	client.app.loadHTML(path.join(__dirname, "element-data-view.html")); 
 
 	this.command = new Command();
 	// file properties - client.app.registerHotKey("alt+enter", this.command.historyJumpBackward);

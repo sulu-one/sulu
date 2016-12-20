@@ -1,25 +1,40 @@
 <dom-module id="element-core-data-view">
-	<style>
-	:host {
+	<style is="custom-style">
+		:host {
+		--paper-dialog-background-color:red;
+		--paper-input-container-focus-color: #FF9900; 
+		--paper-input-container-input: {
+				font-size: 14px;
+				color: #F0F0F0;
+			};
+			--paper-dialog: {
+				color:green;
+				background-color:yellow;
+			};
+
 		--paper-input-container-focus-color: #FF9900;
 		--paper-input-container-input: {
 				font-size: 14px;
 				color: #F0F0F0;
 			};
-	}
-	</style>
+		}
+	</style> 
 	<template> 
-		<span class="element-core-data-view-path">
-			<a on-click="cwd" data-path="" class="element-core-data-view-path-item" href=""><span class="fa fa-hdd-o"></span></a>
-			<template is="dom-repeat" items="{{xpath}}">
-			   	<a on-click="cwd" data-path$="{{item.path}}" class="element-core-data-view-path-item" href="" > 
-			   		<span class="element-core-data-view-path-item">[[item.folder]]</span><span class="element-core-data-view-path-item">[[sep]]</span>
-			   	</a>
-			</template>
-			<paper-input class="filter" style="display: inline-block;" label="filter"></paper-input>
-		</span>
-
-
+		<div>
+			<div class="element-core-data-view-path">
+				<a on-click="cwd" data-path="" class="element-core-data-view-path-item" href=""><span class="fa fa-hdd-o"></span></a>
+				<template is="dom-repeat" items="{{xpath}}">
+					<a on-click="cwd" data-path$="{{item.path}}" class="element-core-data-view-path-item" href="" > 
+						<span class="element-core-data-view-path-item">[[item.folder]]</span><span class="element-core-data-view-path-item">[[sep]]</span>
+					</a>
+				</template>
+				<paper-input class="filter" style="display: inline-block;" label="filter"></paper-input>
+			</div> 
+		 
+				<div>
+					<span>Selected files :</span><span>[[selectedFileCount]]</span> 
+				</div>  
+		</div> 
 		<div class="clusterize"> 
 			<div id="{{scrollAreaID}}" class="clusterize-scroll">
 				<div id="{{contentAreaID}}" class="clusterize-content">
@@ -33,12 +48,11 @@
 
 	<script> 
 
-		window.Polymer({
-			rt : function(){
-				debugger
-				return this.get("root");
-			},
+		window.Polymer({ 
 			is: "element-core-data-view",
+				computeFilter: function() {
+					return "dsf"
+				},
 				ready: function() {
 					var self = this;
 					this.loadingMessage = "Loading data...";
@@ -52,8 +66,7 @@
 				 
 				 
 					fileSystemView.el = this;
-
-					this.set("seperator",this.sep);
+ 
 					this.xpath = [];
 					for(var i = 0; i < this.path.length; i++){ 
 						this.push("xpath", {
@@ -63,7 +76,8 @@
 					} 
 
 					self.cwd = fileSystemView.pathLinkClick.bind(fileSystemView);
-
+					this.selectedFileCount = fileSystemView.selected().length.toString();
+			 
 					$(function() {
 						fileSystemView.bind(); 
 						$( self ).

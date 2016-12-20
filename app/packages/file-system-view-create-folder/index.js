@@ -24,7 +24,6 @@ Command.prototype.createFolder = function createFolder() {
 		var self = this;
 		this.GUI.dialogs.prompt("New folder in \"" + view.path + "\"", defaultText, function(input) {
 			if (input !== undefined){ 
-				window.applicationController.error(new Error("not implemented"));
 				mkdirSync(path.join(view.path, input));
 				view.refresh(input);
 			}

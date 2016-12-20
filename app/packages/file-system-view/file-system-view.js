@@ -365,7 +365,7 @@ View.prototype.setActiveRowByFileName = function(filename) {
 	var self = this;
 	self.activeRowId = 0; 
 	var $scrollArea = $("#scrollArea" + self.id); 
-	self.activeRow = $scrollArea.find('.filesystemitem[data-filename="' + filename + '"]');
+	self.activeRow = $scrollArea.find('.filesystemitem[data-filename="' + filename.replace(/\\/g, "\\\\") + '"]')
 	self.row(self.activeRow);
 	return (self.activeRow.length !== 0) 
 };

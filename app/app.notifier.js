@@ -4,6 +4,9 @@
  * @author Stephan Ahlf
 */
 
+var fs = require("fs");
+var path = require("path");
+
 /**
  * @class ApplicationNotifier
  * @param {ApplicationController} app - the ApplicationController
@@ -33,7 +36,7 @@ ApplicationNotifier.prototype.msg = function(msg) {
 * @param {String} msg - the toaster message
 */
 ApplicationNotifier.prototype.error = function(err) {
-	debugger;
+	var fn = path.join(this.GUI.app.config.dataFolder, "error.log");
 	const {dialog} = require('electron').remote; 
 	var PrettyError = require('pretty-error');
 	var pe = new PrettyError();
@@ -41,10 +44,13 @@ ApplicationNotifier.prototype.error = function(err) {
 	pe.skipNodeFiles(); // this will skip events.js and http.js and similar core node files
 	pe.skipPackage('express'); // this will skip all the trace lines about express` core and sub-modules
 	var renderedError = pe.render(err);  
-	document.querySelector("#toast").text = "Error";
+	document.querySelector("#toast").text = "Error! Press \"F12\" to show console or take a look at \"" + fn + "\".";
 	document.querySelector("#toast").show();
 	console.error(err);
 	console.error(renderedError);
+	fs.appendFile(fn, new Date().toISOString() + "\r\n" + renderedError.replace(/\n/g, "\r\n") + "\r\n", function (err) {
+		console.warn("wrote error to ", fn);
+	});
 };
 
 

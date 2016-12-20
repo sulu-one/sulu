@@ -12,7 +12,8 @@ Command.prototype.open = function open() {
 			var path = require("path"); 
 			var fn =  path.join(view.path, file.name) + file.ext;  
 			this.GUI.app.msg("opening " + fn + "...");
-			open(fn);
+			const {shell} = require('electron');
+			shell.openItem(fn);
 		} else {
 			this.GUI.app.msg("please select a file.");
 		}

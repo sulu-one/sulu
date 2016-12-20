@@ -17,10 +17,10 @@ var GUI = function(app) {
 	var self = this;
 	this.app = app;
 	this.app.registerHotKey("tab", this.toggleActiveFileSystemView);
-	this.app.registerHotKey("down", this.makeNextRowActive);
-	this.app.registerHotKey("up", this.makePreviousRowActive);
+	this.app.registerHotKey("down", this.navigateToNextRow);
+	this.app.registerHotKey("up", this.navigateToPreviousRow);
 	this.app.registerHotKey("enter", this.enterActiveRow);
-	this.app.registerHotKey("backspace", this.navigateBackToParentFolder);
+	this.app.registerHotKey("backspace", this.navigateToParentFolder);
 	this.app.registerHotKey("space", this.selectActiveRow);
 	this.app.registerHotKey("esc", this.unselectAllRows);
 	this.app.registerHotKey("ctrl+a", this.selectAll);
@@ -147,7 +147,7 @@ GUI.prototype.unselectAllRows = function unselectAllRows() {
 /**
  * Navigates to parent folder in active file system view.
 */
-GUI.prototype.navigateBackToParentFolder = function navigateBackToParentFolder() {
+GUI.prototype.navigateToParentFolder = function navigateToParentFolder() {
 	var view = this.GUI.source;
 	view.model.cd("..");
 };
@@ -165,7 +165,7 @@ GUI.prototype.enterActiveRow = function enterActiveRow() {
 /**
  * Sets active row status to next row in active file system view.
 */
-GUI.prototype.makeNextRowActive = function makeNextRowActive() {
+GUI.prototype.navigateToNextRow = function navigateToNextRow() {
 	var nextRow = this.GUI.source.model.nextRow();
 
 	if (this.GUI.source.model.isInView(nextRow)){
@@ -176,7 +176,7 @@ GUI.prototype.makeNextRowActive = function makeNextRowActive() {
 /**
  * Sets active row status to previous row in active file system view.
 */
-GUI.prototype.makePreviousRowActive = function makePreviousRowActive() {
+GUI.prototype.navigateToPreviousRow = function navigateToPreviousRow() {
 	var nextRow = this.GUI.source.model.previousRow();
 
 	if (this.GUI.source.model.isInView(nextRow)){

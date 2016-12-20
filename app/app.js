@@ -9,7 +9,7 @@ try{
 
 		var el = document.getElementsByClassName("clusterize-scroll");
 		for (var i = 0; i < el.length; i++) {
-			el[i].setAttribute("style","max-height:" + (y - 80) + "px");
+			el[i].setAttribute("style","max-height:" + (y - 140) + "px");
 		}
 	};
 

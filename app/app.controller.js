@@ -20,6 +20,7 @@ var ApplicationController = function(config) {
 	this.config = config;
 	this.GUI = new GUI(this);
 	var applicationNotifier = new ApplicationNotifier(this);
+	this.error = applicationNotifier.error;
 	this.msg = applicationNotifier.msg;
 	this.dlg = applicationNotifier.dlg;
 	this.events = new events.EventEmitter();

@@ -456,11 +456,8 @@ View.prototype.dir = function(done) {
 	var self = this; 
 	fs.readdir(self.path, function  (err, directoryContent) {
 		if (err){
-			window.applicationController.msg(err);
-			console.error(err);
-		} else {
-
-
+			window.applicationController.error(err); 
+		} else { 
 			self.extendPathContentMetaData(directoryContent, done);
 		}
 	});

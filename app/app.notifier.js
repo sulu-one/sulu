@@ -12,7 +12,7 @@
 var ApplicationNotifier = function  (app) {
 	this.app = app;
 	this.ironOverlayClosed = function() {};
-	document.querySelector('#dialog').addEventListener('iron-overlay-closed', this.ironOverlayClosed);
+	document.querySelector("#dialog").addEventListener("iron-overlay-closed", this.ironOverlayClosed);
 	return this;
 };
 
@@ -24,8 +24,27 @@ var ApplicationNotifier = function  (app) {
 ApplicationNotifier.prototype.msg = function(msg) {
 	/*var notifier = require('node-notifier');
 	notifier.notify(msg);*/
-	document.querySelector('#toast').text = msg;
-	document.querySelector('#toast').show();
+	document.querySelector("#toast").text = msg;
+	document.querySelector("#toast").show();
+};
+
+/**
+* Show a toaster with a given message string.
+* @param {String} msg - the toaster message
+*/
+ApplicationNotifier.prototype.error = function(err) {
+	debugger;
+	const {dialog} = require('electron').remote; 
+	var PrettyError = require('pretty-error');
+	var pe = new PrettyError();
+	pe.withoutColors();
+	pe.skipNodeFiles(); // this will skip events.js and http.js and similar core node files
+	pe.skipPackage('express'); // this will skip all the trace lines about express` core and sub-modules
+	var renderedError = pe.render(err);  
+	document.querySelector("#toast").text = "Error";
+	document.querySelector("#toast").show();
+	console.error(err);
+	console.error(renderedError);
 };
 
 
@@ -43,15 +62,15 @@ ApplicationNotifier.prototype.dlg = function(settings, done) {
 	var buttons = [];
 	for (var i = 0; i < settings.buttons.length; i++) {
 		var btn = settings.buttons[i];
-		buttons.push('<paper-button dialog-confirm onclick="document.querySelector(\'#dialog\').action=\'' + btn.id + '\';" ' + (btn.autofocus ? 'autofocus' : '') + '>' + btn.text + '</paper-button>');
+		buttons.push('<paper-button dialog-confirm onclick="document.querySelector(\'#dialog\').action=\'' + btn.id + '\';" ' + (btn.autofocus ? "autofocus" : "") + ">" + btn.text + "</paper-button>");
 	}
-	document.querySelector('#dialog-buttons').innerHTML = buttons.join("");
+	document.querySelector("#dialog-buttons").innerHTML = buttons.join("");
 
-	var content = '<' + settings.polymerElementName + ' id="' + settings.polymerElementName + '"></' + settings.polymerElementName + '>';
-	document.querySelector('#dialog-content').innerHTML = content;
+	var content = "<" + settings.polymerElementName + ' id="' + settings.polymerElementName + '"></' + settings.polymerElementName + ">";
+	document.querySelector("#dialog-content").innerHTML = content;
 
-	var dlg = document.querySelector('#dialog');
-	dlg.removeEventListener('iron-overlay-closed', this.ironOverlayClosed);
+	var dlg = document.querySelector("#dialog");
+	dlg.removeEventListener("iron-overlay-closed", this.ironOverlayClosed);
 	this.ironOverlayClosed = done;
 	dlg.action = "-1";
 	this.ironOverlayClosed = function(e) {
@@ -63,7 +82,7 @@ ApplicationNotifier.prototype.dlg = function(settings, done) {
 		}
 		window.key.setScope("global");
 	};
-	dlg.addEventListener('iron-overlay-closed', this.ironOverlayClosed);
+	dlg.addEventListener("iron-overlay-closed", this.ironOverlayClosed);
 	window.key.setScope("modal-dialog");
 	dlg.open();
 };

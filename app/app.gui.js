@@ -14,6 +14,7 @@ var TimeController = require("time-controller");
  * @param {ApplicationController} app - the ApplicationController
 */
 var GUI = function(app) {
+	var self = this;
 	this.app = app;
 	this.app.registerHotKey("tab", this.toggleActiveFileSystemView);
 	this.app.registerHotKey("down", this.makeNextRowActive);
@@ -29,7 +30,16 @@ var GUI = function(app) {
 	window.document.onkeydown = this.onKeyBoardInput.bind(this);
 	this.debouncedKeyBoardInputTimer = new TimeController(this.onFilter, this).debounce(400);
 
-	this.dialogs = new Dialogs();
+	var dialogs = new Dialogs();
+	this.dialogs = {
+		prompt : function(text, defaultValue, done){
+			window.document.onkeydown = null;
+			dialogs.prompt(text, defaultValue, function(input) {
+				window.document.onkeydown = self.onKeyBoardInput.bind(self);
+				done(input);
+			});
+		}
+	};
 	return this;
  
 }; 

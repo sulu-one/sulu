@@ -20,12 +20,14 @@ Command.prototype.rename = function rename() {
 		const {shell} = require('electron');
 		var view = this.GUI.activeView().model;
 		var file = view.activeRowData(); 
-		var defaultText = (file ? file.name : "new_folder");
+		var defaultText = (file ? (file.name + file.ext) : "new_folder");
 		var self = this;
-		this.GUI.dialogs.prompt("New folder in \"" + view.path + "\"", defaultText, function(input) {
+		var fnOld = path.join(file.path, file.name) + file.ext;
+		this.GUI.dialogs.prompt("Rename \"" + fnOld + "\"", defaultText, function(input) {
 			if (input !== undefined){ 
-				mkdirSync(path.join(view.path, input));
-				view.refresh(input);
+				var shell = require("shelljs");
+				shell.mv([fnOld], path.join(file.path, input));
+				view.refresh();
 			}
 		});
 	} else {

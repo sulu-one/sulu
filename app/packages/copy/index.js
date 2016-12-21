@@ -1,4 +1,4 @@
-/*var child_process = require('child_process');*/
+var path = require('path');
 
 
 var Command = function() {
@@ -6,6 +6,7 @@ var Command = function() {
 }
 
 Command.prototype.copy = function copy() {
+
 	var view = this.GUI.activeView().model;
 	var selectedFileSystemItems = view.selected();
 
@@ -21,8 +22,26 @@ Command.prototype.copy = function copy() {
 
 		this.dlg({polymerElementName: "polymer-cat", buttons: buttons}, function(){
 			if (this.result !== -1){
-				this.app.msg(selectedFileSystemItems.length + " files copied. (" + this.result + ", " + this.model.copyFilePermissions + ")");
 				/*cp -R {copy,shell} c:\temp*/
+				var shelljs = require("shelljs");
+				var selection = view.selected();
+				var files = [];
+				for (var i = selection.length - 1; i >= 0; i--) {
+					var item = selection[i];
+					files.push("\"" + path.join(item.path, item.name) + item.ext + "\"");
+				}
+				var target = this.app.GUI.target.model.path;
+				var cmd = 'cp -R ' + files.join(" ") + " " + "\"" + target + "\"";
+			  	console.debug(cmd);
+			  	var self = this;
+				shelljs.exec(cmd, {async:true}, function(code, stdout, stderr) {
+					if (stderr){
+					  	self.app.msg('Program stderr:', stderr);
+					} else {
+						self.app.msg(selectedFileSystemItems.length + " files copied. (" + self.result + ", " + self.model.copyFilePermissions + ")");
+						self.app.GUI.target.model.refresh();
+					}
+				});
 				//child_process.execSync('start "SULU COPY" /D "c:\\temp" "cmd.exe" /K dir && cp --help');
 			}
 		});

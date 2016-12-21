@@ -177,8 +177,11 @@ View.prototype.renderRow = function(fileSystemItem, showFullPath) {
 		
 		var bookmarks = applicationController.config.settings.bookmarks;
 
-
-		row.push('<div style="position:relative" data-rowid="' + file.rowId + '" class="horizontal layout row filesystemitem' + (file.isDisk ? " filesystemitem-disk" : "") + (file.isDirectory ? " filesystemitem-directory" : "") + (file.selected ? " selected" : "") + '" data-isdirectory="' + file.isDirectory + '" data-filename="' + path.join(file.path, file.name) + file.ext + '">');
+		var filename = path.join(file.path, file.name) + file.ext;
+		if (file.name === "..") {
+			filename = file.path;
+		}
+		row.push('<div style="position:relative" data-rowid="' + file.rowId + '" class="horizontal layout row filesystemitem' + (file.isDisk ? " filesystemitem-disk" : "") + (file.isDirectory ? " filesystemitem-directory" : "") + (file.selected ? " selected" : "") + '" data-isdirectory="' + file.isDirectory + '" data-filename="' + filename + '">');
 			row.push('<div class="flex-1">');
 			file.bookmarked = (bookmarks.indexOf(path.join(file.path, file.name) + file.ext) !== -1);
 			if (file.bookmarked) { 
@@ -328,13 +331,11 @@ View.prototype.refreshVirtual = function(virtualFileList, showFullPath){
 
 View.prototype.cd = function(dir, isHistoryJump, done){
 	if (typeof(dir) !== "string"){
-		debugger;
 		dir = dir.path;
 
 	}
 	if (dir.hasOwnProperty("path")){
 		dir = dir.path;
-		debugger;
 	}
 	var self = this;
 	self.activeRow = null;
@@ -353,7 +354,7 @@ View.prototype.cd = function(dir, isHistoryJump, done){
 			self.updateGridViewData(isHistoryJump);
 			if (done) done();
 		});
-	} else {
+	} else { 
 		if (path.isAbsolute(dir)){
 			this.path = dir;
 		} else {

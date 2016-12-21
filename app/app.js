@@ -34,7 +34,7 @@ try{
 	var pe = new PrettyError();
 	pe.withoutColors();
 	pe.skipNodeFiles(); // this will skip events.js and http.js and similar core node files
-	pe.skipPackage('express'); // this will skip all the trace lines about express` core and sub-modules
+	pe.skipPackage('require'); // this will skip all the trace lines about express` core and sub-modules
 	var renderedError = pe.render(e); 
 	dialog.showErrorBox("title", renderedError);
 }

@@ -86,7 +86,7 @@ ApplicationController.prototype.requireAll = function() {
 
 		result = true;
 	} catch (e) {
-		console.log(e);
+		this.error(e);
 	}
 	return result;
 };

@@ -48,8 +48,13 @@ GUI.prototype.onFilter = function onFilter() {
 	var view = this.activeView();  
 	var $filter = view.el.find(".filter").find("input"); 
 	view.searchFilter = $filter.val().trim(); 
+	var oldFile = view.model.activeRow;
+	if (oldFile){
+		oldfile = oldFile.data("filename")
+	}
 	view.model.cd(view.model.path, true, function(){
 		if (view.searchFilter === ""){
+			view.model.setActiveRowByFileName(oldfile);
 		} else {
 			var filteredData = [];
 			for(var i = 0; i < view.model.data.length; i++){
@@ -60,7 +65,10 @@ GUI.prototype.onFilter = function onFilter() {
 					filteredData.push(path.join(item.path, item.name) + item.ext);
 				};
 			}
-			view.model.refreshVirtual(filteredData, false);
+
+			view.model.refreshVirtual(filteredData, false, function(){
+				view.model.setActiveRowByFileName(oldfile);
+			});
 		}
 	});
 }; 

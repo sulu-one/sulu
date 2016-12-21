@@ -305,9 +305,8 @@ View.prototype.refresh = function(newActiveItemName, showFullPath){
 	var selectedFiles = this.selected(); 
 	var activeRow = this.activeRowData();
 	var oldActiveRowId = this.activeRow.data("rowid");
-	var oldItemName = newActiveItemName || (activeRow.name + activeRow.ext);
-	var self = this;
-
+	var oldItemName = newActiveItemName || (path.join(activeRow.path, activeRow.name) + activeRow.ext);
+	var self = this; 
 	this.cd(this.path, true, function () { 
 		self.recoverViewState(selectedFiles);
 		self.updateGridViewData(true, showFullPath);
@@ -315,17 +314,19 @@ View.prototype.refresh = function(newActiveItemName, showFullPath){
 			if (!self.setActiveRowByRowId(oldActiveRowId)){
 				self.setActiveRowByRowId(1);
 			};
-		};
-		
+		}; 
 	});
 };
 
 
-View.prototype.refreshVirtual = function(virtualFileList, showFullPath){ 
+View.prototype.refreshVirtual = function(virtualFileList, showFullPath, done){ 
 	var self = this; 
 	self.extendPathContentMetaData(virtualFileList, function(){
 		self.updateGridViewData(true, showFullPath);  
 		self.setFirstRowActive(true);
+		if (done){
+			done();
+		}
 	});
 };
 

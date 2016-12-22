@@ -1,45 +1,44 @@
-const {app} = require('electron');
-const {BrowserWindow} = require('electron');
 var fs = require('fs');  
 var path = require('path');  
+var node_modules_folder = path.join(__dirname, "node_modules");
 
-// Report crashes to our server.
-//require('crash-reporter').start();
+if (!fs.existsSync(node_modules_folder)){
+  const {dialog} = require('electron')
+  dialog.showErrorBox("setup incomplete", "cannot find folder \"" + node_modules_folder + "\".\nplease open a shell and type `cd " + __dirname + " && npm install`.");
+  process.exit(1);
+} else {
+  const {app} = require('electron');
+  const {BrowserWindow} = require('electron');
 
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the javascript object is GCed.
-var mainWindow = null;
+  // Report crashes to our server.
+  //require('crash-reporter').start();
 
-// Quit when all windows are closed.
-app.on('window-all-closed', function() {
-  if (process.platform !== 'darwin'){
-    app.quit();
-  }
-});
+  // Keep a global reference of the window object, if you don't, the window will
+  // be closed automatically when the javascript object is GCed.
+  var mainWindow = null;
 
-app.setAppUserModelId('<sulu>');
-// This method will be called when Electron has done everything
-// initialization and ready for creating browser windows.
-app.on('ready', function() {
-  // Create the browser window.
-  mainWindow = new BrowserWindow({ 
-    width: 800, height: 600, title : "sulu",
-    icon: __dirname + '/icon.png',
-    transparent: false,
-    frame: true
+  app.on('window-all-closed', function() {
+    if (process.platform !== 'darwin'){
+      app.quit();
+    }
   });
-  // and load the index.html of the app.
-  mainWindow.loadURL('file://' + __dirname + '/index.html');
 
-  //  mainWindow.openDevTools({detach : false});
+  app.setAppUserModelId('<sulu>');
 
-  mainWindow.maximize();
+  app.on('ready', function() {
 
-  // Emitted when the window is closed.
-  mainWindow.on('closed', function() {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
-    mainWindow = null;
+    mainWindow = new BrowserWindow({ 
+      width: 800, height: 600, title : "sulu",
+      icon: __dirname + '/icon.png',
+      transparent: false,
+      frame: true
+    });
+
+    mainWindow.loadURL('file://' + __dirname + '/index.html');
+    mainWindow.maximize();
+
+    mainWindow.on('closed', function() {
+      mainWindow = null;
+    });
   });
-});
+}

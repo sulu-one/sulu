@@ -15,8 +15,7 @@ if (!fs.existsSync(node_modules_folder)){
 
   // Keep a global reference of the window object, if you don't, the window will
   // be closed automatically when the javascript object is GCed.
-  var mainWindow = null;
-
+  var mainWindow = null; 
   app.on('window-all-closed', function() {
     if (process.platform !== 'darwin'){
       app.quit();
@@ -34,8 +33,10 @@ if (!fs.existsSync(node_modules_folder)){
       frame: true
     });
 
+  
+
     mainWindow.loadURL('file://' + __dirname + '/index.html');
-    mainWindow.maximize();
+     mainWindow.maximize();
 
     mainWindow.on('closed', function() {
       mainWindow = null;

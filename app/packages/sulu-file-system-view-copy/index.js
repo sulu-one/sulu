@@ -7,6 +7,7 @@ var Command = function() {
 
 Command.prototype.copy = function copy() {
 
+ 
 	var view = this.GUI.activeView().model;
 	var selectedFileSystemItems = view.selected();
 
@@ -23,26 +24,50 @@ Command.prototype.copy = function copy() {
 		this.dlg({polymerElementName: "polymer-cat", buttons: buttons}, function(){
 			if (this.result !== -1){
 				/*cp -R {copy,shell} c:\temp*/
-				var shelljs = require("shelljs");
-				var selection = view.selected();
-				var files = [];
-				for (var i = selection.length - 1; i >= 0; i--) {
-					var item = selection[i];
-					files.push("\"" + path.join(item.path, item.name) + item.ext + "\"");
-				}
-				var target = this.app.GUI.target.model.path;
-				var cmd = 'cp -R ' + files.join(" ") + " " + "\"" + target + "\"";
-			  	console.debug(cmd);
+		  		var win = window.open("consoleWindow.html"); 
+		  		var readyEventListener = function (event) {
+			        if ( event.data === "rdy") {
+			            run();
+			        }
+			    };
+				window.addEventListener('message', readyEventListener, false);
+
 			  	var self = this;
-				shelljs.exec(cmd, {async:true}, function(code, stdout, stderr) {
-					if (stderr){
-					  	self.app.msg('Program stderr:', stderr);
-					} else {
-						self.app.msg(selectedFileSystemItems.length + " files copied. (" + self.result + ", " + self.model.copyFilePermissions + ")");
-						self.app.GUI.target.model.refresh();
+				var run = function() { 
+					var shelljs = require("shelljs");
+					var selection = view.selected();
+					var files = [];
+					for (var i = selection.length - 1; i >= 0; i--) {
+						var item = selection[i];
+						files.push("\"" + path.join(item.path, item.name) + item.ext + "\"");
 					}
-				});
-				//child_process.execSync('start "SULU COPY" /D "c:\\temp" "cmd.exe" /K dir && cp --help');
+					var target = self.app.GUI.target.model.path;
+					var cmd = 'cp -R ' + files.join(" ") + " " + "\"" + target + "\"";
+				  	console.debug(cmd);
+
+					win.eval("log('<span>' + " + JSON.stringify(cmd) + " + '...<span>')");
+					var child = shelljs.exec(cmd, {async:true}, function(code,out,err){
+						if (out !== ""){
+							win.eval("log('<span>' + " + JSON.stringify("out") + " + '<span>')");						
+						}
+						if (err !== ""){
+							win.eval("log('<span class=error>' + " + JSON.stringify("err") + " + '<span>')");
+						}
+						if (err === "" && out === ""){						
+							// win.close()
+						}
+						self.app.GUI.target.model.refresh();
+					});
+					child.stdout.on('data', function(data) {
+						window.removeEventListener('message', readyEventListener);
+						win.eval("log('<span>' + " + JSON.stringify(data) + " + '<span>')");
+					});				
+					child.stderr.on('data', function(data) {
+						window.removeEventListener('message', readyEventListener);
+						win.eval("log('<span class=error>' + " + JSON.stringify(data) + " + '<span>')");
+					});
+					//child_process.execSync('start "SULU COPY" /D "c:\\temp" "cmd.exe" /K dir && cp --help');
+				}
 			}
 		});
 	}

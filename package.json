@@ -18,7 +18,7 @@
     "url": "https://github.com/sulu-one/sulu"
   },
   "scripts": {
-    "docs": "jsdoc2md \"app/*.js\" > api.md",
+    "docs": "jsdoc2md \"./app/packages/**/*.js\" > api.md",
     "start": "electron ./app",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm -rf ./dist",

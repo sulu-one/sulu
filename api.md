@@ -10,11 +10,7 @@
 </dl>
 
 ## Members
-
-<dl>
-<dt><a href="#fs">fs</a></dt>
-<dd></dd>
-</dl>
+ 
 
 <a name="ApplicationController"></a>
 
@@ -109,11 +105,14 @@ Import external JavaScript code file.
 * [GUI](#GUI)
     * [new GUI(app)](#new_GUI_new)
     * [.selectActiveRow()](#GUI+selectActiveRow)
+    * [.selectAll()](#GUI+selectAll)
+    * [.invertSelection()](#GUI+invertSelection)
+    * [.selectByFileExtension()](#GUI+selectByFileExtension)
     * [.unselectAllRows()](#GUI+unselectAllRows)
-    * [.navigateBackToParentFolder()](#GUI+navigateBackToParentFolder)
+    * [.navigateToParentFolder()](#GUI+navigateToParentFolder)
     * [.enterActiveRow()](#GUI+enterActiveRow)
-    * [.makeNextRowActive()](#GUI+makeNextRowActive)
-    * [.makePreviousRowActive()](#GUI+makePreviousRowActive)
+    * [.navigateToNextRow()](#GUI+navigateToNextRow)
+    * [.navigateToPreviousRow()](#GUI+navigateToPreviousRow)
     * [.toggleActiveFileSystemView()](#GUI+toggleActiveFileSystemView)
     * [.activeView(view)](#GUI+activeView)
     * [.fileSystemViews()](#GUI+fileSystemViews)
@@ -132,15 +131,33 @@ Import external JavaScript code file.
 Mark active row of active file system view as selected.
 
 **Kind**: instance method of <code>[GUI](#GUI)</code>  
+<a name="GUI+selectAll"></a>
+
+### guI.selectAll()
+Mark all rows of file system view.
+
+**Kind**: instance method of <code>[GUI](#GUI)</code>  
+<a name="GUI+invertSelection"></a>
+
+### guI.invertSelection()
+Invert selected rows of file system view.
+
+**Kind**: instance method of <code>[GUI](#GUI)</code>  
+<a name="GUI+selectByFileExtension"></a>
+
+### guI.selectByFileExtension()
+Mark all rows of same filetype as selected.
+
+**Kind**: instance method of <code>[GUI](#GUI)</code>  
 <a name="GUI+unselectAllRows"></a>
 
 ### guI.unselectAllRows()
 Mark all rows of active file system view as not selected.
 
 **Kind**: instance method of <code>[GUI](#GUI)</code>  
-<a name="GUI+navigateBackToParentFolder"></a>
+<a name="GUI+navigateToParentFolder"></a>
 
-### guI.navigateBackToParentFolder()
+### guI.navigateToParentFolder()
 Navigates to parent folder in active file system view.
 
 **Kind**: instance method of <code>[GUI](#GUI)</code>  
@@ -150,15 +167,15 @@ Navigates to parent folder in active file system view.
 Navigates to active row in active file system view.
 
 **Kind**: instance method of <code>[GUI](#GUI)</code>  
-<a name="GUI+makeNextRowActive"></a>
+<a name="GUI+navigateToNextRow"></a>
 
-### guI.makeNextRowActive()
+### guI.navigateToNextRow()
 Sets active row status to next row in active file system view.
 
 **Kind**: instance method of <code>[GUI](#GUI)</code>  
-<a name="GUI+makePreviousRowActive"></a>
+<a name="GUI+navigateToPreviousRow"></a>
 
-### guI.makePreviousRowActive()
+### guI.navigateToPreviousRow()
 Sets active row status to previous row in active file system view.
 
 **Kind**: instance method of <code>[GUI](#GUI)</code>  
@@ -194,6 +211,7 @@ Return the DOM and datamodel of all file system views.
     * [new ApplicationNotifier(app)](#new_ApplicationNotifier_new)
     * _instance_
         * [.msg(msg)](#ApplicationNotifier+msg)
+        * [.error(msg)](#ApplicationNotifier+error)
         * [.dlg(settings, done)](#ApplicationNotifier+dlg)
     * _static_
         * [.app](#ApplicationNotifier.app)
@@ -210,6 +228,17 @@ Return the DOM and datamodel of all file system views.
 <a name="ApplicationNotifier+msg"></a>
 
 ### applicationNotifier.msg(msg)
+Show a toaster with a given message string.
+
+**Kind**: instance method of <code>[ApplicationNotifier](#ApplicationNotifier)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| msg | <code>String</code> | the toaster message |
+
+<a name="ApplicationNotifier+error"></a>
+
+### applicationNotifier.error(msg)
 Show a toaster with a given message string.
 
 **Kind**: instance method of <code>[ApplicationNotifier](#ApplicationNotifier)</code>  
@@ -241,11 +270,4 @@ Show a dialog with the given settings.
 | Param | Type | Description |
 | --- | --- | --- |
 | config | <code>Object</code> | ApplicationController configuration |
-
-<a name="fs"></a>
-
-## fs
-**Kind**: global variable  
-**Author:** Stephan Ahlf  
-**License**: MIT  
-**Copyright**: (c) 2016 Stephan Ahlf  
+ 

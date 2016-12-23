@@ -172,25 +172,27 @@ View.prototype.click = function(/*e*/) {
 
 View.prototype.renderRow = function(fileSystemItem, showFullPath) {
 	var file = fileSystemItem; 
+
 	if (fileSystemItem.visible === undefined || fileSystemItem.visible === true){
 		var row = [];
 		
 		var bookmarks = applicationController.config.settings.bookmarks;
 
-		var filename = path.join(file.path, file.name) + file.ext;
-		if (file.name === "..") {
+		var filename = path.join(file.path, (file.name || "")) + (file.ext || "");
+		if (file.name === "" || file.name === "..") {
 			filename = file.path;
 		}
+			
 		row.push('<div style="position:relative" data-rowid="' + file.rowId + '" class="horizontal layout row filesystemitem' + (file.isDisk ? " filesystemitem-disk" : "") + (file.isDirectory ? " filesystemitem-directory" : "") + (file.selected ? " selected" : "") + '" data-isdirectory="' + file.isDirectory + '" data-filename="' + filename + '">');
 			row.push('<div class="flex-1">');
-			file.bookmarked = (bookmarks.indexOf(path.join(file.path, file.name) + file.ext) !== -1);
+			file.bookmarked = (bookmarks.indexOf(path.join(file.path, (file.name || "")) + (file.ext || "")) !== -1);
 			if (file.bookmarked) { 
 				row.push('<span class="' + (file.bookmarkClass || "fa fa-bookmark glow") + '"></span> '); 
 			}
 			row.push('<span class="' + file.icon + '"></span></div>');
-			var fn = file.name ;
+			var fn = file.name || filename ;
 			if (showFullPath){
-				fn = path.join(file.path, file.name);
+				fn = path.join(file.path, (file.name || ""));
 			}
 			row.push('<div class="flex-5"><span class="filesystemitem-filename">' + fn + "</span></div>");
 			row.push('<div class="flex-2">' + file.ext + "</div>");
@@ -341,7 +343,7 @@ View.prototype.cd = function(dir, isHistoryJump, done){
 	var self = this;
 	self.activeRow = null;
 	self.activeRowId = null; 
-
+ 
 	if (dir == "" || (!path.isAbsolute(dir) && dir === ".." && path.join(this.path, "..") === this.path)){
 		// root of disc
 		drivelist.list(function(error, disks) {
@@ -350,7 +352,11 @@ View.prototype.cd = function(dir, isHistoryJump, done){
 			self.data = [];
 			for (var i = 0; i < disks.length; i++) {
 				var disk = disks[i];
-				self.data.push({isDisk: true, icon: "fa fa-hdd-o", name: disk.mountpoint + self.sep, stats:{size: bytesToSize(disk.size)}/*, ext: disk.description*/});
+				 	self.data.push({
+				 	isDisk: true, 
+					icon: "fa fa-hdd-o", path: disk.mountpoint + self.sep, 
+					stats:{size: bytesToSize(disk.size)}/*, ext: disk.description*/}
+				); 
 			}
 			self.updateGridViewData(isHistoryJump);
 			if (done) done();
@@ -427,6 +433,7 @@ View.prototype.extendPathContentMetaData = function(directoryContent, done) {
 		isDirectory: true,
 		idDisk: false
 	}); 
+
 	for (var i = 0; i < directoryContent.length; i++) {
 		var filename = directoryContent[i];
 
@@ -483,14 +490,12 @@ View.prototype.dir = function(done) {
 
 
 View.prototype.pathLinkClick = function(e, detail) { 
-	var p = e.target.parentElement.dataset.path; 
+	var p = e.target.parentElement.dataset.path || ""; 
 	if (p !== ""){
 		p += this.sep;
-	}
+	} 
 	this.cd(p);
-	e.preventDefault();
- 
-	console.log( this.id, "cdw", this.path );
+	e.preventDefault(); 
 	return false;
 }; 
 

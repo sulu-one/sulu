@@ -9,7 +9,7 @@ Command.prototype.showBookmarks = function showBookmarks() {
 	if (v){  
 		var view = this.GUI.activeView().model;
 		var bookmarks = self.config.settings.bookmarks; 
-		view.refreshVirtual(bookmarks); 
+		view.refreshVirtual(bookmarks, true); 
 	} else {
 		this.GUI.app.msg("please select a file system view.");
 	}

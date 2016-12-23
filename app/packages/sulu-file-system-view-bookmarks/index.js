@@ -7,7 +7,7 @@ Command.prototype.showBookmarks = function showBookmarks() {
 	var v = this.GUI.activeView();
 	var self = this;
 	if (v){  
-		var view = this.GUI.activeView().model;  
+		var view = this.GUI.activeView().model;
 		var bookmarks = self.config.settings.bookmarks; 
 		view.refreshVirtual(bookmarks); 
 	} else {

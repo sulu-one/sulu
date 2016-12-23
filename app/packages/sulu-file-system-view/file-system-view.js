@@ -8,7 +8,7 @@ var View = function(id) {
 	var cfg = {
 		path : process.cwd()
 	}
-debugger;
+	
 	if (applicationController.config.settings.fileSystemViews && applicationController.config.settings.fileSystemViews[id]){
 		cfg.path = applicationController.config.settings.fileSystemViews[id].path;
 	}
@@ -179,6 +179,25 @@ View.prototype.click = function(/*e*/) {
 //	view.cluster.update(view.renderRows(view.data));
 };
 
+function formatDate(date) {
+    var year = date.getFullYear(),
+        month = date.getMonth() + 1, // months are zero indexed
+        day = date.getDate(),
+        hour = date.getHours(),
+        minute = date.getMinutes(),
+        second = date.getSeconds(),
+        hourFormatted = hour % 12 || 12, // hour returned in 24 hour format
+        dayFormatted = day < 10 ? "0" + day : day,
+        monthFormatted = month < 10 ? "0" + month : month,
+        minuteFormatted = minute < 10 ? "0" + minute : minute,
+        hourFormatted = hour < 10 ? "0" + hour : hour,
+        secondFormatted = second < 10 ? "0" + second : second,
+        morning = hour < 12 ? "am" : "pm";
+
+    return dayFormatted + "." + monthFormatted + "." + year + " " + hourFormatted + ":" +
+            minuteFormatted + ":" + secondFormatted ;
+}
+
 View.prototype.renderRow = function(fileSystemItem, showFullPath) {
 	var file = fileSystemItem; 
 
@@ -203,11 +222,17 @@ View.prototype.renderRow = function(fileSystemItem, showFullPath) {
 			if (showFullPath){
 				fn = path.join(file.path, (file.name || ""));
 			}
-			row.push('<div class="flex-5"><span class="filesystemitem-filename">' + fn + "</span></div>");
+			 
+			var dt = new Date(file.stats.date);
+			// var dt = (file.stats.date || "").toString().replace("T", " ").replace(".000Z", "");
+			if (file.stats.date !== ""){
+				dt = formatDate(dt);
+			}
+			row.push('<div class="flex-4"><span class="filesystemitem-filename">' + fn + "</span></div>");
 			row.push('<div class="flex-2">' + file.ext + "</div>");
 			row.push('<div class="flex-2">' + (!file.isDirectory ? file.stats.size : "") + "</div>");
-			row.push('<div class="flex-1">' + (file.stats.mtime || "").toString().replace("T", " ").replace(".000Z", "") + "</div>");
-			row.push('<div class="flex-1">-a--</div>');
+			row.push('<div class="flex-3">' + dt + "</div>");
+			// row.push('<div class="flex-1">-a--</div>');
 			row.push("<paper-ripple></paper-ripple>");
 		row.push("</div>");
 		return row.join("\n");

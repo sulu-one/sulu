@@ -6,6 +6,14 @@ var Command = function() {
 	return this;
 }
 
+Command.prototype.copyFileSystemViewPath = function copyFileSystemViewPath() {
+	var view = this.GUI.activeView().model;
+	
+	clipboard.write({text: view.path.replace(/\\/g, "\\\\") });
+	this.GUI.app.msg("copied " + view.path.replace(/\\/g, "\\\\") + " to clipboard"); 
+	return false
+};
+
 Command.prototype.copyFilenamesWithPath = function copyFilenamesWithPath() {
 	var view = this.GUI.activeView().model;
 	var selectedItems = view.selected();
@@ -64,6 +72,7 @@ var Plugin = function (client) {
 	this.command = new Command(); 
 	client.app.registerHotKey("ctrl+y", this.command.copyFilenamesWithPath);
 	client.app.registerHotKey("ctrl+shift+y", this.command.copyFilenames);
+	client.app.registerHotKey("ctrl+shift+c", this.command.copyFileSystemViewPath);
 	client.app.registerHotKey("ctrl+shift+alt+y", this.command.copyFilenamesWithExtendedInfo);
 };
 

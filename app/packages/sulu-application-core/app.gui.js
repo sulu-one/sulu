@@ -203,7 +203,7 @@ GUI.prototype.toggleActiveFileSystemView = function toggleActiveFileSystemView()
 	}
 	if (!this.GUI.activeView().model.activeRow){
 		this.GUI.activeView().model.setFirstRowActive()
-	}
+	} 
 	window.document.title = this.GUI.activeView().model.path;
 	return false;
 };
@@ -215,6 +215,7 @@ GUI.prototype.toggleActiveFileSystemView = function toggleActiveFileSystemView()
 GUI.prototype.activeView = function(view) {
 	var self = this;
 	if (view){
+		this.app.config.settings.fileSystemViews = {};
 		$("element-core-data-view").each(function(/*i,n*/) {
 			var model = $(this).data("controller");
 			var currentView = {
@@ -225,12 +226,22 @@ GUI.prototype.activeView = function(view) {
 			if (view.id === model.id){
 				self.source = currentView;
 				currentView.el.parent().addClass("active-filesystem-view");
-				currentView.el.find(".clusterize-content").focus()
+				currentView.el.find(".clusterize-content").focus();
 			} else {
 				self.target = currentView;
 				currentView.el.parent().removeClass("active-filesystem-view");
 			}
-		});
+		}); 
+		this.app.config.settings.fileSystemViews[self.source.model.id] = {
+			active : true,
+			path : self.source.model.path
+		}
+		this.app.config.settings.fileSystemViews[self.target.model.id] = {
+			active : false,
+			path : self.target.model.path
+		}
+
+		this.app.config.save();
 	}
 	return self.source;
 };

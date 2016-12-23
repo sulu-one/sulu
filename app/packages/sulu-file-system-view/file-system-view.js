@@ -5,7 +5,16 @@ var drivelist = require("drivelist");
 var View = function(id) {
 	this.id = id;
 	this.activeRow = null;
-	this.path = process.cwd();
+	var cfg = {
+		path : process.cwd()
+	}
+debugger;
+	if (applicationController.config.settings.fileSystemViews && applicationController.config.settings.fileSystemViews[id]){
+		cfg.path = applicationController.config.settings.fileSystemViews[id].path;
+	}
+
+
+	this.path = cfg.path;
 	this.sep = require("path").sep;
 	this.history = [this.path];
 	return this;

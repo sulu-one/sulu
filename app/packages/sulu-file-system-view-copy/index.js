@@ -1,4 +1,4 @@
-var path = require('path');
+var path = require("path");
 
 
 var Command = function() {
@@ -25,15 +25,18 @@ Command.prototype.copy = function copy() {
 			if (this.result !== -1){
 				/*cp -R {copy,shell} c:\temp*/
 		  		var win = window.open("consoleWindow.html"); 
+				var started = false;
 		  		var readyEventListener = function (event) {
 			        if ( event.data === "rdy") {
 			            run();
 			        }
 			    };
-				window.addEventListener('message', readyEventListener, false);
+				window.addEventListener("message", readyEventListener, false);
 
 			  	var self = this;
 				var run = function() { 
+					if(started) return;
+					started = true;
 					var shelljs = require("shelljs");
 					var selection = view.selected();
 					var files = [];
@@ -42,29 +45,34 @@ Command.prototype.copy = function copy() {
 						files.push("\"" + path.join(item.path, item.name) + item.ext + "\"");
 					}
 					var target = self.app.GUI.target.model.path;
-					var cmd = 'cp -R ' + files.join(" ") + " " + "\"" + target + "\"";
+					var cmd = "cp -r " + files.join(" ") + " " + "\"" + target + "\"";
 				  	console.debug(cmd);
 
 					win.eval("log('<span>' + " + JSON.stringify(cmd) + " + '...<span>')");
-					var child = shelljs.exec(cmd, {async:true}, function(code,out,err){
+					var child = shelljs.exec(cmd, {async:true}, function(code,out,err){ 
 						if (out !== ""){
-							win.eval("log('<span>' + " + JSON.stringify("out") + " + '<span>')");						
+							win.eval("log('<span>' + " + JSON.stringify("done") + " + '<span>')");						
 						}
 						if (err !== ""){
-							win.eval("log('<span class=error>' + " + JSON.stringify("err") + " + '<span>')");
+							win.eval("log('<span class=error>' + " + JSON.stringify("done") + " + '<span>')");
 						}
-						if (err === "" && out === ""){						
-							// win.close()
+						if (err === "" && out === ""){
+							win.eval("log('<span>' + " + JSON.stringify("ok") + " + '<span>')");						
+							win.close()
 						}
 						self.app.GUI.target.model.refresh();
 					});
-					child.stdout.on('data', function(data) {
-						window.removeEventListener('message', readyEventListener);
+					child.stdout.on("data", function(data) {
+						window.removeEventListener("message", readyEventListener);
 						win.eval("log('<span>' + " + JSON.stringify(data) + " + '<span>')");
 					});				
-					child.stderr.on('data', function(data) {
-						window.removeEventListener('message', readyEventListener);
+					child.stderr.on("data", function(data) {
+						window.removeEventListener("message", readyEventListener);
 						win.eval("log('<span class=error>' + " + JSON.stringify(data) + " + '<span>')");
+					});
+					child.on("close", function(data) {
+						window.removeEventListener("message", readyEventListener);
+						win.eval("log('<span>' + " + JSON.stringify("close") + " + '<span>')");
 					});
 					//child_process.execSync('start "SULU COPY" /D "c:\\temp" "cmd.exe" /K dir && cp --help');
 				}
@@ -77,7 +85,7 @@ Command.prototype.copy = function copy() {
 
 var Plugin = function  (client) {
 	this.command = new Command();
-	client.app.loadHTML(require("path").join(__dirname, 'polymer-cat.html'));
+	client.app.loadHTML(require("path").join(__dirname, "polymer-cat.html"));
 	client.app.registerHotKey("f5", this.command.copy);
 };
 

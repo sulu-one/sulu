@@ -5,6 +5,7 @@ var Command = function  () {
 };
 
 Command.prototype.toggleDevTools = function toggleDevTools() {
+	 
 	remote.getCurrentWindow().toggleDevTools();
 	return false
 };

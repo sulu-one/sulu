@@ -25,6 +25,7 @@
     "bump": "npm version patch && git push && git push --tags && npm publish",
     "postinstall": "cd app && npm install",
     "build": "electron-packager ./app SULU --platform all --arch all --out ./../sulu-binary/",
+    "build-test": "electron-packager ./app SULU --icon ./src/logo.png --out ./../sulu-binary/ --overwrite",
     "build-installer-windows" : "cd C:\\git\\sulu\\app\\dist\\SULU-win32-x64\\resources && electron-installer-windows --src .. --dest SULU"
   },
   "devDependencies": {

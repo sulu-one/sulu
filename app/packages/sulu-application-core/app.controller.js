@@ -54,6 +54,7 @@ ApplicationController.prototype.getFunctionName = function(fn) {
 */
 ApplicationController.prototype.registerHotKey = function(key, fn) {
 	var n  = this.getFunctionName(fn);
+	
 	console.info("press \"" + key + "\" to \"" + n + "\"");
 	window.key(key, "global", fn.bind(this));
 	window.key.setScope("global");
@@ -70,6 +71,7 @@ ApplicationController.prototype.fileSystemViews = function() {
 */
 ApplicationController.prototype.requireAll = function() {
 	var result = false;
+	var meta;
 	try{
 		window.key = require("keymaster");
 		this.packageController = require("package.js");
@@ -79,6 +81,7 @@ ApplicationController.prototype.requireAll = function() {
 			debug: true,
 			directories: folders,
 			identify: function() {
+				meta = this.meta;
 				return (this.meta.suluPackage === true);
 			},
 			packageContstructorSettings: {app : this}
@@ -86,6 +89,7 @@ ApplicationController.prototype.requireAll = function() {
 
 		result = true;
 	} catch (e) {
+		e.suluPackage = meta;
 		this.error(e);
 	}
 	return result;

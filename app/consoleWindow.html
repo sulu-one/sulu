@@ -55,6 +55,7 @@
 	  </ul>
 	</div>
 	<script type="text/javascript">   
+		window.$ = require("jquery");
 		require('electron').remote.getCurrentWindow().setMenu(null);   
 		var $lg = document.getElementById("lg");
 		function log(text){
@@ -62,7 +63,9 @@
 			e.innerHTML = text;
 		    $lg.appendChild(e);
 		}
-		window.opener.postMessage("rdy")
+		$(function(){
+			window.opener.postMessage("rdy");
+		});
 	</script>
 </body>
 </html>

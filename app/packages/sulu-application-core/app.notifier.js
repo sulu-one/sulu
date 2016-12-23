@@ -48,7 +48,8 @@ ApplicationNotifier.prototype.error = function(err) {
 	document.querySelector("#toast").show();
 	console.error(err);
 	console.error(renderedError);
-	fs.appendFile(fn, new Date().toISOString() + "\r\n" + renderedError.replace(/\n/g, "\r\n") + "\r\n", function (err) {
+	var text = new Date().toISOString() + "\r\n" + "\r\n" + renderedError.replace(/\n/g, "\r\n") + "\r\n";
+	fs.appendFile(fn, text, function (err) {
 		console.warn("wrote error to ", fn);
 	});
 };
@@ -77,7 +78,12 @@ ApplicationNotifier.prototype.dlg = function(settings, done) {
 
 	var dlg = document.querySelector("#dialog");
 	dlg.removeEventListener("iron-overlay-closed", this.ironOverlayClosed);
-	this.ironOverlayClosed = done;
+	this.ironOverlayClosed = function(){
+		debugger;
+		window.document.onkeydown = self.app.GUI.onKeyBoardInput.bind(this);
+		done()
+	};
+
 	dlg.action = "-1";
 	this.ironOverlayClosed = function(e) {
 		var btnIndex = parseInt(e.target.action, 10);
@@ -90,6 +96,7 @@ ApplicationNotifier.prototype.dlg = function(settings, done) {
 	};
 	dlg.addEventListener("iron-overlay-closed", this.ironOverlayClosed);
 	window.key.setScope("modal-dialog");
+	window.document.onkeydown = null;
 	dlg.open();
 };
 

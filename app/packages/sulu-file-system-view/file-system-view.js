@@ -306,8 +306,15 @@ View.prototype.recoverViewState = function(selectedFiles){
 View.prototype.refresh = function(newActiveItemName, showFullPath){
 	var selectedFiles = this.selected(); 
 	var activeRow = this.activeRowData();
-	var oldActiveRowId = this.activeRow.data("rowid");
-	var oldItemName = newActiveItemName || (path.join(activeRow.path, activeRow.name) + activeRow.ext);
+	var oldActiveRowId;
+	if (this.activeRow){
+		oldActiveRowId = this.activeRow.data("rowid");
+	} 
+
+	var oldItemName = newActiveItemName;
+	if (activeRow) {
+		oldItemName = oldItemName || (path.join(activeRow.path, activeRow.name) + activeRow.ext);
+	}
 	var self = this; 
 	this.cd(this.path, true, function () { 
 		self.recoverViewState(selectedFiles);
@@ -389,7 +396,7 @@ View.prototype.setActiveRowByFileName = function(filename) {
 	var self = this;
 	self.activeRowId = 0; 
 	var $scrollArea = $("#scrollArea" + self.id); 
-	self.activeRow = $scrollArea.find('.filesystemitem[data-filename="' + filename.replace(/\\/g, "\\\\") + '"]')
+	self.activeRow = $scrollArea.find('.filesystemitem[data-filename="' + (filename || "").replace(/\\/g, "\\\\") + '"]')
 	self.row(self.activeRow);
 	return (self.activeRow.length !== 0) 
 };

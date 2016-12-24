@@ -17,7 +17,7 @@
 
 ### Versions
 
-You can get this information from copy and pasting the output of `atom --version` and `apm --version` from the command line. Also, please include the OS and what version of the OS you're running.
+You can get this information from copy and pasting the output of `sulu-cmd --version` and `sulu-cmd --version --package` from the command line. Also, please include the OS and what version of the OS you're running.
 
 ### Error LOG: Press ```CTRL+F12``` and ```CTRL+F4``` to open the ```error.log``` file.
 ```bash

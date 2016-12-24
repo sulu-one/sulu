@@ -13,62 +13,11 @@ This is a prototype at development! [Here is a lot of work todo](https://github.
 
 ## Screenshot
 
-![Screenshot](/demo.gif)
+![Screenshot](/demo.gif) 
 
-## Short cuts
-
-(so far) check console (F12) to get a list full list
-
-- "tab" - "toggleActiveFileSystemView"
-- "down" - "makeNextRowActive"
-- "up" - "makePreviousRowActive"
-- "enter" - "enterActiveRow"
-- "backspace" - "navigateBackToParentFolder"
-- "space" - "selectActiveRow"
-- "esc" - "unselectAllRows"
-- "ctrl+a" - "selectAll"
-- "ctrl+shift+a" - "invertSelection"
-- "ctrl+s" - "selectByFileExtension"
-- "f5" - "copy"
-- "f12" - "toggleDevTools"
-- "ctrl+alt+left" - "historyJumpBackward"
-- "ctrl+alt+right" - "historyJumpForward"
-- "right" - "changeDirectory"
-- "ctrl+b" - "toggleBookmark"
-- "ctrl+shift+b" - "showBookmarks"
-- "ctrl+y" - "copyFilenamesWithPath"
-- "ctrl+shift+y" - "copyFilenames"
-- "ctrl+shift+alt+y" - "copyFilenamesWithExtendedInfo"
-- "ctrl+f7" - "createFile"
-- "f7" - "createFolder"
-- "del" - "moveToTrash"
-- "f4" - "open"
-- "ctrl+p" - "preview"
-- "ctrl+enter" - "openShell"
-- "ctrl+r" - "reload"
-- "f5" - "reload"
-- "ctrl+f5" - "reloadHard"
-- "f2" - "rename"
-- "ctrl+e" - "showItemInFolder"
-- "ctrl+f12" - "settings"
+## [Key Bindings](/docs/key-bindings.md)
 
 ## [Contributing](/CONTRIBUTING.md)
-
-```bash
-
-
-# installation
-
-$ git clone https://github.com/sulu-one/sulu.git;
-$ cd sulu;
-$ npm install;
-$ npm link .;
-
-# run
-
-$ sulu;
-
-```
 
 ## [API](./docs/api.md)
 

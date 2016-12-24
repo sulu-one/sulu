@@ -25,12 +25,12 @@
     <filter
        inkscape:collect="always"
        style="color-interpolation-filters:sRGB"
-       id="filter3419">
+       id="filter4280">
       <feBlend
          inkscape:collect="always"
          mode="lighten"
          in2="BackgroundImage"
-         id="feBlend3421" />
+         id="feBlend4282" />
     </filter>
   </defs>
   <sodipodi:namedview
@@ -41,17 +41,19 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.98994949"
-     inkscape:cx="166.21061"
+     inkscape:cx="173.69306"
      inkscape:cy="251.31385"
      inkscape:document-units="px"
      inkscape:current-layer="layer2"
      showgrid="false"
      units="px"
-     inkscape:window-width="1366"
-     inkscape:window-height="705"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
-     inkscape:window-maximized="1" />
+     inkscape:window-width="853"
+     inkscape:window-height="403"
+     inkscape:window-x="130"
+     inkscape:window-y="130"
+     inkscape:window-maximized="0"
+     inkscape:showpageshadow="false"
+     showborder="false" />
   <metadata
      id="metadata3342">
     <rdf:RDF>
@@ -68,7 +70,8 @@
      inkscape:label="Ebene 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-540.36216)">
+     transform="translate(0,-540.36216)"
+     style="display:inline;opacity:1;">
     <ellipse
        style="opacity:0.92600002;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3.5999999;stroke-dasharray:none;stroke-opacity:1"
        id="path3353"
@@ -81,15 +84,15 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Ebene 2"
-     style="opacity:0.4;filter:url(#filter3419)">
+     style="display:inline;opacity:0.59;filter:url(#filter4280)">
     <ellipse
-       style="opacity:0.92600002;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3.5999999;stroke-dasharray:none;stroke-opacity:1"
+       style="opacity:0.264;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3.5999999;stroke-dasharray:none;stroke-opacity:1"
        id="path3356"
-       cx="297.62598"
-       cy="256.94043"
-       rx="196.55864"
-       ry="199.4213"
-       transform="matrix(0.99965102,-0.02641671,0.02334491,0.99972747,0,0)"
+       cx="288.32504"
+       cy="257.47879"
+       rx="197.56473"
+       ry="194.37424"
+       transform="matrix(0.99967184,-0.02561658,0.02407417,0.99971018,0,0)"
        inkscape:export-filename="C:\Users\User\Desktop\path3356.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
@@ -97,13 +100,14 @@
   <g
      inkscape:groupmode="layer"
      id="layer3"
-     inkscape:label="Ebene 3">
+     inkscape:label="Ebene 3"
+     style="display:inline">
     <circle
-       style="opacity:0.92600002;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3.5999999;stroke-dasharray:none;stroke-opacity:1"
+       style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3.5999999;stroke-dasharray:none;stroke-opacity:1"
        id="path3389"
-       cx="329.30969"
-       cy="273.604"
-       r="170.71577"
+       cx="325.2691"
+       cy="320.07101"
+       r="132.32997"
        inkscape:export-filename="C:\Users\User\Desktop\path3389.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />

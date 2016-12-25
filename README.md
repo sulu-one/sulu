@@ -15,12 +15,10 @@ This is at development! [Here some work todo](https://github.com/sulu-one/sulu/i
 
 ### Normal usage
 
-#### Download and execute precompiled applications for different operating systems
+One way is to download and execute precompiled applications for different operating systems from https://github.com/sulu-one/sulu/releases. Done.
 
-https://github.com/sulu-one/sulu/releases
 
-#### Console starter
-
+Another way is the console starter command which you can install from [npmjs.org](https://www.npmjs.com/package/sulu)
 ```bash
 $ npm install -g sulu;
 $ sulu;

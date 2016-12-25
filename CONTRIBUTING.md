@@ -35,8 +35,10 @@ possible with your report. If you can, please include:
  - Fork it!
  - Clone your fork
  - Install development dependencies
-   - ```cd sulu;```
-   - ```npm install;```
+   - ```$ cd sulu;```
+   - ```$ npm install;```
+   - ```$ npm link .;```
+   - Type ```$ sulu;``` to start the application.
  - Create your feature branch: `git checkout -b my-new-feature;`
  - Commit your changes: `git commit -am 'Add some feature'`
  - Push to the branch: `git push origin my-new-feature`

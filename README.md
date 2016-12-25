@@ -11,8 +11,27 @@ This is at development! [Here some work todo](https://github.com/sulu-one/sulu/i
 [![devDependency Status](https://david-dm.org/sulu-one/sulu/dev-status.svg)](https://david-dm.org/sulu-one/sulu#info=devDependencies)
 [![Codacy Badge](https://www.codacy.com/project/badge/e5ce84ae276649d5ab61f4f1b264e5e0)](https://www.codacy.com/app/stephanahlf/sulu)  
 
+## Installation
+
+### Normal usage
+
+#### Download and execute precompiled applications for different operating systems
+
+https://github.com/sulu-one/sulu/releases
+
+#### Console starter
+
+```bash
+$ npm install -g sulu;
+$ sulu;
+```
+
+### Use Developer for latest versions or to hack on SULU
+
+https://github.com/sulu-one/sulu/blob/master/CONTRIBUTING.md#contributing
 
 ## Docs
+- [Documentation](/docs/)
 - [Key Bindings](/docs/key-bindings.md)
 - [Contributing](/CONTRIBUTING.md)
 - [API](./docs/api.md)

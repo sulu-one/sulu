@@ -24,9 +24,9 @@ $ npm install -g sulu;
 $ sulu;
 ```
 
-### Use Developer for latest versions or to hack on SULU
+### Advanced developer usage
 
-https://github.com/sulu-one/sulu/blob/master/CONTRIBUTING.md#contributing
+Use developer channel for latest versions or to [hack on SULU codes](https://github.com/sulu-one/sulu/blob/master/CONTRIBUTING.md#contributing).
 
 ## Docs
 - [Documentation](/docs/)

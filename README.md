@@ -15,7 +15,11 @@ This is at development! [Here some work todo](https://github.com/sulu-one/sulu/i
 
 ### Normal usage
 
-**Recommended** way is to download and execute precompiled applications for different operating systems from https://github.com/sulu-one/sulu/releases. **Done**.
+**Recommended** way is to download and execute precompiled applications for different operating systems from https://github.com/sulu-one/sulu/releases. **Done**.  
+Your operating system is not in in List? To build your own release. Clone this repo and type ```npm run build```.
+
+
+
 
 
 Another way is the console starter command which you can install from [npmjs.org](https://www.npmjs.com/package/sulu)

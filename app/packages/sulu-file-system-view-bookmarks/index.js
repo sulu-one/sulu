@@ -1,4 +1,6 @@
- var Command = function() {
+var path = require("path");
+ 
+var Command = function() {
 	return this;
 }
 
@@ -29,7 +31,7 @@ Command.prototype.toggleBookmark = function toggleBookmark() {
 			var fn =  path.join(file.path, file.name) + file.ext; 
 			var index = self.config.settings.bookmarks.indexOf(fn);
 			if ( index === -1 ){ 
-			 	self.config.settings.bookmarks.push(fn);
+			 	self.config.settings.bookmarks.unshift(fn);
 			} else {
 				self.config.settings.bookmarks.splice(index, 1);
 			}
@@ -53,6 +55,7 @@ function FileIcons(client){
 FileIcons.prototype.init = function(client) {  
 	client.app.config.settings.bookmarks = client.app.config.settings.bookmarks || [];
 	client.app.events.on("init-filesystem-item-icon", this.getFileSystemItemIcon); 
+	client.app.events.on("enter-filesystem-item", this.onEnterFileSystemItem.bind(client)); 
 	
 	this.command = new Command();
 	client.app.registerHotKey("ctrl+b", this.command.toggleBookmark);
@@ -63,6 +66,22 @@ FileIcons.prototype.getFileSystemItemIcon = function(fileSystemItem){
 	if (fileSystemItem.bookmarked){
  		fileSystemItem.bookmarkClass = this.bookmarkClass;
 	}
+	return fileSystemItem;
+};
+
+FileIcons.prototype.onEnterFileSystemItem = function(fileSystemItem){
+	var fn = (path.join(fileSystemItem.path, fileSystemItem.name) + fileSystemItem.ext).toLowerCase();
+
+	for (var i = 0; i < this.app.config.settings.bookmarks.length; i++) {
+		var bm = this.app.config.settings.bookmarks[i];
+		if (bm.toLowerCase() === fn){
+			this.app.config.settings.bookmarks.splice(i, 1);
+			this.app.config.settings.bookmarks.unshift(bm);
+			this.app.config.save();
+			break;
+		}
+	}
+	fileSystemItem.preventDefault = false;
 	return fileSystemItem;
 };
 

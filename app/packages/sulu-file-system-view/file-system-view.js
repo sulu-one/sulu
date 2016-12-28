@@ -102,7 +102,8 @@ View.prototype.dblclick = function(/*e*/) {
 	var filename = fileSystemItemDataRow.data("filename"); 
 	var view = $(this).parents("element-core-data-view").data("controller");
 	var rowData = view.data[id];
-	if (rowData.isDirectory || rowData.isDisk){ 
+	window.applicationController.events.emit("enter-filesystem-item", rowData);  
+	if (!rowData.preventDefault && (rowData.isDirectory || rowData.isDisk)){ 
 		view.cd(filename);
 	}
 

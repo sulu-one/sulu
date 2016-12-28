@@ -10,8 +10,19 @@
   "bin": {
     "sulu": "index.js"
   },
+  "build": {
+	  "appId": "com.electron.sulu",
+      "iconUrl": "https://raw.githubusercontent.com/sulu-one/sulu/master/src/icon.ico",
+	  "mac": {
+	    "category": "public.app-category.filesystem",
+	    "iconUrl": "src/icon.icns"
+	  },
+	  "win": {
+	    "iconUrl": "https://raw.githubusercontent.com/sulu-one/sulu/master/src/icon.ico"
+	  }
+  },
   "homepage": "https://github.com/s-a/sulu",
-  "keywords": [],
+  "keywords": ["filesystem","filemanager","explorer","finder","file","folder"],
   "license": "",
   "repository": {
     "type": "git",
@@ -26,12 +37,14 @@
     "postinstall": "cd app && npm install",
     "build": "electron-packager ./app SULU --platform all --arch all --out ./../sulu-binary/",
     "build-test": "electron-packager ./app SULU --icon ./src/logo.png --out ./../sulu-binary/ --overwrite",
-    "build-installer-windows": "cd C:\\git\\sulu\\app\\dist\\SULU-win32-x64\\resources && electron-installer-windows --src .. --dest SULU"
+    "build-installer-windows": "cd C:\\git\\sulu\\app\\dist\\SULU-win32-x64\\resources && electron-installer-windows --src .. --dest SULU",
+    "compile-local-cli" : "node node_modules/electron-builder/out/cli/build-cli.js",
+    "compile-local-glob" : "electron-builder"
   },
-  "devDependencies": {},
-  "dependencies": {
+  "devDependencies": {
+    "electron-builder": "^10.13.1",
     "electron": "^1.4.12",
-    "electron-prebuilt": "^1.2.2",
-    "shelljs": "^0.7.5"
-  }
+    "electron-prebuilt": "^1.2.2"
+  },
+  "dependencies": {}
 }

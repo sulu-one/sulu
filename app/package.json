@@ -18,7 +18,7 @@
   },
   "scripts": {
     "install-polymer": "bower install --save PolymerElements/paper-icon-button"
-  },
+  }, 
   "dependencies": {
     "clusterize.js": "^0.12.0",
     "dialogs": "^1.1.17",

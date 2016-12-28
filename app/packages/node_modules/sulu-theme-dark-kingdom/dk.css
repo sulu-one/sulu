@@ -1,0 +1,73 @@
+body{
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: #121718;
+	color: #8A8A8A;
+}
+
+::-webkit-scrollbar {
+	background: #333E42;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #54676D;
+}
+
+ 
+
+
+
+
+.active-filesystem-view{
+    color:#F0F0F0;
+}
+
+.filesystemitem-directory{
+	color:#906804;
+}
+
+.active-filesystem-view .filesystemitem-directory{
+	color:#FCD97E;
+}
+
+.filesystemitem{
+	border: solid 1px #121718;
+}
+
+.filesystemitem.selected{
+    color:#CC0000;
+}
+
+.active-filesystem-view .filesystemitem.active{
+    border: solid 1px #F0F0F0;
+}
+
+.filesystemitem.active{
+    border: solid 1px #8A8A8A;
+}
+
+paper-ripple {
+    color: #F0F0F0;
+}
+ 
+.element-core-data-view-path-item {
+	color: inherit;
+	margin: 0;
+	padding: 0;	
+	text-decoration: none;
+}
+
+.element-core-data-view-path-item:hover{ 
+	text-decoration: underline;
+	color: #FF9900;
+}
+
+.active-filesystem-view .element-core-data-view-path-item {
+	color: #FF9900;
+}
+
+.active-filesystem-view .element-core-data-view-path-item:hover{  
+}

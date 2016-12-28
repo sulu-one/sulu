@@ -1,0 +1,44 @@
+body {
+    -webkit-user-select: none;
+    user-select: none;
+    font-size: 14px;
+    font-family: 'Roboto', 'Noto', sans-serif;  
+}
+ 
+.element-core-data-view{
+	margin: 6px;
+}
+
+::-webkit-scrollbar {
+    height: 6px;
+    width: 12px;
+    background: #E0E0E0;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #BABABA;
+}
+
+::-webkit-scrollbar-corner {
+    background: #E0E0E0;
+}
+
+
+.file-system-icon{
+    font-size: 16px;
+}
+
+.filesystemitem:hover,.filesystemitem:active{
+    text-decoration: underline;
+}
+
+
+.glow { 
+    color: #997A00;
+    text-shadow: 0;
+}
+
+.active-filesystem-view .glow { 
+    color: #FFCC00;
+    text-shadow: 0px 0px 5px #FFFFFF; 
+}

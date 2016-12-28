@@ -16,10 +16,10 @@ FileIcons.prototype.init = function(client) {
 FileIcons.prototype.getFileSystemItemIcon = function(fileSystemItem) { 
 	var result = "";
 
+
 	if (fileSystemItem.isDirectory){
 		if (fileSystemItem.isSymbolicLink === true){
-		debugger;
-			result = "fa fa-link file-system-icon";
+			result = "fa fa-folder-o file-system-icon";
 		} else {
 			result = "fa fa-folder file-system-icon";
 		}

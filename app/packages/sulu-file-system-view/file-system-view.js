@@ -484,22 +484,30 @@ View.prototype.extendPathContentMetaData = function(directoryContent, done) {
 
 		var stats = {};
 		var folder = this.path;
-		try {
+
+
+
+		var symlink = null;
+		try { 
 			if (path.isAbsolute(filename)){
 				stats = fs.statSync(filename);
 				folder = path.dirname(filename);
+				symlink = fs.readlinkSync(filename);
 			} else {
 				stats = fs.statSync(path.join(self.path, filename));
+				symlink = fs.readlinkSync(path.join(self.path, filename));
 			}
 		} catch(e){
-			stats.isFile = function() {
-				return true;
-			};
+			if (!stats.isFile){	
+				stats.isFile = function() {
+					return true;
+				};
+			}
 			if (!stats.isSymbolicLink){			
 				stats.isSymbolicLink = function() {
 					return false;
 				};
-			}
+			} 
 		}
 
 		var extension = path.extname(filename); 
@@ -510,7 +518,7 @@ View.prototype.extendPathContentMetaData = function(directoryContent, done) {
 			name: path.basename(filename, extension),
 			ext: extension,
 			isDirectory: !stats.isFile(),
-			isSymbolicLink : stats.isSymbolicLink(),
+			isSymbolicLink : (symlink !== null),
 			isdisk: false
 		};
 
@@ -530,7 +538,14 @@ View.prototype.extendPathContentMetaData = function(directoryContent, done) {
 
 View.prototype.dir = function(done) {
 	var self = this; 
-	fs.readdir(self.path, function  (err, directoryContent) {
+	var path = self.path;
+
+	try{
+		path = fs.readlinkSync(path);
+	} catch(e){}
+
+
+	fs.readdir(path, function  (err, directoryContent) {
 		if (err){
 			window.applicationController.error(err); 
 		} else { 

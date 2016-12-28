@@ -34,8 +34,11 @@
     "postinstall": "cd app && npm install",
     "build-windows--ia32": "node lib/build.js --os windows --arch ia32",
     "build-windows--x64": "node lib/build.js --os windows --arch x64",
-    "build-windows": "npm run build-windows--ia32 && npm run build-windows--x64",
-    "build": "npm run build-windows"
+    "build-windows": "npm run build-windows--ia32 && npm run build-windows--x64",    
+    "build-linux--ia32": "node lib/build.js --os linux --arch ia32",
+    "build-linux--x64": "node lib/build.js --os linux --arch x64",
+    "build-linux": "npm run build-linux--ia32 && npm run build-linux--x64",
+    "build": "npm run build-linux && npm run build-windows"
   },
   "devDependencies": {
     "electron": "^1.4.12",

@@ -16,11 +16,7 @@ This is at development! [Here some work todo](https://github.com/sulu-one/sulu/i
 ### Normal usage
 
 **Recommended** way is to download and execute precompiled applications for different operating systems from https://github.com/sulu-one/sulu/releases. **Done**.  
-Your operating system is not in in List? To build your own release. Clone this repo and type ```npm run build```.
-
-
-
-
+Your operating system is not in in List? To build your own release. Clone this repo and type ```npm run``` to get an idea on what build script you have to hack.
 
 Another way is the console starter command which you can install from [npmjs.org](https://www.npmjs.com/package/sulu)
 ```bash
@@ -32,8 +28,19 @@ $ sulu;
 
 Use developer channel for latest versions or to [hack on SULU codes](https://github.com/sulu-one/sulu/blob/master/CONTRIBUTING.md#contributing).
 
-### Package development
-[Examples](app/packages)
+## Packages
+### Packagemanager
+https://github.com/sulu-one/sulu-core  
+```bash
+$ npm install -g sulu-core
+$ # sulu-core <npm-command-line-arguments>
+$ sulu-core list
+$ sulu-core install @npmpackage
+$ sulu-core uninstall @npmpackage
+```
+
+### Development
+[Examples](app/packages/node_nodules)
 
 ## Docs
 - [Documentation](/docs/)

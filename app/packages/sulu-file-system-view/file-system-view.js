@@ -305,7 +305,10 @@ View.prototype.updateGridViewData = function(isHistoryJump, showFullPath){
 		self.history.push(self.el.get("path").join(self.sep));
 	} 
 	self.setFirstRowActive();
-	window.document.title = window.applicationController.GUI.activeView().model.path + " - SULU"; 
+	var v = window.applicationController.GUI.activeView();
+	if (v){
+		window.document.title = v.model.path + " - SULU"; 
+	}
 	self.el.set("selectedFileCount", self.selected().length);
 }
 
@@ -453,9 +456,9 @@ View.prototype.mimeIconType = function(fileSystemItem) {
 		result = "fa fa-folder";
 	} else {
 		result = "fa fa-file-o";
-		window.applicationController.events.emit("init-filesystem-item-icon", fileSystemItem); 
-		result = fileSystemItem.icon;
 	}
+	window.applicationController.events.emit("init-filesystem-item-icon", fileSystemItem); 
+	result = fileSystemItem.icon;
 
 	return result;
 };
@@ -469,7 +472,7 @@ View.prototype.extendPathContentMetaData = function(directoryContent, done) {
 	self.dirs.push({
 		icon: "fa fa-level-up",
 		path: path.join(self.path, ".."),
-		stats:{size : bytesToSize(0), date: ""},
+		stats:{size : bytesToSize(0), date: null},
 		name: "..",
 		ext: "",
 		isDirectory: true,
@@ -491,6 +494,11 @@ View.prototype.extendPathContentMetaData = function(directoryContent, done) {
 		} catch(e){
 			stats.isFile = function() {
 				return true;
+			};
+			if (!stats.isSymbolicLink){			
+				stats.isSymbolicLink = function() {
+					return false;
+				};
 			}
 		}
 
@@ -502,6 +510,7 @@ View.prototype.extendPathContentMetaData = function(directoryContent, done) {
 			name: path.basename(filename, extension),
 			ext: extension,
 			isDirectory: !stats.isFile(),
+			isSymbolicLink : stats.isSymbolicLink(),
 			isdisk: false
 		};
 

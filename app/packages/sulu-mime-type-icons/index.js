@@ -17,7 +17,12 @@ FileIcons.prototype.getFileSystemItemIcon = function(fileSystemItem) {
 	var result = "";
 
 	if (fileSystemItem.isDirectory){
-		result = "fa fa-folder file-system-icon";
+		if (fileSystemItem.isSymbolicLink === true){
+		debugger;
+			result = "fa fa-link file-system-icon";
+		} else {
+			result = "fa fa-folder file-system-icon";
+		}
 	} else {
 		var ext = fileSystemItem.ext.toLowerCase();
 		var fn = fileSystemItem.name.toLowerCase() + ext; 

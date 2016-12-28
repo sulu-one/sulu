@@ -40,7 +40,7 @@ $ sulu-core uninstall @npmpackage
 ```
 
 ### Development
-[Examples](app/packages/node_nodules)
+[Examples](app/packages/node_modules)
 
 ## Docs
 - [Documentation](/docs/)

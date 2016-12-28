@@ -3,3 +3,5 @@ app/node_modules
 /dist
 *.log
 /app/config.js
+/src/*.png~
+/src/*.kra~

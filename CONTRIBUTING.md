@@ -36,6 +36,7 @@ possible with your report. If you can, please include:
  - Clone your fork
  - Install development dependencies
    - ```$ cd sulu;```
+   - ```$ git submodule update --recursive --remote;```
    - ```$ npm install;```
    - ```$ npm link .;```
    - Type ```$ sulu;``` to start the application.

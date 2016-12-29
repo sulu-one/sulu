@@ -1,0 +1,3 @@
+[submodule "app/packages/node_modules/sulu-theme-dark-kingdom"]
+	path = app/packages/node_modules/sulu-theme-dark-kingdom
+	url = https://github.com/sulu-one/sulu-theme-dark-kingdom.git

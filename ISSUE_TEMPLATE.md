@@ -18,10 +18,10 @@
 
 ### Version(s)
 
-You can get this information from copy and pasting the output of `sulu-cmd --version` from the command line. Also, please include the OS and what version of the OS you're running.
+You can get this information from copy and pasting the output of `[sulu-core](https://github.com/sulu-one/sulu-core) --version` from the command line. Also, please include the OS and what version of the OS you're running.
 
 ### Error LOG
-Press ```CTRL+F12``` and ```CTRL+F4``` to open the ```error.log``` file.
+Press ```CTRL+F12``` navigate to ```error.log``` and press ```CTRL+F4``` to open the ```error.log``` file.
 ```bash
 [error.log file content of error]
 ```
@@ -29,4 +29,4 @@ Press ```CTRL+F12``` and ```CTRL+F4``` to open the ```error.log``` file.
 =====================  
 **Notes from SULU maintainer:**
 You are welcome to add a feature or fix bug via sending [pull request](CONTRIBUTING.md),
-it'll be faster then just opening a request issue. Awesome! Thanks!!
+it'll be faster than just opening a request issue. Awesome! Thanks!!

@@ -4,3 +4,51 @@
 [submodule "app/packages/node_modules/sulu-application-core"]
 	path = app/packages/node_modules/sulu-application-core
 	url = https://github.com/sulu-one/sulu-application-core.git
+[submodule "app/packages/node_modules/sulu-application-settings"]
+	path = app/packages/node_modules/sulu-application-settings
+	url = https://github.com/sulu-one/sulu-application-settings.git
+[submodule "app/packages/node_modules/sulu-dev-tools"]
+	path = app/packages/node_modules/sulu-dev-tools
+	url = https://github.com/sulu-one/sulu-dev-tools
+[submodule "app/packages/node_modules/sulu-file-system-view"]
+	path = app/packages/node_modules/sulu-file-system-view
+	url = https://github.com/sulu-one/sulu-file-system-view
+[submodule "app/packages/node_modules/sulu-file-system-view-bookmarks"]
+	path = app/packages/node_modules/sulu-file-system-view-bookmarks
+	url = https://github.com/sulu-one/sulu-file-system-view-bookmarks
+[submodule "app/packages/node_modules/sulu-mime-type-icons"]
+	path = app/packages/node_modules/sulu-mime-type-icons
+	url = https://github.com/sulu-one/sulu-mime-type-icons.git
+[submodule "app/packages/node_modules/sulu-file-system-view-delete"]
+	path = app/packages/node_modules/sulu-file-system-view-delete
+	url = https://github.com/sulu-one/sulu-file-system-view-delete
+[submodule "app/packages/node_modules/sulu-file-system-view-edit"]
+	path = app/packages/node_modules/sulu-file-system-view-edit
+	url = https://github.com/sulu-one/sulu-file-system-view-edit.git
+[submodule "app/packages/node_modules/sulu-file-system-view-preview"]
+	path = app/packages/node_modules/sulu-file-system-view-preview
+	url = https://github.com/sulu-one/sulu-file-system-view-preview
+[submodule "app/packages/node_modules/sulu-file-system-view-prompt-here"]
+	path = app/packages/node_modules/sulu-file-system-view-prompt-here
+	url = https://github.com/sulu-one/sulu-file-system-view-prompt-here.git
+[submodule "app/packages/node_modules/sulu-file-system-view-reload"]
+	path = app/packages/node_modules/sulu-file-system-view-reload
+	url = https://github.com/sulu-one/sulu-file-system-view-reload.git
+[submodule "app/packages/node_modules/sulu-file-system-view-rename"]
+	path = app/packages/node_modules/sulu-file-system-view-rename
+	url = https://github.com/sulu-one/sulu-file-system-view-rename
+[submodule "app/packages/node_modules/sulu-file-system-view-show"]
+	path = app/packages/node_modules/sulu-file-system-view-show
+	url = https://github.com/sulu-one/sulu-file-system-view-show
+[submodule "app/packages/node_modules/sulu-file-system-view-clipboard"]
+	path = app/packages/node_modules/sulu-file-system-view-clipboard
+	url = https://github.com/sulu-one/sulu-file-system-view-clipboard
+[submodule "app/packages/node_modules/sulu-file-system-view-copy"]
+	path = app/packages/node_modules/sulu-file-system-view-copy
+	url = https://github.com/sulu-one/sulu-file-system-view-copy
+[submodule "app/packages/node_modules/sulu-file-system-view-create-file"]
+	path = app/packages/node_modules/sulu-file-system-view-create-file
+	url = https://github.com/sulu-one/sulu-file-system-view-create-file
+[submodule "app/packages/node_modules/sulu-file-system-view-create-folder"]
+	path = app/packages/node_modules/sulu-file-system-view-create-folder
+	url = https://github.com/sulu-one/sulu-file-system-view-create-folder

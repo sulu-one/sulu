@@ -1,0 +1,16 @@
+{
+  "name": "sulu-installed-pages",
+  "version": "1.0.0",
+  "description": "Bundle of installed packages installed within sulu fileexplorer",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "sulu"
+  ],
+  "author": "s-a",
+  "license": "MIT"
+}

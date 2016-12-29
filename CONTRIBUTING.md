@@ -27,7 +27,7 @@ possible with your report. If you can, please include:
 ## Submitting Pull Requests
 
 * Include screenshots and animated GIFs in your pull request whenever possible.
-* Follow the [coding style defined in .jshintrc](/.eslintrc).
+* Follow the [coding style defined in .eslintrc](/.eslintrc).
 * Write documentation in [Markdown](https://daringfireball.net/projects/markdown).
 
 ## CONTRIBUTING

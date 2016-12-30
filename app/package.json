@@ -2,7 +2,7 @@
     "name": "sulu",
     "title": "A hackable file manager",
     "description": "A hackable file manager",
-    "version": "0.1.49",
+    "version": "0.1.50",
     "author": "Stephan Ahlf <stephan.ahlf@gmail.com>",
     "bugs": {
         "url": "https://github.com/s-a/sulu/issues"

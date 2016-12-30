@@ -30,7 +30,7 @@
     "start": "electron ./app",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm -rf ./dist",
-    "pull": "git pull && git submodule update --recursive --remote",
+    "pull": "git pull && git submodule update --recursive --remote && git submodule update --init",
     "bump": "npm run pull && npm version patch && git push && git push --tags && npm publish",
     "postinstall": "cd app && npm install",
     "build-windows--ia32": "node lib/build.js --os windows --arch ia32",
@@ -38,6 +38,7 @@
     "build-windows": "npm run build-windows--ia32 && npm run build-windows--x64",
     "build-linux--ia32": "node lib/build.js --os linux --arch ia32",
     "build-linux--x64": "node lib/build.js --os linux --arch x64",
+    "build-mac--x64": "node lib/build.js --os mac --arch x64",
     "build-linux": "npm run build-linux--ia32 && npm run build-linux--x64",
     "build": "npm run build-linux && npm run build-windows"
   },

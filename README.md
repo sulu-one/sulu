@@ -1,8 +1,6 @@
-# SULU [![unstable](http://badges.github.io/stability-badges/dist/unstable.svg)](http://github.com/badges/stability-badges)
-![SULU](src/logo-sm.png)
-## A hackable file manager riding on Linux, Windows and OS X
-This is at development! [Here some work todo](https://github.com/sulu-one/sulu/issues)!
+# ![SULU](src/logo-sm.png) SULU
 
+## A ```</hackable>``` ```[package-driven]``` File Manager ```{CROSS_PLATFORM}```
 
 [![Massachusetts Institute of Technology (MIT)](https://s-a.github.io/license/img/mit.svg)](/LICENSE.md#mit)
 [![Discord Channel](https://img.shields.io/badge/discord-testing@reactiflux-738bd7.svg?style=flat-square)](https://discord.gg/rX7hu3D)
@@ -13,38 +11,55 @@ This is at development! [Here some work todo](https://github.com/sulu-one/sulu/i
 
 ## Installation
 
-### Normal usage
+A full [list of supported platforms](docs/supported-platforms.md) are available in the [docs](/docs/) folder.
 
-**Recommended** way is to download and execute precompiled applications for different operating systems from https://github.com/sulu-one/sulu/releases. **Done**.  
-Your operating system is not in in List? To build your own release. Clone this repo and type ```npm run``` to get an idea on what build script you have to hack.
-
-Another way is the console starter command which you can install from [npmjs.org](https://www.npmjs.com/package/sulu)
+- Easy setup
+ - **Recommended** way is to download and execute precompiled applications for different operating systems from [releases](https://github.com/sulu-one/sulu/releases).  
+ **Done**.  
+_
+If your operating system is not in List you can build your own release. Open the ```package.json``` and checkout the script ```build-windows``` to learn how create a build job for your os. Currently we use [electron-builder](https://github.com/electron-userland/electron-builder) but there are tons of other build tools online._
+- Another way is the console starter command which you can install from [npmjs.org](https://www.npmjs.com/package/sulu)
 ```bash
 $ npm install -g sulu;
 $ sulu;
 ```
-
-### Advanced developer usage
-
-Use developer channel for latest versions or to [hack on SULU codes](https://github.com/sulu-one/sulu/blob/master/CONTRIBUTING.md#contributing).
+- If you like to hack the SULU codes we recommend the  [Contributing](https://github.com/sulu-one/sulu/blob/master/CONTRIBUTING.md#contributing) Docs
 
 ## Packages
+
+Since SULU is a papckage driven application there exists a command line shell tool called [sulu-core](https://github.com/sulu-one/sulu-core).
 ### Packagemanager
-https://github.com/sulu-one/sulu-core  
+
+You can install the SULU package manager with
+
 ```bash
 $ npm install -g sulu-core
-$ # sulu-core <npm-command-line-arguments>
-$ sulu-core list
-$ sulu-core install @npmpackage
-$ sulu-core uninstall @npmpackage
 ```
 
-### Development
-[Examples](docs/packages.md)
+### Packagemanager usage
 
-## Docs
-- [Documentation](/docs/)
+```bash
+# sulu-core <npm-command-line-arguments>
+$ sulu-core list # list installed packages
+$ sulu-core install @npmpackage # install package
+$ sulu-core uninstall @npmpackage # uninstall package
+$ sulu-core update # update all packages
+```
+For more Details see the [sulu-core project page](https://github.com/sulu-one/sulu-core).
+
+## Contributing
+
+If you like to fix or improve SULU or create your own package for SULU read the [Contributing Docs ](https://github.com/sulu-one/sulu/blob/master/CONTRIBUTING.md#contributing) first.
+
+### Write your own package
+
+- _TODO: "ADD-HELLO-WORLD-EXAMPLE"_
+- Study [pre-installed and featured packages](docs/packages.md) to learn what is possible.
+- Read the [API Docs](./docs/api.md) to get a full list of API specification.
+
+## More docs
 - [Key Bindings](/docs/key-bindings.md)
-- [Contributing](/CONTRIBUTING.md)
-- [API](./docs/api.md)
-- [License](/LICENSE.md)
+- [All documentations](/docs/)
+
+# License
+This project is [MIT Licensed](/LICENSE.md)

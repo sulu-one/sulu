@@ -11,7 +11,7 @@
 
 ## Installation
 
-A full [list of supported platforms](supported-platforms.md) are available in the [docs](/docs/) folder.
+A full [list of supported platforms](docs/supported-platforms.md) are available in the [docs](/docs/) folder.
 
 - Easy setup
  - **Recommended** way is to download and execute precompiled applications for different operating systems from [releases](https://github.com/sulu-one/sulu/releases).  

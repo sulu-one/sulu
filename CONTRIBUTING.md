@@ -37,6 +37,7 @@ possible with your report. If you can, please include:
  - Install development dependencies
    - ```$ cd sulu;```
    - ```$ git submodule update --recursive --remote;```
+   - ```$ git submodule update --init;```
    - ```$ npm install;```
    - ```$ npm link .;```
    - Type ```$ sulu;``` to start the application.

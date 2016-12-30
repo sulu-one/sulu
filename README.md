@@ -38,12 +38,19 @@ $ npm install -g sulu-core
 
 ### Packagemanager usage
 
+Currently a typical update process is: 
 ```bash
-# sulu-core <npm-command-line-arguments>
+$ sulu-core outdated # list available updates
+$ sulu-core update # update all packages
+# press ctrl+f5 to refresh SULU application
+```
+
+More commands:
+```bash
 $ sulu-core list # list installed packages
 $ sulu-core install @npmpackage # install package
 $ sulu-core uninstall @npmpackage # uninstall package
-$ sulu-core update # update all packages
+# sulu-core <npm-command-line-arguments>
 ```
 For more Details see the [sulu-core project page](https://github.com/sulu-one/sulu-core).
 

@@ -59,7 +59,7 @@ If you like to fix or improve SULU or create your own package for SULU read the 
 
 ### Write your own package
 
-To write your own package you need a simple node module with the following structure.
+1. You need a simple node module with the following structure.
 ```javascript
 var remote = require('electron').remote;
 
@@ -80,6 +80,8 @@ var Plugin = function devTools(client) {
 
 module.exports = Plugin;
 ```
+
+2. A package.json with `"suluPackage": true`
 
 - A package that handles the [delete process of SULU](https://github.com/sulu-one/sulu-file-system-view-delete/blob/5960d1e8cefc847b685e88088d00977b12ecca57/index.js
 ).

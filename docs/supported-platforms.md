@@ -1,6 +1,6 @@
 # Supported Platforms
 
-Following platforms are supported by ironNode/Electron:
+Following platforms are supported by SULU/Electron:
 
 Check out the latest version of this doc at -> https://github.com/atom/electron/blob/master/docs/tutorial/supported-platforms.md
 

@@ -15,9 +15,8 @@ A full [list of supported platforms](docs/supported-platforms.md) are available 
 
 - Easy setup
  - **Recommended** way is to download and execute precompiled applications for different operating systems from [releases](https://github.com/sulu-one/sulu/releases).  
- **Done**.  
-_
-If your operating system is not in List you can build your own release. Open the ```package.json``` and checkout the script ```build-windows``` to learn how create a build job for your os. Currently we use [electron-builder](https://github.com/electron-userland/electron-builder) but there are tons of other build tools online._
+ **Done**.   
+_If your operating system is not in List you can build your own release. Open the ```package.json``` and checkout the script ```build-windows``` to learn how create a build job for your os. Currently we use [electron-builder](https://github.com/electron-userland/electron-builder) but there are tons of other build tools online._ We like Pull Requests when you resolve a build for your OS!
 - Another way is the console starter command which you can install from [npmjs.org](https://www.npmjs.com/package/sulu)
 ```bash
 $ npm install -g sulu;
@@ -87,7 +86,7 @@ module.exports = Plugin;
 - Study [pre-installed and featured packages](docs/packages.md) to learn what is possible.
 - Read the [SULU API Docs](./docs/api.md) to use SULU core methods.
 - Read the [Electron Documentation](http://electron.atom.io/docs/api/) to use the Electron API.
-- And then write a piece of code that will blow us all! :smile:
+- And then write a piece of code that will blow us all! :sunglasses:
 
 ## More docs
 - [Key Bindings](/docs/key-bindings.md)

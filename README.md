@@ -27,7 +27,7 @@ $ sulu;
 
 ## Packages
 
-Since SULU is a papckage driven application there exists a command line shell tool called [sulu-core](https://github.com/sulu-one/sulu-core).
+Since SULU is a package driven application there exists a command line shell tool called [```sulu-core```](https://github.com/sulu-one/sulu-core).
 ### Packagemanager
 
 You can install the SULU package manager with

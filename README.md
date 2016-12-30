@@ -38,7 +38,7 @@ $ npm install -g sulu-core
 
 ### Packagemanager usage
 
-Currently a typical update process is: 
+Currently a typical update process is:
 ```bash
 $ sulu-core outdated # list available updates
 $ sulu-core update # update all packages
@@ -60,9 +60,34 @@ If you like to fix or improve SULU or create your own package for SULU read the 
 
 ### Write your own package
 
-- _TODO: "ADD-HELLO-WORLD-EXAMPLE"_
+To write your own package you need a simple node module with the following structure.
+```javascript
+var remote = require('electron').remote;
+
+var Command = function  () {
+	return this;
+};
+
+Command.prototype.toggleDevTools = function toggleDevTools() {
+
+	remote.getCurrentWindow().toggleDevTools();
+	return false
+};
+
+var Plugin = function devTools(client) {
+	this.command = new Command();
+	client.app.registerHotKey("f12", this.command.toggleDevTools);
+};
+
+module.exports = Plugin;
+```
+
+- A package that handles the [delete process of SULU](https://github.com/sulu-one/sulu-file-system-view-delete/blob/5960d1e8cefc847b685e88088d00977b12ecca57/index.js
+).
 - Study [pre-installed and featured packages](docs/packages.md) to learn what is possible.
-- Read the [API Docs](./docs/api.md) to get a full list of API specification.
+- Read the [SULU API Docs](./docs/api.md) to use SULU core methods.
+- Read the [Electron Documentation](http://electron.atom.io/docs/api/) to use the Electron API.
+- And then write a piece of code that will blow us all! :smile:
 
 ## More docs
 - [Key Bindings](/docs/key-bindings.md)

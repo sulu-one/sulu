@@ -11,12 +11,11 @@
 
 ## Installation
 
-A full [list of supported platforms](docs/supported-platforms.md) are available in the [docs](/docs/) folder.
 
-- Easy setup
- - **Recommended** way is to download and execute precompiled applications for different operating systems from [releases](https://github.com/sulu-one/sulu/releases).  
- **Done**.   
-_If your operating system is not in List you can build your own release. Open the ```package.json``` and checkout the script ```build-windows``` to learn how create a build job for your os. Currently we use [electron-builder](https://github.com/electron-userland/electron-builder) but there are tons of other build tools online._ We like Pull Requests when you resolve a build for your OS!
+- One Click Install
+  - **Recommended** way is to download and execute precompiled applications for different operating systems from [latest releases](https://github.com/sulu-one/sulu/releases). After that [update the packages](#packages).
+ **Done**.
+ _If your operating system is not in List you can build your own release. Open the ```package.json``` and checkout the script ```build-windows``` to learn how create a build job for your os. Currently we use [electron-builder](https://github.com/electron-userland/electron-builder) but there are tons of other build tools online._ We like Pull Requests when you resolve a build for your OS!
 - Another way is the console starter command which you can install from [npmjs.org](https://www.npmjs.com/package/sulu)
 ```bash
 $ npm install -g sulu;
@@ -26,10 +25,11 @@ $ sulu;
 
 ## Packages
 
-Since SULU is a package driven application there exists a command line shell tool called [```sulu-core```](https://github.com/sulu-one/sulu-core).
+Since SULU is a package driven application there exists a command line shell tool called [```sulu-core```](https://github.com/sulu-one/sulu-core). It aims to manage the SULU system configuration which also containts the topic package management.
+
 ### Packagemanager
 
-You can install the SULU package manager with
+You can install the SULU package manager with [npm](https://www.npmjs.com/). To make it available on your machine you need to install [Node.js®](https://nodejs.org/en/) first.
 
 ```bash
 $ npm install -g sulu-core
@@ -81,9 +81,10 @@ var Plugin = function devTools(client) {
 module.exports = Plugin;
 ```
 
-2. A package.json with `"suluPackage": true`
+2. A package.json with a property [`"suluPackage": true`](https://github.com/sulu-one/sulu-dev-tools/blob/8a6f2de1b2cea7dfa053cfcefae2cb39c90ef432/package.json#L2)
 
-- A package that handles the [delete process of SULU](https://github.com/sulu-one/sulu-file-system-view-delete/blob/5960d1e8cefc847b685e88088d00977b12ecca57/index.js
+#### More to read
+- The preinstalled package that handles the [delete process of SULU](https://github.com/sulu-one/sulu-file-system-view-delete/blob/5960d1e8cefc847b685e88088d00977b12ecca57/index.js
 ).
 - Study [pre-installed and featured packages](docs/packages.md) to learn what is possible.
 - Read the [SULU API Docs](./docs/api.md) to use SULU core methods.
@@ -92,7 +93,7 @@ module.exports = Plugin;
 
 ## More docs
 - [Key Bindings](/docs/key-bindings.md)
-- [All documentations](/docs/)
+- [Documents Index](/docs/)
 
 # License
 This project is [MIT Licensed](/LICENSE.md)

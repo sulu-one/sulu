@@ -1,5 +1,5 @@
-node_modules  
-!app/packages/node_modules 
+node_modules
+!app/packages/node_modules
 /dist
 *.log
 /app/config.js

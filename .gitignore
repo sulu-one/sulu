@@ -1,5 +1,5 @@
 node_modules
-!app/packages/node_modules
+!app/packages/node_modules/sulu-*
 /dist
 *.log
 /app/config.js

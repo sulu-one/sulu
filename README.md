@@ -16,11 +16,6 @@
   - **Recommended** way is to download and execute precompiled applications for different operating systems from [latest releases](https://github.com/sulu-one/sulu/releases). After that [update the packages](#packages).
  **Done**.
  _If your operating system is not in List you can build your own release. Open the ```package.json``` and checkout the script ```build-windows``` to learn how create a build job for your os. Currently we use [electron-builder](https://github.com/electron-userland/electron-builder) but there are tons of other build tools online._ We like Pull Requests when you resolve a build for your OS!
-- Another way is the console starter command which you can install from [npmjs.org](https://www.npmjs.com/package/sulu)
-```bash
-$ npm install -g sulu;
-$ sulu;
-```
 - If you like to hack the SULU codes we recommend the  [Contributing](https://github.com/sulu-one/sulu/blob/master/CONTRIBUTING.md#contributing) Docs
 
 ## Packages
@@ -89,7 +84,7 @@ module.exports = Plugin;
 - Study [pre-installed and featured packages](docs/packages.md) to learn what is possible.
 - Read the [SULU API Docs](./docs/api.md) to use SULU core methods.
 - Read the [Electron Documentation](http://electron.atom.io/docs/api/) to use the Electron API.
-- And then write a piece of code that will blow us all! :sunglasses:
+- And then write a cool piece of code :sunglasses:
 
 ## More docs
 - [Key Bindings](/docs/key-bindings.md)

@@ -39,6 +39,10 @@ possible with your report. If you can, please include:
    - ```$ git submodule update --recursive --remote;```
    - ```$ git submodule update --init;```
    - ```$ npm install;```
+   - ```$ cd app/packages;```
+   - ```$ npm install;```
+   - ```$ cd ..;```
+   - ```$ cd ..;```
    - ```$ npm link .;```
    - Type ```$ sulu;``` to start the application.
  - Create your feature branch: `git checkout -b my-new-feature;`

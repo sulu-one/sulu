@@ -20,7 +20,7 @@
     "sulu-file-system-view-reload": "^1.0.2",
     "sulu-file-system-view-rename": "^1.0.3",
     "sulu-file-system-view-show": "^1.0.3",
-    "sulu-mime-type-icons": "^1.0.3",
+    "sulu-mime-type-icons": "^1.0.6",
     "sulu-theme-dark-kingdom": "^0.2.4"
   },
   "devDependencies": {},

@@ -2,7 +2,7 @@
     "name": "sulu",
     "title": "A hackable file manager",
     "description": "A hackable file manager",
-    "version": "0.1.50",
+    "version": "0.2.1",
     "author": "Stephan Ahlf <stephan.ahlf@gmail.com>",
     "bugs": {
         "url": "https://github.com/s-a/sulu/issues"
@@ -19,7 +19,6 @@
     "scripts": {
         "install-polymer": "bower install --save PolymerElements/paper-icon-button"
     },
-    "dependencies": {
-    },
+    "dependencies": {},
     "devDependencies": {}
 }

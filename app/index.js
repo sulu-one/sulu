@@ -2,11 +2,7 @@ var fs = require('fs');
 var path = require('path');  
 var node_modules_folder = path.join(__dirname, "node_modules");
 
-if (!fs.existsSync(node_modules_folder)){
-  const {dialog} = require('electron')
-  dialog.showErrorBox("setup incomplete", "cannot find folder \"" + node_modules_folder + "\".\nplease open a shell and type `cd " + __dirname + " && npm install`.");
-  process.exit(1);
-} else {
+ 
   const {app} = require('electron');
   const {BrowserWindow} = require('electron');
 
@@ -42,4 +38,4 @@ if (!fs.existsSync(node_modules_folder)){
       mainWindow = null;
     });
   });
-}
+ 

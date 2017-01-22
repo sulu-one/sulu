@@ -10,7 +10,7 @@
     "sulu-file-system-view": "^1.0.6",
     "sulu-file-system-view-bookmarks": "^1.0.6",
     "sulu-file-system-view-clipboard": "^1.0.2",
-    "sulu-file-system-view-copy": "^1.0.4",
+    "sulu-file-system-view-copy": "^1.0.5",
     "sulu-file-system-view-create-file": "^1.0.2",
     "sulu-file-system-view-create-folder": "^1.0.2",
     "sulu-file-system-view-delete": "^1.0.2",

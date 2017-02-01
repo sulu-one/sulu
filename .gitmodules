@@ -52,3 +52,6 @@
 [submodule "app/packages/node_modules/sulu-file-system-view-create-folder"]
 	path = app/packages/node_modules/sulu-file-system-view-create-folder
 	url = https://github.com/sulu-one/sulu-file-system-view-create-folder
+[submodule "app/packages/node_modules/sulu-command-pallete"]
+	path = app/packages/node_modules/sulu-command-pallete
+	url = https://github.com/sulu-one/sulu-command-pallete.git

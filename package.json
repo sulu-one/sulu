@@ -43,7 +43,7 @@
     "build": "npm run build-linux && npm run build-windows"
   },
   "devDependencies": {
-    "electron": "^1.4.12",
+    "electron": "^9.1.0",
     "electron-builder": "^10.13.1",
     "electron-prebuilt": "^1.2.2",
     "minimist": "^1.2.0"
